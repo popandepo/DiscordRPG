@@ -1,11 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\UsefulTools\UsefulTools\UsefulTools.csproj" />
+    <PackageReference Include="Discord.Net" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
