@@ -4,8 +4,30 @@ namespace DiscordRPG
 {
     class Emojis
     {
-        public static Emoji Shield = new Emoji("\uD83D");
-        public static Emoji Shield2 = new Emoji("\uDEE1");
+        public static Emoji Shield = new Emoji("🛡️");
+        public static Emoji Shield2 = new Emoji("❕");
+        public static Emoji Bag = new Emoji("💼");
+        public static Emoji TurnBack = new Emoji("↩️");
+        public static Emoji MagicWand = new Emoji("🪄");
+        public static Emoji CheckMark = new Emoji("✅");
+        public static Emoji CrossMark = new Emoji("❎");
+        public static Emoji BackButton = new Emoji("◀️");
+        public static Emoji PlayButton = new Emoji("▶️");
+        public static Emoji QuestionMark = new Emoji("❓");
         public static Emoji Sword = new Emoji("\u2694");
+        public static Emoji[] Numbers = { //Access using index
+            new Emoji("0️⃣"),
+            new Emoji("1️⃣"),
+            new Emoji("2️⃣"),
+            new Emoji("3️⃣"),
+            new Emoji("4️⃣"),
+            new Emoji("5️⃣"),
+            new Emoji("6️⃣"),
+            new Emoji("7️⃣"),
+            new Emoji("8️⃣"),
+            new Emoji("9️⃣"),
+            new Emoji("🔟")
+        };
+
     }
 }

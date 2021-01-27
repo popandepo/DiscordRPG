@@ -16,7 +16,7 @@ namespace DiscordRPG
 
                 int index = Program.group.Add(reaction.UserId, temp, temp.Username, temp.ToString());
 
-                await Program.group.SocketUser[0].SendMessageAsync($"{Program.group.UserName[index]}, who has an ID of {Program.group.ID[index]} has reacted to the message which has the ID {reaction.MessageId} in {reaction.Channel} with {reaction.Emote}");
+                await Program.group.SocketUser[1].SendMessageAsync($"{Program.group.UserName[index]}, who has an ID of {Program.group.ID[index]} has reacted to the message which has the ID {reaction.MessageId} in {reaction.Channel} with {reaction.Emote}");
             }
         }
 
@@ -26,7 +26,7 @@ namespace DiscordRPG
             {
                 int index = Program.group.Add(message.Author.Id, Program._client.GetUser(message.Author.Id), message.Author.Username, message.Author.ToString());
 
-                await Program.group.SocketUser[0].SendMessageAsync($"{message.Author.Username}, who has an ID of {message.Author.Id} has sent the message \"{message.Content}\" with the ID {message.Id} in {message.Channel}");
+                await Program.group.SocketUser[1].SendMessageAsync($"{message.Author.Username}, who has an ID of {message.Author.Id} has sent the message \"{message.Content}\" with the ID {message.Id} in {message.Channel}");
 
                 if (message.Content.StartsWith('|'))
                 {
@@ -50,6 +50,18 @@ namespace DiscordRPG
                             await message.AddReactionAsync(Emojis.Sword);
                             await message.AddReactionAsync(Emojis.Shield);
                             await message.AddReactionAsync(Emojis.Shield2);
+                            for (int i = 0; i < 11; i++)
+                            {
+                                await message.AddReactionAsync(Emojis.Numbers[i]);
+                            }
+                            await message.AddReactionAsync(Emojis.Bag);
+                            await message.AddReactionAsync(Emojis.TurnBack);
+                            await message.AddReactionAsync(Emojis.MagicWand);
+                            await message.AddReactionAsync(Emojis.CheckMark);
+                            await message.AddReactionAsync(Emojis.CrossMark);
+                            await message.AddReactionAsync(Emojis.BackButton);
+                            await message.AddReactionAsync(Emojis.PlayButton);
+                            await message.AddReactionAsync(Emojis.QuestionMark);
                             break;
 
                         case "kill":
