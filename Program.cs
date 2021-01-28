@@ -1,9 +1,9 @@
 ﻿using Discord;
 using Discord.WebSocket;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using UsefulTools;
 
 namespace DiscordRPG
 {
@@ -14,6 +14,7 @@ namespace DiscordRPG
         public static UserStorage group;
         public static bool adminLoop;
         public static bool userStorageInit = false;
+        public static List<Player> players = new List<Player>();
         static void Main(string[] args) //Calls the state machine to boot then main menu. if anything goes wrong safe exit
         {
             try

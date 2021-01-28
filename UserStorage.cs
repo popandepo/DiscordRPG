@@ -1,6 +1,5 @@
 ﻿using Discord.WebSocket;
 using System;
-using UsefulTools;
 namespace DiscordRPG
 {
     public class UserStorage

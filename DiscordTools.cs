@@ -11,6 +11,13 @@ namespace DiscordRPG
         {
             if (!reaction.User.Value.IsBot)
             {
+                /*if (Program.players.Search(reaction.UserId))
+                {
+                    await channel.SendMessageAsync("Player detected");
+                } else
+                {
+                    await channel.SendMessageAsync("You are not currently playing");
+                }*/
 
                 SocketUser temp = Program._client.GetUser(reaction.UserId);
 
@@ -47,6 +54,11 @@ namespace DiscordRPG
                             break;
 
                         case "start test":
+
+
+                            Program.players.Add(new Player(message.Author.Id));
+
+
                             var newMessage = message.Channel.SendMessageAsync("A hostile Goblin appears in front of you, what will you do?\n(press the question mark for information)");
                             await newMessage.Result.AddReactionAsync(Emojis.Sword);
                             await newMessage.Result.AddReactionAsync(Emojis.Shield);

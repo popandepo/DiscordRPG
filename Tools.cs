@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UsefulTools
+namespace DiscordRPG
 {
     public static class Tools
     {
