@@ -1,7 +1,9 @@
 ﻿using Discord;
 using Discord.WebSocket;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DiscordRPG
@@ -16,10 +18,22 @@ namespace DiscordRPG
         public static bool userStorageInit = false;
         static void Main(string[] args) //Calls the state machine to boot then main menu. if anything goes wrong safe exit
         {
-            for (int i = 0; i < 100; i++)
+            List<int> test = new List<int>();
+            for (int i = 0; i < 100_000; i++)
             {
-                Console.WriteLine(Tools.RandomWeighted(10, 0, 10));
+                test.Add(Tools.RandomWeighted(100,25,200,10));
+                //Console.WriteLine($"remaining operations: {100_000-i}");
             }
+
+
+            var result = (from number in test
+                          group number by number into g
+                          select new { key = g.Key, count = g.Count() })
+                          .OrderBy(item => item.key)
+                          .ToList();
+
+
+
             Console.ReadLine();
             try
             {
