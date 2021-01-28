@@ -6,17 +6,24 @@ namespace DiscordRPG
     {
         public List<Player> Players { get; set; } = new List<Player>();
 
-        public bool Search(ulong searchTerm)
+        public PlayerStorage()
+        {
+        }
+        public int Add(Player input)
+        {
+            Players.Add(input);
+            return Players.IndexOf(input);
+        }
+        public bool Contains(ulong id)
         {
             foreach (var player in Players)
             {
-                if (player.ID == searchTerm)
+                if (player.ID == id)
                 {
                     return true;
                 }
             }
             return false;
         }
-
     }
 }

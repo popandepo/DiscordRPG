@@ -11,13 +11,14 @@ namespace DiscordRPG
         {
             if (!reaction.User.Value.IsBot)
             {
-                /*if (Program.players.Search(reaction.UserId))
+                if (Program.players.Contains(reaction.UserId))
                 {
                     await channel.SendMessageAsync("Player detected");
-                } else
+                }
+                else
                 {
                     await channel.SendMessageAsync("You are not currently playing");
-                }*/
+                }
 
                 SocketUser temp = Program._client.GetUser(reaction.UserId);
 

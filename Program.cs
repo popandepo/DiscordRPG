@@ -1,7 +1,6 @@
 ﻿using Discord;
 using Discord.WebSocket;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -11,12 +10,17 @@ namespace DiscordRPG
     {
         public static States currentState;
         public static DiscordSocketClient _client;
+        public static PlayerStorage players;
         public static UserStorage group;
         public static bool adminLoop;
         public static bool userStorageInit = false;
-        public static List<Player> players = new List<Player>();
         static void Main(string[] args) //Calls the state machine to boot then main menu. if anything goes wrong safe exit
         {
+            for (int i = 0; i < 100; i++)
+            {
+                Console.WriteLine(Tools.RandomWeighted(10, 0, 10));
+            }
+            Console.ReadLine();
             try
             {
                 StateMachine(States.Boot);

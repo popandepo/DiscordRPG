@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DiscordRPG
 {
@@ -7,7 +9,6 @@ namespace DiscordRPG
 
         public static string GetChar()
         {
-
             return Console.ReadKey().KeyChar.ToString();
         }
 
@@ -18,24 +19,66 @@ namespace DiscordRPG
 
         public static int[] Range(int startPoint = 0, int endPoint = 0)
         {
-            int arrayLength = Math.Max(startPoint, endPoint) - Math.Min(startPoint, endPoint) + 1;
-            int[] rangeOut = new int[arrayLength];
-            if (startPoint < endPoint)
+
+            return Enumerable.Range(startPoint, endPoint).ToArray();
+
+            //int arrayLength = Math.Max(startPoint, endPoint) - Math.Min(startPoint, endPoint) + 1;
+            //int[] rangeOut = new int[arrayLength];
+            //if (startPoint < endPoint)
+            //{
+            //    for (int i = 0; i < arrayLength; i++)
+            //    {
+            //        rangeOut[i] = i + startPoint;
+            //    }
+            //}
+            //else
+            //{
+            //    for (int i = 0; i < arrayLength; i++)
+            //    {
+            //        rangeOut[i] = startPoint - i;
+            //    }
+            //}
+
+            //return rangeOut;
+        }
+
+        public static int RandomWeighted(int weight = 7, int min = 0, int max = 10)
+        {
+            int maxWeight = max - weight;
+            int minWeight = weight - min;
+            int loops = Math.Max(maxWeight, minWeight);
+            int loopsPlus = loops + 1;
+            int loopsMinus = loops - 1;
+            int currentLoop = loops;
+            List<int> numbers = new List<int>();
+
+            for (int i = 0; i <= loops; i++)
             {
-                for (int i = 0; i < arrayLength; i++)
-                {
-                    rangeOut[i] = i + startPoint;
-                }
+                numbers.Add(loops);
             }
-            else
+            for (int i = 0; i <= loops; i++)
             {
-                for (int i = 0; i < arrayLength; i++)
+                for (int u = 0; u <= loopsMinus; u++)
                 {
-                    rangeOut[i] = startPoint - i;
+                    if (loopsPlus <= max)
+                    {
+                        numbers.Add(loopsPlus);
+                    }
                 }
+                for (int d = 0; d <= loopsMinus; d++)
+                {
+                    if (loopsMinus >= min)
+                    {
+                        numbers.Add(loopsMinus);
+                    }
+                }
+                loopsPlus++;
+                loopsMinus--;
             }
 
-            return rangeOut;
+            Random rnd = new Random();
+            int random = rnd.Next(0, numbers.Count);
+            return numbers.ElementAt(random);
         }
 
         public static string Convert<T>(T[] input, string sepString = ",") //CONVERTS AN ARRAY INTO A STRING SEPARATED BY WHATEVER CHARACTER YOU CHOOSE. BY DEFAULT ","
