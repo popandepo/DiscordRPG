@@ -2,6 +2,7 @@
 using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace DiscordRPG
 {
     class Program
     {
+        public static string location = "C:\\Users\\popan\\Documents\\GitHub\\DiscordRPG\\UserStorage.txt";
         public static States currentState;
         public static DiscordSocketClient _client;
         public static PlayerStorage players;
@@ -18,23 +20,6 @@ namespace DiscordRPG
         public static bool userStorageInit = false;
         static void Main(string[] args) //Calls the state machine to boot then main menu. if anything goes wrong safe exit
         {
-            List<int> test = new List<int>();
-            for (int i = 0; i < 100_000; i++)
-            {
-                test.Add(Tools.RandomWeighted(100,25,200,10));
-                //Console.WriteLine($"remaining operations: {100_000-i}");
-            }
-
-
-            var result = (from number in test
-                          group number by number into g
-                          select new { key = g.Key, count = g.Count() })
-                          .OrderBy(item => item.key)
-                          .ToList();
-
-
-
-            Console.ReadLine();
             try
             {
                 StateMachine(States.Boot);
@@ -109,7 +94,7 @@ namespace DiscordRPG
 
         private static void LoadFromFile() //loads all users from a file
         {
-            string fileInput = File.ReadAllText("User Storage.txt");
+            string fileInput = File.ReadAllText(location);
             fileInput = Tools.Replace("all", fileInput, "\n", "");
             string[] fileInputArray = fileInput.Split('<');
             foreach (var user in fileInputArray)
@@ -132,7 +117,7 @@ namespace DiscordRPG
 
         private static void SaveToFile()//saves all users to file
         {
-            File.WriteAllText("User Storage.txt", group.ToString());
+            File.WriteAllText(location, group.ToString());
         }
 
         public static void StateMain() //is the main menu screen input and output

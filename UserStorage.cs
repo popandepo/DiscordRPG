@@ -22,7 +22,6 @@ namespace DiscordRPG
 
         public UserStorage()
         {
-
             ID = new ulong[] { 235921495291854850 };
             SocketUser = new SocketUser[] { Program._client.GetGuild(800973317032771586).GetUser(235921495291854850) };
             UserName = new string[] { "popandepo" };

@@ -6,7 +6,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="User Storage.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="User Storage.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Discord.Net" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="UserStorage.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

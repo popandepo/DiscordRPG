@@ -42,52 +42,33 @@ namespace DiscordRPG
             //return rangeOut;
         }
 
-        public static int RandomWeighted(int weight = 7, int min = 0, int max = 10, int multFactor = 1)
+        public static int RandomWeighted(int weight = 10, int min = 0, int max = 10)
         {
-            int maxWeight = max - weight; //difference between max and weight
-            int minWeight = weight - min; //difference between weight and min
-            int loops = Math.Max(maxWeight, minWeight); //largest difference becomes amount of times to loop
-            int smallest = Math.Min(maxWeight,minWeight); //smallest difference
-            int loopsPlus = loops + 1; //loops for numbers above weight
-            int loopsMinus = loops - 1; //loops for numbers below weight
-            int modifier = smallest;
-            if (modifier == 0)
-            {
-                modifier = 1;
-            }
+            int maxWeight = max - weight;
+            int minWeight = weight - min;
+            int loops = Math.Max(maxWeight, minWeight);
+            int loopsPlus = weight + 1;
+            int loopsMinus = weight - 1;
             List<int> numbers = new List<int>();
-
-            for (int i = 0; i < loops + modifier*(multFactor)/*adds additional numbers based on modifier*/; i++)
-            {
-                numbers.Add(loops);
-            }
-
-            if (modifier > min)
-            {
-            modifier--;
-            }
-
             for (int i = 0; i <= loops; i++)
             {
-                for (int u = 0; u <= loopsMinus + modifier*(multFactor); u++)
+                numbers.Add(weight);
+            }
+            for (int i = 0; i <= loops; i++)
+            {
+                for (int u = 0; u <= loopsMinus; u++)
                 {
                     if (loopsPlus <= max)
                     {
                         numbers.Add(loopsPlus);
                     }
                 }
-
-                for (int d = 0; d <= loopsMinus + modifier*(multFactor); d++)
+                for (int d = 0; d <= loopsMinus; d++)
                 {
                     if (loopsMinus >= min)
                     {
                         numbers.Add(loopsMinus);
                     }
-                }
-
-                if (modifier > min)
-                {
-                    modifier--;
                 }
                 loopsPlus++;
                 loopsMinus--;
