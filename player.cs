@@ -1,4 +1,6 @@
-﻿namespace DiscordRPG
+﻿using Discord;
+
+namespace DiscordRPG
 {
     public class Player
     {
@@ -8,6 +10,8 @@
 
         }
         public ulong ID { get; set; }
+
+        public IEmote[] ExpectedReactions {get; set;}
 
     }
 }

@@ -19,27 +19,7 @@ namespace DiscordRPG
 
         public static int[] Range(int startPoint = 0, int endPoint = 0)
         {
-
             return Enumerable.Range(startPoint, endPoint).ToArray();
-
-            //int arrayLength = Math.Max(startPoint, endPoint) - Math.Min(startPoint, endPoint) + 1;
-            //int[] rangeOut = new int[arrayLength];
-            //if (startPoint < endPoint)
-            //{
-            //    for (int i = 0; i < arrayLength; i++)
-            //    {
-            //        rangeOut[i] = i + startPoint;
-            //    }
-            //}
-            //else
-            //{
-            //    for (int i = 0; i < arrayLength; i++)
-            //    {
-            //        rangeOut[i] = startPoint - i;
-            //    }
-            //}
-
-            //return rangeOut;
         }
 
         public static int RandomWeighted(int weight = 7, int min = 0, int max = 10)

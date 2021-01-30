@@ -11,7 +11,10 @@ namespace DiscordRPG
         }
         public int Add(Player input)
         {
+            if (!Contains(input.ID))
+            {
             Players.Add(input);
+            }
             return Players.IndexOf(input);
         }
         public bool Contains(ulong id)
