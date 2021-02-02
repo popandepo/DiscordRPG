@@ -11,7 +11,7 @@ namespace DiscordRPG
         }
         public ulong ID { get; set; }
 
-        public IEmote[] ExpectedReactions {get; set;}
+        public IEmote[] ExpectedReactions { get; set; }
 
     }
 }

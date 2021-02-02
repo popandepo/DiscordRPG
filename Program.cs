@@ -16,11 +16,6 @@ namespace DiscordRPG
         public static bool userStorageInit = false;
         static void Main(string[] args) //Calls the state machine to boot then main menu. if anything goes wrong safe exit
         {
-            for (int i = 0; i < 100; i++)
-            {
-                Console.WriteLine(Tools.RandomWeighted(10, 0, 10));
-            }
-            Console.ReadLine();
             try
             {
                 StateMachine(States.Boot);
@@ -95,23 +90,28 @@ namespace DiscordRPG
 
         private static void LoadFromFile() //loads all users from a file
         {
-            string fileInput = File.ReadAllText("User Storage.txt");
-            fileInput = Tools.Replace("all", fileInput, "\n", "");
-            string[] fileInputArray = fileInput.Split('<');
-            foreach (var user in fileInputArray)
+            if (File.Exists("User Storage.txt"))
             {
-                try
+                Console.WriteLine("found a file");
+                Console.ReadLine();
+                string fileInput = File.ReadAllText("User Storage.txt");
+                fileInput = Tools.Replace("all", fileInput, "\n", "");
+                string[] fileInputArray = fileInput.Split('<');
+                foreach (var user in fileInputArray)
                 {
-                    var userfulInfo = user.Split('>')[1];
-                    var values = userfulInfo.Split(", ");
-                    ulong id = Convert.ToUInt64(values[0]);
-                    SocketUser sUser = _client.GetUser(id);
-                    string userName = values[1];
-                    string hashName = values[2];
-                    group.Add(id, sUser, userName, hashName);
-                }
-                catch
-                {
+                    try
+                    {
+                        var userfulInfo = user.Split('>')[1];
+                        var values = userfulInfo.Split(", ");
+                        ulong id = Convert.ToUInt64(values[0]);
+                        SocketUser sUser = _client.GetUser(id);
+                        string userName = values[1];
+                        string hashName = values[2];
+                        group.Add(id, sUser, userName, hashName);
+                    }
+                    catch
+                    {
+                    }
                 }
             }
         }

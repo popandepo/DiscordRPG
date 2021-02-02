@@ -13,7 +13,7 @@ namespace DiscordRPG
         {
             if (!Contains(input.ID))
             {
-            Players.Add(input);
+                Players.Add(input);
             }
             return Players.IndexOf(input);
         }

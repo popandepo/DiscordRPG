@@ -11,14 +11,14 @@ namespace DiscordRPG
         {
             if (!reaction.User.Value.IsBot)
             {
-                //if (Program.players.Contains(reaction.UserId))
-                //{
+                if (Program.players.Contains(reaction.UserId))
+                {
                     await channel.SendMessageAsync("Player detected");
-                //}
-                //else
-                //{
+                }
+                else
+                {
                     await channel.SendMessageAsync("You are not currently playing");
-                //}
+                }
 
                 SocketUser temp = Program._client.GetUser(reaction.UserId);
 
@@ -35,7 +35,7 @@ namespace DiscordRPG
                 int index = Program.group.Add(message.Author.Id, Program._client.GetUser(message.Author.Id), message.Author.Username, message.Author.ToString());
 
                 await Program.group.SocketUser[0].SendMessageAsync($"{message.Author.Username}, who has an ID of {message.Author.Id} has sent the message \"{message.Content}\" with the ID {message.Id} in {message.Channel}");
-                
+
                 if (message.Content.StartsWith('|'))
                 {
                     string[] command = message.Content.Split('|');
@@ -55,17 +55,23 @@ namespace DiscordRPG
                             break;
 
                         case "new game":
-                            //if (Program.players.Contains(message.Author.Id))
-                            //{
-                            //    var sentMessage = message.Channel.SendMessageAsync($"An existing save file for the user {message.Author.Username} already exists, would you like to load that file({Emojis.CheckMark})? or create a new one({Emojis.CrossMark})?");
-                            //    await sentMessage.Result.AddReactionsAsync(Emojis.loadOrOverwrite);
-                            //    //Program.players.Add//expectedReactions.(Emojis.loadOrOverwrite, message.Author.Id);
-                            //}
-                            
-                            //Program.players.Add(new Player(message.Author.Id));
+                            SocketMessage sentSM;
+                            IUserMessage sentIUM;
+                            Discord.Rest.RestUserMessage sentRUM;
 
-                            var sentMessage = message.Author.SendMessageAsync($"goblin time");
-                            await sentMessage.Result.AddReactionsAsync(Emojis.mainCombatReactions);
+                            if (Program.players.Contains(message.Author.Id))
+                            {
+                                sentRUM = message.Channel.SendMessageAsync($"An existing save file for the user {message.Author.Username} already exists, would you like to load that file({Emojis.CheckMark})? or create a new one({Emojis.CrossMark})?").Result;
+                                await sentRUM.AddReactionsAsync(Emojis.loadOrOverwrite);
+                            }
+                            else
+                            {
+                                Program.players.Add(new Player(message.Author.Id));
+                            }
+
+
+                            sentIUM = message.Author.SendMessageAsync($"goblin time").Result;
+                            await sentIUM.AddReactionsAsync(Emojis.mainCombatReactions);
 
                             break;
 
@@ -100,7 +106,7 @@ namespace DiscordRPG
             //Broadcast("I'm online! Harvesting...");
             await Program._client.DownloadUsersAsync(Program._client.Guilds);
             Program.group = new UserStorage();
-            Console.WriteLine("Users are downloaded!");
+            Console.WriteLine("Users are harvested!");
             Program.userStorageInit = true;
             return Task.CompletedTask;
         }

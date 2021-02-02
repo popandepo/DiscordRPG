@@ -9,4 +9,10 @@
     <PackageReference Include="Discord.Net" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="User Storage.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

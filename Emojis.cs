@@ -30,7 +30,7 @@ namespace DiscordRPG
             new Emoji("🔟")
         };
 
-        public static IEmote[] loadOrOverwrite = new IEmote[] {CheckMark,CrossMark,Flag};
-        public static IEmote[] mainCombatReactions = new IEmote[] {Sword,Shield,Wand,Bag,Shoes,QuestionMark,Flag};
+        public static IEmote[] loadOrOverwrite = new IEmote[] { CheckMark, CrossMark, Flag };
+        public static IEmote[] mainCombatReactions = new IEmote[] { Sword, Shield, Wand, Bag, Shoes, QuestionMark, Flag };
     }
 }
