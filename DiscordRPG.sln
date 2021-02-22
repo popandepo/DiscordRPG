@@ -5,6 +5,12 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiscordRPG", "DiscordRPG.csproj", "{34F72C71-0E9C-493D-94F0-00E465FD434F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordRPG_Bot_UnitTests", "DiscordRPG_Bot_UnitTests\DiscordRPG_Bot_UnitTests.csproj", "{1D85E157-51F7-4118-8053-70971E78DA12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordRPG_Website_UnitTests", "DiscordRPG_Website_UnitTests\DiscordRPG_Website_UnitTests.csproj", "{3BD77EA4-858E-4428-ACC3-5D59BD820E21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordRPG_WebInterface", "DiscordRPG_WebInterface\DiscordRPG_WebInterface.csproj", "{8D132214-93E8-4AEB-9D82-299FD3EF3406}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{34F72C71-0E9C-493D-94F0-00E465FD434F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34F72C71-0E9C-493D-94F0-00E465FD434F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34F72C71-0E9C-493D-94F0-00E465FD434F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D85E157-51F7-4118-8053-70971E78DA12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D85E157-51F7-4118-8053-70971E78DA12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D85E157-51F7-4118-8053-70971E78DA12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D85E157-51F7-4118-8053-70971E78DA12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BD77EA4-858E-4428-ACC3-5D59BD820E21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BD77EA4-858E-4428-ACC3-5D59BD820E21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BD77EA4-858E-4428-ACC3-5D59BD820E21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BD77EA4-858E-4428-ACC3-5D59BD820E21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D132214-93E8-4AEB-9D82-299FD3EF3406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D132214-93E8-4AEB-9D82-299FD3EF3406}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D132214-93E8-4AEB-9D82-299FD3EF3406}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D132214-93E8-4AEB-9D82-299FD3EF3406}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
