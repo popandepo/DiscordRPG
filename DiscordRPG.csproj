@@ -6,7 +6,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Discord.Net" Version="2.2.0" />
+    <PackageReference Include="coverlet.collector" Version="3.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Discord.Net" Version="2.3.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="DiscordRPG_Bot_UnitTests\DiscordRPG_Bot_UnitTests.csproj" />
+    <ProjectReference Include="DiscordRPG_WebInterface\DiscordRPG_WebInterface.csproj" />
+    <ProjectReference Include="DiscordRPG_Website_UnitTests\DiscordRPG_Website_UnitTests.csproj" />
   </ItemGroup>
 
 </Project>
