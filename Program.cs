@@ -21,7 +21,7 @@ namespace DiscordRPG
         private async Task BotInit() //starts the bot and initiates all handlers
         {
             _client = new DiscordSocketClient(new DiscordSocketConfig() { AlwaysDownloadUsers = true });
-            string token = "ODAxMDU1NDY1ODUyMjM5ODcy.YAbHCQ.J61LcyB49Nf2OSK2PfsrNQp2w-k";
+            string token = "";
 
             await _client.LoginAsync(TokenType.Bot, token);
             await _client.StartAsync();
