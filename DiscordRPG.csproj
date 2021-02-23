@@ -6,6 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DiscordRPG_Bot_UnitTests\**" />
+    <Compile Remove="DiscordRPG_WebInterface\**" />
+    <Compile Remove="DiscordRPG_Website_UnitTests\**" />
+    <EmbeddedResource Remove="DiscordRPG_Bot_UnitTests\**" />
+    <EmbeddedResource Remove="DiscordRPG_WebInterface\**" />
+    <EmbeddedResource Remove="DiscordRPG_Website_UnitTests\**" />
+    <None Remove="DiscordRPG_Bot_UnitTests\**" />
+    <None Remove="DiscordRPG_WebInterface\**" />
+    <None Remove="DiscordRPG_Website_UnitTests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Discord.Net" Version="2.2.0" />
   </ItemGroup>
 
