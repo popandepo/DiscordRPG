@@ -11,7 +11,7 @@ namespace DiscordRPG
         
         static void Main(string[] args)
         {
-            
+            Console.WriteLine("test");
         }
 
         /// <summary>
