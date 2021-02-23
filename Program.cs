@@ -12,8 +12,9 @@ namespace DiscordRPG
         
         static async Task Main(string[] args)
         {
-            Console.WriteLine("test");
+            Console.WriteLine("Initiating...");
             await BotInit();
+            Console.WriteLine("Initiated!");
             Console.ReadLine();
         }
 
@@ -34,8 +35,6 @@ namespace DiscordRPG
             _client.MessageReceived += DiscordHandlers.MessageHandler;//Whenever a message is heard, push it to the message handler
             _client.ReactionAdded += DiscordHandlers.ReactionHandler;//Whenever a reaction is added, push it to the reaction handler
             _client.ReactionRemoved += DiscordHandlers.ReactionHandler;//Whenever a reaction is removed, push it to the reaction handler
-
-            Console.WriteLine("Initiated!");
         }
     }
 }
