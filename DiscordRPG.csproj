@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <StartupObject>DiscordRPG.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,6 +32,12 @@
     <ProjectReference Include="DiscordRPG_Bot_UnitTests\DiscordRPG_Bot_UnitTests.csproj" />
     <ProjectReference Include="DiscordRPG_WebInterface\DiscordRPG_WebInterface.csproj" />
     <ProjectReference Include="DiscordRPG_Website_UnitTests\DiscordRPG_Website_UnitTests.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="BotKey.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

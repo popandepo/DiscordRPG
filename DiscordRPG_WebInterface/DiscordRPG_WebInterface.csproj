@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <StartupObject>DiscordRPG_WebInterface.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
