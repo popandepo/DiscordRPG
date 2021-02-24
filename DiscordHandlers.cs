@@ -19,7 +19,7 @@ namespace DiscordRPG
                 var author = message.Author;
                 var channel = message.Channel;
                 var command = message.Content.ToLower();
-                if (command.Contains("!join"))
+                if (command.Contains("!join")) //Separate commands into a command handler and find an intelligent way to deal with it
                 {
                     Program.players.Add(new Player(author.Id));
                 }
