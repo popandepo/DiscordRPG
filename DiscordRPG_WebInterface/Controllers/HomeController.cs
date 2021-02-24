@@ -12,6 +12,7 @@ namespace DiscordRPG_Webinterface.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private Transferdata data;
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -23,8 +24,12 @@ namespace DiscordRPG_Webinterface.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult CurrentStatus()
         {
+            // Do some shit to get data from database. 
+            data = new Transferdata() { 
+                
+            };
             return View();
         }
 
