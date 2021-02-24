@@ -1,0 +1,6 @@
+﻿namespace DiscordRPG
+{
+    interface IEquipment
+    {
+    }
+}
