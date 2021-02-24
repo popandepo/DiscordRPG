@@ -64,6 +64,11 @@ namespace DiscordRPG
             return Task.CompletedTask;
         }
 
+        /// <summary>
+        /// Edits the LastMessage in a player
+        /// </summary>
+        /// <param name="player">The player</param>
+        /// <param name="message">The new message</param>
         private static void EditMessage(Player player, string message)
         {
             player.LastMessage.ModifyAsync(m => { m.Content = message; });
