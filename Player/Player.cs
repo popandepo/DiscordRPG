@@ -58,7 +58,7 @@ namespace DiscordRPG.Player
             Attack = 5;
             Defence = 5;
 
-            CItems.Add(new Item("Potion",3,"POTION",5));
+            CItems.Add(new Item("Potion",3,10,"POTION",5));
             //CEquipment = starter equipment
             //SEquipment = nothing
 
