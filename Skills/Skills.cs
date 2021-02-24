@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DiscordRPG
+﻿namespace DiscordRPG
 {
     class Skills : ISkill
     {

@@ -14,9 +14,31 @@ namespace DiscordRPG
         /// <returns>Task.CompletedTask</returns>
         public static Task MessageHandler(SocketMessage message)
         {
-            var author = message.Author;
-            var channel = message.Channel;
+            if (message.Content.Contains("!"))
+            {
+                var author = message.Author;
+                var channel = message.Channel;
+                var command = message.Content.ToLower();
+                if (command.Contains("!join"))
+                {
+                    Program.players.Add(new Player(author.Id));
+                }
+                else if (command.Contains("!leave"))
+                {
+                    foreach (var player in Program.players)
+                    {
+                        if (player.ID == author.Id)
+                        {
+                            Program.players.Remove(player);
+                        }
+                    }
+                }
+                else if (command.Contains("!test")) //REMOVE AFTER TESTING IS DONE
+                {
+                    author.SendMessageAsync("I recieved a test order, responding as ordered!");
+                }
 
+            }
             return Task.CompletedTask;
         }
 
