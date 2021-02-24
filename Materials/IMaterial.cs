@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DiscordRPG.Materials
+namespace DiscordRPG
 {
     interface IMaterial
     {

@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using DiscordRPG.Skills;
-using DiscordRPG.Equipment;
-using DiscordRPG.Items;
-using DiscordRPG.Materials;
 using System.Text;
 using Discord.WebSocket;
 
-namespace DiscordRPG.Player
+namespace DiscordRPG
 {
     interface IPlayer
     {

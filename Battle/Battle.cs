@@ -1,9 +1,8 @@
-﻿using DiscordRPG.Items;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DiscordRPG.Battle
+namespace DiscordRPG
 {
     class Battle
     {
@@ -33,7 +32,7 @@ namespace DiscordRPG.Battle
         /// </summary>
         /// <param name="player">The player to add health to</param>
         /// <param name="item">The amount to add</param>
-        public static void AddHealth(Player.Player player, int amount)
+        public static void AddHealth(Player player, int amount)
         {
             player.Health += amount;
             if (player.Health>player.MHealth)

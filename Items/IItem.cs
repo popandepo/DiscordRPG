@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DiscordRPG.Items
+namespace DiscordRPG
 {
     interface IItem
     {

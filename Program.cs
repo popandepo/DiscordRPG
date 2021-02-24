@@ -10,7 +10,7 @@ namespace DiscordRPG
     class Program
     {
         public static DiscordSocketClient _client;
-        public static List<Player.Player> players;
+        public static List<Player> players;
         
         static async Task Main(string[] args)
         {

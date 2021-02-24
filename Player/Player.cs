@@ -1,14 +1,10 @@
 ﻿using Discord.WebSocket;
-using DiscordRPG.Equipment;
-using DiscordRPG.Items;
-using DiscordRPG.Skills;
-using DiscordRPG.Materials;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DiscordRPG.Player
+namespace DiscordRPG
 {
     class Player : IPlayer
     {

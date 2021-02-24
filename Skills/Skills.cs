@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DiscordRPG.Skills
+namespace DiscordRPG
 {
     /// <summary>
     /// All skills inherit from ISkill object that decides the "framework" for all skills created. 
