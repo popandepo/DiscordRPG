@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DiscordRPG.Skills;
 using DiscordRPG.Equipment;
 using DiscordRPG.Items;
+using DiscordRPG.Materials;
 using System.Text;
 using Discord.WebSocket;
 
@@ -19,8 +20,11 @@ namespace DiscordRPG.Player
         int Attack { get; set; } //TEMPORARY
         int Defence { get; set; } //TEMPORARY
         List<ISkill> Skills { get; set; }
-        List<IEquipment> Equipment { get; set; }
-        List<IItem> Items { get; set; }
+        List<IEquipment> CEquipment { get; set; }
+        List<IEquipment> SEquipment { get; set; }
+        List<IItem> CItems { get; set; }
+        List<IItem> SItems { get; set; }
+        List<IMaterial> Materials { get; set; }
         int NumberOfSkills { get; }
         //list of skills
         //list of carried equipment

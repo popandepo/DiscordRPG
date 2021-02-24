@@ -2,6 +2,7 @@
 using DiscordRPG.Equipment;
 using DiscordRPG.Items;
 using DiscordRPG.Skills;
+using DiscordRPG.Materials;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +23,11 @@ namespace DiscordRPG.Player
         public int Attack { get; set; }
         public int Defence { get; set; }
         public List<ISkill> Skills { get; set; }
-        public List<IEquipment> Equipment { get; set; }
-        public List<IItem> Items { get; set; }
+        public List<IEquipment> CEquipment { get; set; }
+        public List<IEquipment> SEquipment { get; set; }
+        public List<IItem> CItems { get; set; }
+        public List<IItem> SItems { get; set; }
+        public List<IMaterial> Materials { get; set; }
         public int NumberOfSkills => Skills.Count();
 
         //list of skills
@@ -33,8 +37,12 @@ namespace DiscordRPG.Player
         //list of stored items
         //list of materials
         //a combat class containing everyone in the fight referenced by "player", "friend1", "enemy1", "enemy2" etc.
-    
-        public Player(ulong id)
+        
+        /// <summary>
+        /// Creates a player object
+        /// </summary>
+        /// <param name="id">The Discord ID of the Player</param>
+        public Player(ulong id) //MOVE DEFAULT VALUES TO GETTER-SETTERS WHEN PROJECT IS DONE
         {
             ID = id;
             User = Program._client.GetUser(id);
