@@ -1,5 +1,6 @@
 ﻿using Discord;
 using Discord.WebSocket;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DiscordRPG
@@ -22,11 +23,12 @@ namespace DiscordRPG
                 if (command.Contains("!join")) //Separate commands into a command handler and find an intelligent way to deal with it
                 {
                     Program.players.Add(new Player(author.Id));
-                    foreach (var player in Program.players)
+                    foreach (var player in Program.players) //IS THERE A BETTER WAY TO FIND A PLAYER WITH A SINGLE ID?
                     {
                         if (player.ID == author.Id)
                         {
                             SendMessage(player, "You have been added to the list of players, please use this channel for any future messages");
+                            System.Console.WriteLine($"{player.Hashname} has been added");
                         }
                     }
                 }
@@ -36,6 +38,7 @@ namespace DiscordRPG
                     {
                         if (player.ID == author.Id)
                         {
+                            System.Console.WriteLine($"{player.Hashname} has left");
                             Program.players.Remove(player);
                         }
                     }
@@ -47,6 +50,7 @@ namespace DiscordRPG
                         if (player.ID == author.Id)
                         {
                             SendMessage(player, "I recieved a test order, responding as ordered!");
+                            System.Console.WriteLine($"{player.Hashname} sent a test message");
                         }
                     }
                 }
@@ -56,9 +60,29 @@ namespace DiscordRPG
                     {
                         if (player.ID == author.Id)
                         {
-                            EditMessage(player, message.Content.Remove(0,5));
+                            EditMessage(player, message.Content.Remove(0, 5));
+                            System.Console.WriteLine($"{player.Hashname} edited a message");
                         }
                     }
+                }
+                else if (command.Contains("!loot")) //GIVE THE PLAYER SOME LOOT TO TEST HOW MY PROGRAM HANDLES IT
+                {
+                    foreach (var player in Program.players)
+                    {
+                        if (player.ID == author.Id)
+                        {
+                            List<ILootables> loot = new List<ILootables>();
+                            loot.Add(new Item("testitem", 1, 1, "TEST", 1));
+                            loot.Add(new Material("testmaterial", 1, 1));
+
+                            System.Console.WriteLine($"{player.Hashname} looted some stuff");
+
+                            player.RecieveLoot(loot);
+
+                        }
+                    }
+
+
                 }
             }
             return Task.CompletedTask;

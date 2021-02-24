@@ -2,7 +2,7 @@
 
 namespace DiscordRPG
 {
-    interface IItem
+    interface IItem : ILootables
     {
         string Name { get; set; }
         string Description { get; set; }
@@ -10,5 +10,6 @@ namespace DiscordRPG
         int MaxAmount { get; set; }
         string Type { get; set; }
         List<int> Attributes { get; set; }
+        string Identifier { get; set; }
     }
 }

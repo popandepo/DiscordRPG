@@ -1,6 +1,0 @@
-﻿namespace DiscordRPG
-{
-    interface IMaterial
-    {
-    }
-}

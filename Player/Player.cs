@@ -57,6 +57,10 @@ namespace DiscordRPG
             CItems = new List<Item>();
             CItems.Add(new Item("Potion", 3, 10, "POTION", 5));
 
+            SItems = new List<Item>();
+
+            SMaterials = new List<IMaterial>();
+
             //CEquipment = starter equipment
             //SEquipment = nothing
 
@@ -68,6 +72,22 @@ namespace DiscordRPG
             //Skills = starter skills (maybe nothing, maybe a low-level heal ability or something)
 
             //Combat = nothing
+        }
+        public void RecieveLoot(List<ILootables> loot)
+        {
+            foreach (var item in loot)
+            {
+                if (item.Identifier == "Item")
+                {
+                    SItems.Add((Item)item);
+                    User.SendMessageAsync($"You looted {item.Amount} {item.Name}");
+                }
+                else if (item.Identifier == "Material")
+                {
+                    SMaterials.Add((Material)item);
+                    User.SendMessageAsync($"You looted {item.Amount} {item.Name}");
+                }
+            }
         }
     }
 }

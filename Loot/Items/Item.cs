@@ -10,6 +10,7 @@ namespace DiscordRPG
         public int Amount { get; set; }
         public int MaxAmount { get; set; }
         public string Type { get; set; }
+        public string Identifier { get; set; } = "Item";
         public List<int> Attributes { get; set; }
 
         /// <summary>
