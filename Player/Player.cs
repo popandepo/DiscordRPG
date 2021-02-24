@@ -31,5 +31,10 @@ namespace DiscordRPG.Player
         //list of stored items
         //list of materials
         //a combat class containing everyone in the fight referenced by "player", "friend1", "enemy1", "enemy2" etc.
+    
+        public Player(ulong id)
+        {
+            Hashname = Program._client.GetUser(id).ToString();
+        }
     }
 }
