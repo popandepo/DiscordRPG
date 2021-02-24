@@ -27,11 +27,20 @@ namespace DiscordRPG
         {
             _client = new DiscordSocketClient(new DiscordSocketConfig() { AlwaysDownloadUsers = true });
 
+            try
+            {
             string token = FileManipulation.ReadFile("BotKey.txt");//Reads the token from file
-
             await _client.LoginAsync(TokenType.Bot, token);
             await _client.StartAsync();
             await _client.SetStatusAsync(UserStatus.Online);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("No Botkey found, please contact an administrator. Press any key to try again");
+                Console.ReadKey();
+                await BotInit();
+            }
+
 
 
             _client.MessageReceived += DiscordHandlers.MessageHandler;//Whenever a message is heard, push it to the message handler
