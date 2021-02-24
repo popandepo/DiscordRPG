@@ -18,6 +18,7 @@ namespace DiscordRPG.Player
         public SocketUser User { get; set; }
         public string Hashname { get; set; }
         public int Health { get; set; }
+        public int MHealth { get; set; }
         public int Bp { get; set; }
         public int Money { get; set; }
         public string State { get; set; }
@@ -50,12 +51,14 @@ namespace DiscordRPG.Player
             User = Program._client.GetUser(id);
             Hashname = User.ToString();
             Health = 10;
+            MHealth = 10;
             Bp = 0;
             Money = 100;
             State = "IDLE";
             Attack = 5;
             Defence = 5;
-            
+
+            CItems.Add(new Item("Potion",3,"POTION",5));
             //CEquipment = starter equipment
             //SEquipment = nothing
 
