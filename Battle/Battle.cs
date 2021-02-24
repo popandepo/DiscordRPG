@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DiscordRPG.Combat
+namespace DiscordRPG.Battle
 {
-    class Combat
+    class Battle
     {
         public void UseItem(ulong playerID,Item item)
         {
