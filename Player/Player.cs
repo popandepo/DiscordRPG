@@ -1,8 +1,6 @@
 ﻿using Discord.WebSocket;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DiscordRPG
 {
@@ -18,8 +16,8 @@ namespace DiscordRPG
         public int Bp { get; set; }
         public int Money { get; set; }
         public string State { get; set; }
-        public int Attack { get; set; }
-        public int Defence { get; set; }
+        public int Attack { get; set; } //TEMPORARY
+        public int Defence { get; set; } //TEMPORARY
         public List<ISkill> Skills { get; set; }
         public List<IEquipment> CEquipment { get; set; } //Carried
         public List<IEquipment> SEquipment { get; set; } //Stored
@@ -36,7 +34,7 @@ namespace DiscordRPG
         //list of stored items
         //list of materials
         //a combat class containing everyone in the fight referenced by "player", "friend1", "enemy1", "enemy2" etc.
-        
+
         /// <summary>
         /// Creates a player object
         /// </summary>
@@ -54,7 +52,7 @@ namespace DiscordRPG
             Attack = 5;
             Defence = 5;
 
-            CItems.Add(new Item("Potion",3,10,"POTION",5));
+            CItems.Add(new Item("Potion", 3, 10, "POTION", 5));
             //CEquipment = starter equipment
             //SEquipment = nothing
 

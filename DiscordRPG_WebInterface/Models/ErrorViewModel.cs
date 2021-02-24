@@ -1,5 +1,3 @@
-using System;
-
 namespace DiscordRPG_Webinterface.Models
 {
     public class ErrorViewModel

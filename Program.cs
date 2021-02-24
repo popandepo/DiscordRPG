@@ -2,7 +2,6 @@
 using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace DiscordRPG
@@ -11,7 +10,7 @@ namespace DiscordRPG
     {
         public static DiscordSocketClient _client;
         public static List<Player> players;
-        
+
         static async Task Main(string[] args)
         {
             Console.WriteLine("Initiating...");
@@ -27,7 +26,7 @@ namespace DiscordRPG
         private static async Task BotInit() //starts the bot and initiates all handlers
         {
             _client = new DiscordSocketClient(new DiscordSocketConfig() { AlwaysDownloadUsers = true });
-            
+
             string token = FileManipulation.ReadFile("BotKey.txt");//Reads the token from file
 
             await _client.LoginAsync(TokenType.Bot, token);

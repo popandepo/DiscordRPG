@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DiscordRPG
 {
@@ -22,7 +20,7 @@ namespace DiscordRPG
         /// <param name="maxAmount">The Max Amount of the Item</param>
         /// <param name="type">The Type of the Item</param>
         /// <param name="attributes">Any Attributes the Item has</param>
-        public Item(string name, int amount, int maxAmount, string type, params int[] attributes )
+        public Item(string name, int amount, int maxAmount, string type, params int[] attributes)
         {
             Name = name;
             MaxAmount = maxAmount;
