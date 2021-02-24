@@ -33,6 +33,7 @@ namespace DiscordRPG
             var message = reaction.Message.Value;
             var reacter = reaction.User.Value;
             var author = reaction.Message.Value.Author;
+            //var channel = reaction.Channel;
 
             return Task.CompletedTask;
         }
