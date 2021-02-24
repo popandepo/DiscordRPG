@@ -4,12 +4,14 @@ using DiscordRPG.Skills;
 using DiscordRPG.Equipment;
 using DiscordRPG.Items;
 using System.Text;
+using Discord.WebSocket;
 
 namespace DiscordRPG.Player
 {
     interface IPlayer
     {
         ulong ID { get; set; }
+        SocketUser User { get; set; }
         string Hashname { get; set; }
         int Health { get; set; }
         int Bp { get; set; }
