@@ -16,7 +16,10 @@ namespace DiscordRPG
             Console.WriteLine("Initiating...");
             await BotInit();
             Console.WriteLine("Initiated!");
-            Console.ReadLine();
+            while (true)
+            {
+
+            }
         }
 
         /// <summary>
