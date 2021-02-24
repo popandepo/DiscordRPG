@@ -16,6 +16,7 @@ namespace DiscordRPG.Player
         string Hashname { get; set; }
         int Health { get; set; }
         int Bp { get; set; }
+        int Money { get; set; }
         string State { get; set; }
         int Attack { get; set; } //TEMPORARY
         int Defence { get; set; } //TEMPORARY
@@ -24,7 +25,8 @@ namespace DiscordRPG.Player
         List<IEquipment> SEquipment { get; set; }
         List<IItem> CItems { get; set; }
         List<IItem> SItems { get; set; }
-        List<IMaterial> Materials { get; set; }
+        List<IMaterial> CMaterials { get; set; }
+        List<IMaterial> SMaterials { get; set; }
         int NumberOfSkills { get; }
         //list of skills
         //list of carried equipment
