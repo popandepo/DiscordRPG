@@ -1,4 +1,5 @@
-﻿using Discord.WebSocket;
+﻿using Discord;
+using Discord.WebSocket;
 using System.Collections.Generic;
 
 namespace DiscordRPG
@@ -6,6 +7,7 @@ namespace DiscordRPG
     interface IPlayer
     {
         ulong ID { get; set; }
+        IUserMessage LastMessage { get; set; }
         SocketUser User { get; set; }
         string Hashname { get; set; }
         int Health { get; set; }
@@ -15,11 +17,11 @@ namespace DiscordRPG
         string State { get; set; }
         int Attack { get; set; } //TEMPORARY
         int Defence { get; set; } //TEMPORARY
-        List<ISkill> Skills { get; set; }
+        List<Skill> Skills { get; set; }
         List<IEquipment> CEquipment { get; set; }
         List<IEquipment> SEquipment { get; set; }
-        List<IItem> CItems { get; set; }
-        List<IItem> SItems { get; set; }
+        List<Item> CItems { get; set; }
+        List<Item> SItems { get; set; }
         List<IMaterial> CMaterials { get; set; }
         List<IMaterial> SMaterials { get; set; }
         int NumberOfSkills { get; }

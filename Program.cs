@@ -9,7 +9,7 @@ namespace DiscordRPG
     class Program
     {
         public static DiscordSocketClient _client;
-        public static List<Player> players;
+        public static List<Player> players = new List<Player>();
 
         static async Task Main(string[] args)
         {
@@ -29,14 +29,14 @@ namespace DiscordRPG
 
             try
             {
-            string token = FileManipulation.ReadFile("BotKey.txt");//Reads the token from file
-            await _client.LoginAsync(TokenType.Bot, token);
-            await _client.StartAsync();
-            await _client.SetStatusAsync(UserStatus.Online);
+                string token = FileManipulation.ReadFile("BotKey.txt");//Reads the token from file
+                await _client.LoginAsync(TokenType.Bot, token);
+                await _client.StartAsync();
+                await _client.SetStatusAsync(UserStatus.Online);
             }
             catch (Exception)
             {
-                Console.WriteLine("No Botkey found, please contact an administrator. Press any key to try again");
+                Console.WriteLine("No Botkey found, please contact an administrator. Press any key to try again...");
                 Console.ReadKey();
                 await BotInit();
             }

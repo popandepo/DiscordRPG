@@ -1,6 +1,6 @@
 ﻿namespace DiscordRPG
 {
-    class Skills : ISkill
+    class Skill : ISkill
     {
         public int ID { get; set; }
         public string SkillName { get; set; }

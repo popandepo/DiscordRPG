@@ -22,6 +22,13 @@ namespace DiscordRPG
                 if (command.Contains("!join")) //Separate commands into a command handler and find an intelligent way to deal with it
                 {
                     Program.players.Add(new Player(author.Id));
+                    foreach (var player in Program.players)
+                    {
+                        if (player.ID == author.Id)
+                        {
+                            SendMessage(player, "You have been added to the list of players, please use this channel for any future messages");
+                        }
+                    }
                 }
                 else if (command.Contains("!leave"))
                 {
@@ -35,11 +42,41 @@ namespace DiscordRPG
                 }
                 else if (command.Contains("!test")) //REMOVE AFTER TESTING IS DONE
                 {
-                    author.SendMessageAsync("I recieved a test order, responding as ordered!");
+                    foreach (var player in Program.players)
+                    {
+                        if (player.ID == author.Id)
+                        {
+                            SendMessage(player, "I recieved a test order, responding as ordered!");
+                        }
+                    }
                 }
-
+                else if (command.Contains("!edit"))
+                {
+                    foreach (var player in Program.players)
+                    {
+                        if (player.ID == author.Id)
+                        {
+                            EditMessage(player, message.Content.Remove(0,5));
+                        }
+                    }
+                }
             }
             return Task.CompletedTask;
+        }
+
+        private static void EditMessage(Player player, string message)
+        {
+            player.LastMessage.ModifyAsync(m => { m.Content = message; });
+        }
+
+        /// <summary>
+        /// Sends a message to a player and stores it in LastMessage
+        /// </summary>
+        /// <param name="player">The player to send a message to</param>
+        /// <param name="message">The message to send</param>
+        private static void SendMessage(Player player, string message)
+        {
+            player.LastMessage = player.User.SendMessageAsync(message).Result;
         }
 
         /// <summary>

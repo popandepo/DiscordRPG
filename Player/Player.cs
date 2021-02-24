@@ -1,4 +1,5 @@
-﻿using Discord.WebSocket;
+﻿using Discord;
+using Discord.WebSocket;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,6 +10,7 @@ namespace DiscordRPG
 
 
         public ulong ID { get; set; }
+        public IUserMessage LastMessage { get; set; }
         public SocketUser User { get; set; }
         public string Hashname { get; set; }
         public int Health { get; set; }
@@ -18,11 +20,11 @@ namespace DiscordRPG
         public string State { get; set; }
         public int Attack { get; set; } //TEMPORARY
         public int Defence { get; set; } //TEMPORARY
-        public List<ISkill> Skills { get; set; }
+        public List<Skill> Skills { get; set; }
         public List<IEquipment> CEquipment { get; set; } //Carried
         public List<IEquipment> SEquipment { get; set; } //Stored
-        public List<IItem> CItems { get; set; } //Carried
-        public List<IItem> SItems { get; set; } //Stored
+        public List<Item> CItems { get; set; } //Carried
+        public List<Item> SItems { get; set; } //Stored
         public List<IMaterial> CMaterials { get; set; } //Carried
         public List<IMaterial> SMaterials { get; set; } //Stored
         public int NumberOfSkills => Skills.Count();
@@ -52,7 +54,9 @@ namespace DiscordRPG
             Attack = 5;
             Defence = 5;
 
+            CItems = new List<Item>();
             CItems.Add(new Item("Potion", 3, 10, "POTION", 5));
+
             //CEquipment = starter equipment
             //SEquipment = nothing
 
