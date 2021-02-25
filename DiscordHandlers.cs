@@ -76,7 +76,7 @@ namespace DiscordRPG
                             {
                                 List<ILootables> loot = new List<ILootables>();
                                 loot.Add(new Item("testitem", 1, 1, "TEST", 1));
-                                loot.Add(new Material("testmaterial", 1, 1));
+                                loot.Add(new Material("testmaterial", 1, 1,"Normal"));
 
                                 System.Console.WriteLine($"{player.Hashname} looted some stuff");
 
