@@ -12,7 +12,8 @@ namespace DiscordRPG
             3, //pulls
             MaterialList.LootGen(MaterialList.goblinEarOne, 20),
             MaterialList.LootGen(MaterialList.goblinEarTwo, 10),
-            MaterialList.LootGen(MaterialList.goblinGem, 5));
+            MaterialList.LootGen(MaterialList.goblinGem, 5)
+            );
 
         public static Enemy Slime = new Enemy("Slime",
             new List<string> { "Forest", "Plains" },
@@ -22,6 +23,8 @@ namespace DiscordRPG
             3, //pulls
             MaterialList.LootGen(MaterialList.slimeGooOne, 20),
             MaterialList.LootGen(MaterialList.slimeGooTwo, 10),
-            MaterialList.LootGen(MaterialList.slimeGem, 5));
+            MaterialList.LootGen(MaterialList.slimeGem, 5),
+            ItemList.LootGen(ItemList.slimePotion, 2)
+            );
     }
 }
