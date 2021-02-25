@@ -97,10 +97,11 @@ namespace DiscordRPG
         
         public override string ToString()
         {
-            string output = $"ID:{ID} Hashname:{Hashname} Health:{Health} MHealth:{MHealth} Bp:{Bp} Money:{Money} State:{State} Attack:{Attack} Defense:{Defense}";
+            string output = $"ID:{ID}, Hashname:{Hashname}, Health:{Health}, MHealth:{MHealth}, Bp:{Bp}, Money:{Money}, State:{State}, Attack:{Attack}, Defense:{Defense},";
             
             foreach (var item in CItems)
             {
+                output += "CItems:"
                 output += item.ToString();
             }
             foreach (var item in SItems)
