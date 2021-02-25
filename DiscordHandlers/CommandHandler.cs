@@ -73,6 +73,16 @@ namespace DiscordRPG
 
 
             }
+            else if (command.Contains("!enemy"))
+            {
+                foreach (var player in Program.players)
+                {
+                    if (player.ID == author.Id)
+                    {
+                        Enemy testGoblin = new Enemy("Goblin", new List<string> { "Forest" }, 10, 10, 10, new Material("Goblin ear", 2, 1, "Normal", 50), new Material("Goblin ear", 1, 1, "Normal", 50));
+                    }
+                }
+            }
 
             return Task.CompletedTask;
         }

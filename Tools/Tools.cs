@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace DiscordRPG.Tools
+namespace DiscordRPG
 {
-    class Tools
+    public class Tools
     {
         public int GetRandRange(int min, int max)
         {
