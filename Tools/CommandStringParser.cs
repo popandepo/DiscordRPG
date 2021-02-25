@@ -41,7 +41,7 @@ namespace DiscordRPG
             var splitString = input.Split(Delimiter).ToList();
             splitString.RemoveAt(0);
             if (splitString.Count() <= 1) throw new Exception($"No arguments");
-            string outputString = splitString.Aggregate((i, j) => i + ' ' + j);
+            string outputString = splitString.Aggregate((i, j) => i + Delimiter + j);
 
             return outputString;
         }
