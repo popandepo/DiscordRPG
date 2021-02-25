@@ -1,8 +1,5 @@
-﻿using DiscordRPG;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xunit;
 
 namespace DiscordRPG_Bot_UnitTests

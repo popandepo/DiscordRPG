@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace DiscordRPG.Tools
+namespace DiscordRPG
 {
     public class CommandStringParser
     {
@@ -61,7 +59,7 @@ namespace DiscordRPG.Tools
             if (input.Length <= 0) throw new Exception("Input string has no content!");
             if (input[0] != prefix) throw new Exception("Unable to locate command prefix");
             var splitString = input.Split(delim).ToList();
-            splitString.RemoveRange(1, splitString.Count()-1);
+            splitString.RemoveRange(1, splitString.Count() - 1);
             var command = splitString[0].Substring(1);
             return command;
         }
@@ -72,7 +70,7 @@ namespace DiscordRPG.Tools
             if (input.Length <= 0) throw new Exception("Input string has no content!");
             if (input[0] != Prefix) throw new Exception("Unable to locate command prefix");
             var splitString = input.Split(Delimiter).ToList();
-            splitString.RemoveRange(1, splitString.Count()-1);
+            splitString.RemoveRange(1, splitString.Count() - 1);
             var command = splitString[0].Substring(1);
             return command;
         }

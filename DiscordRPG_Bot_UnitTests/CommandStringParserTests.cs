@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using DiscordRPG;
+using System;
 using Xunit;
-using DiscordRPG.Tools;
 
 namespace DiscordRPG_Bot_UnitTests
 {
@@ -14,7 +12,8 @@ namespace DiscordRPG_Bot_UnitTests
         public CommandStringParser DifferentPrefix;
         protected TestsBase()
         {
-            CommaParser = new CommandStringParser {
+            CommaParser = new CommandStringParser
+            {
                 Delimiter = ',',
                 Prefix = '!'
             };
