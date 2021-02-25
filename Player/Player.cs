@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace DiscordRPG
 {
-    class Player : IPlayer
+    public class Player : IPlayer
     {
 
 
@@ -21,12 +21,12 @@ namespace DiscordRPG
         public int Attack { get; set; } //TEMPORARY
         public int Defence { get; set; } //TEMPORARY
         public List<Skill> Skills { get; set; }
-        public List<IEquipment> CEquipment { get; set; } //Carried
-        public List<IEquipment> SEquipment { get; set; } //Stored
+        public List<Equipment> CEquipment { get; set; } //Carried
+        public List<Equipment> SEquipment { get; set; } //Stored
         public List<Item> CItems { get; set; } //Carried
         public List<Item> SItems { get; set; } //Stored
-        public List<IMaterial> CMaterials { get; set; } //Carried
-        public List<IMaterial> SMaterials { get; set; } //Stored
+        public List<Material> CMaterials { get; set; } //Carried
+        public List<Material> SMaterials { get; set; } //Stored
         public int NumberOfSkills => Skills.Count();
 
         //list of skills

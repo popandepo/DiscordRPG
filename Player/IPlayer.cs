@@ -18,12 +18,12 @@ namespace DiscordRPG
         int Attack { get; set; } //TEMPORARY
         int Defence { get; set; } //TEMPORARY
         List<Skill> Skills { get; set; }
-        List<IEquipment> CEquipment { get; set; }
-        List<IEquipment> SEquipment { get; set; }
+        List<Equipment> CEquipment { get; set; }
+        List<Equipment> SEquipment { get; set; }
         List<Item> CItems { get; set; }
         List<Item> SItems { get; set; }
-        List<IMaterial> CMaterials { get; set; }
-        List<IMaterial> SMaterials { get; set; }
+        List<Material> CMaterials { get; set; }
+        List<Material> SMaterials { get; set; }
         int NumberOfSkills { get; }
         //list of skills
         //list of carried equipment

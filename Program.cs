@@ -46,9 +46,9 @@ namespace DiscordRPG
 
 
 
-            _client.MessageReceived += DiscordHandlers.MessageHandler;//Whenever a message is heard, push it to the message handler
-            _client.ReactionAdded += DiscordHandlers.ReactionHandler;//Whenever a reaction is added, push it to the reaction handler
-            _client.ReactionRemoved += DiscordHandlers.ReactionHandler;//Whenever a reaction is removed, push it to the reaction handler
+            _client.MessageReceived += MessageHandler.Send;//Whenever a message is heard, push it to the message handler
+            _client.ReactionAdded += ReactionHandler.Send;//Whenever a reaction is added, push it to the reaction handler
+            _client.ReactionRemoved += ReactionHandler.Send;//Whenever a reaction is removed, push it to the reaction handler
         }
     }
 }

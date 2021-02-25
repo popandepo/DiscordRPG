@@ -1,6 +1,6 @@
 ﻿namespace DiscordRPG
 {
-    class Material : IMaterial
+    public class Material : IMaterial
     {
         public string Name { get; set; }
         public int Amount { get; set; }
