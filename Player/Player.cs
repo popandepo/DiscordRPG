@@ -59,7 +59,7 @@ namespace DiscordRPG
 
             SItems = new List<Item>();
 
-            SMaterials = new List<IMaterial>();
+            SMaterials = new List<Material>();
 
             //CEquipment = starter equipment
             //SEquipment = nothing

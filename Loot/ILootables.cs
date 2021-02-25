@@ -1,6 +1,6 @@
 ﻿namespace DiscordRPG
 {
-    interface ILootables
+    public interface ILootables
     {
         string Name { get; set; }
         int Amount { get; set; }
