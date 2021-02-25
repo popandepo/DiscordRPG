@@ -2,7 +2,7 @@
 
 namespace DiscordRPG
 {
-    public class UserTool
+    public class UserTools
     {
 
         public static Player? IsRegistered(ulong id)
