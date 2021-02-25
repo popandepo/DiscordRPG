@@ -9,7 +9,7 @@ namespace DiscordRPG.Modules
     public class EnemyGoblin : ModuleBase<SocketCommandContext>
     {
         [Command("EnemyGoblin")] // RequireUserPermission(permission)
-        [Alias("enemygoblin", "ENEMYGOBLIN", "eNEMYgOBLIN")]
+        [Alias("enemy", "ENEMY", "eNEMY")]
         [Summary("")]
         public async Task EnemyGoblinAsync()
         {
