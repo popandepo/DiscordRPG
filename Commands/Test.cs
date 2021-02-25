@@ -11,7 +11,7 @@ namespace DiscordRPG.Commands
         [Summary("")]
         public async Task TestAsync()
         {
-            var player = UserTool.IsRegistered(Context.User.Id);
+            var player = UserTools.IsRegistered(Context.User.Id);
             if (player is null) return;
             await MessageHandler.SendMessageAsync(player, "I recieved a test order, responding as ordered!");
             Console.WriteLine($"{player.Hashname} sent a test message");

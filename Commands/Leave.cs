@@ -11,7 +11,7 @@ namespace DiscordRPG.Commands
         [Summary("")]
         public async Task LeaveAsync()
         {
-            var player = UserTool.IsRegistered(Context.User.Id);
+            var player = UserTools.IsRegistered(Context.User.Id);
             if (player is null || !Context.IsPrivate) return; //If player does not exist or it is not a DirectMessage, do nothing
             Console.WriteLine($"{player.Hashname} has left");
             Program.players.Remove(player);

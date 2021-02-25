@@ -12,7 +12,7 @@ namespace DiscordRPG.Commands
         [Summary("")]
         public async Task LootAsync()
         {
-            var player = UserTool.IsRegistered(Context.User.Id);
+            var player = UserTools.IsRegistered(Context.User.Id);
             if (player is null) return;
             List<ILootables> loot = new List<ILootables>();
             loot.Add(new Item("testitem", 1, 1, "TEST", 1));

@@ -11,7 +11,7 @@ namespace DiscordRPG.Commands
         [Summary("")]
         public async Task EnemyGoblinAsync()
         {
-            var player = UserTool.IsRegistered(Context.User.Id);
+            var player = UserTools.IsRegistered(Context.User.Id);
             if (player is null) return;
             Enemy testGoblin = new Enemy("Goblin", new List<string> { "Forest" }, 10, 10, 10, 10, new Material("Goblin Club", 2, 1, "Normal", 20), new Material("Goblin Foot", 1, 1, "Normal", 50), new Material("Goblin Ear", 1, 1, "Normal", 80));
             string output = "You recieved: \n";

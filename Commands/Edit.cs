@@ -12,7 +12,7 @@ namespace DiscordRPG.Commands
         public async Task EditAsync(string content, [Remainder] string extra = null)
         {
             Console.WriteLine("Function does not appear to work atm");
-            var player = UserTool.IsRegistered(Context.User.Id);
+            var player = UserTools.IsRegistered(Context.User.Id);
             if (player is null) return;
             await MessageHandler.EditMessageAsync(player, content);
             Console.WriteLine($"{player.Hashname} edited a message");
