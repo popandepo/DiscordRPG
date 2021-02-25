@@ -79,7 +79,8 @@ namespace DiscordRPG
                 {
                     if (player.ID == author.Id)
                     {
-                        Enemy testGoblin = new Enemy("Goblin", new List<string> { "Forest" }, 10, 10, 10, new Material("Goblin ear", 2, 1, "Normal", 50), new Material("Goblin ear", 1, 1, "Normal", 50));
+                        Enemy testGoblin = new Enemy("Goblin", new List<string> { "Forest" }, 10, 10, 10, 10, new Material("Goblin Club", 2, 1, "Normal", 20), new Material("Goblin Foot", 1, 1, "Normal", 50), new Material("Goblin Ear", 1, 1, "Normal", 80));
+                        testGoblin.Pull().ForEach(i => Console.WriteLine(i.Name));
                     }
                 }
             }

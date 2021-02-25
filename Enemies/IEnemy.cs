@@ -12,5 +12,7 @@ namespace DiscordRPG
         int Bonus { get; set; }
         int Pulls { get; set; }
         List<ILootables> Loot { get; set; }
+
+        List<ILootables> Pull();
     }
 }

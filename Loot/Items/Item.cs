@@ -13,6 +13,8 @@ namespace DiscordRPG
         public string Identifier { get; set; } = "Item";
         public List<int> Attributes { get; set; }
         public int Chance { get; set; }
+        public int PeakChance { get; set; }
+        public int BaseChance { get; set; }
 
         /// <summary>
         /// Creates an Item object

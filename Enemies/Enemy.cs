@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DiscordRPG
@@ -40,7 +41,32 @@ namespace DiscordRPG
         /// <returns>A list of ILootables</returns>
         public List<ILootables> Pull()
         {
+            var rng = new Random();
+
             List<ILootables> loot = new List<ILootables>();
+            List<ILootables> itemsToLoot = new List<ILootables>();
+
+            int lootSum = Loot.Select(i => i.Chance).Sum();
+            int cumulativeChance = 0;
+            foreach (var item in Loot)
+            {
+                item.BaseChance = cumulativeChance;
+                cumulativeChance += item.Chance;
+                item.PeakChance = cumulativeChance;
+                itemsToLoot.Add(item);
+            }
+
+            for (int i = 0; i < (Pulls + Bonus); i++)
+            {
+                int chance = Tools.GetRandRange(0, lootSum, rng);
+                foreach (var item in itemsToLoot)
+                {
+                    if (item.BaseChance < chance && item.PeakChance > chance)
+                    {
+                        loot.Add(item);
+                    }
+                }
+            }
 
             return loot;
         }
