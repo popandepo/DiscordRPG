@@ -73,6 +73,11 @@ namespace DiscordRPG
 
             //Combat = nothing
         }
+
+        /// <summary>
+        /// Gives a list of loot to the player
+        /// </summary>
+        /// <param name="loot">The list of loot to give to the player</param>
         public void RecieveLoot(List<ILootables> loot)
         {
             foreach (var item in loot)
