@@ -34,5 +34,21 @@ namespace DiscordRPG
             Chance = chance;
             Attributes = attributes.ToList();
         }
+
+        public override string ToString()
+        {
+            string output = $"Name:{Name} Amount:{Amount} MaxAmount:{MaxAmount} Type:{Type} Identifier:{Identifier}";
+            output += "Attributes{";
+            string tempOutput = "";
+            foreach (var attr in Attributes)
+            {
+                tempOutput += attr;
+                tempOutput += " ";
+            }
+            output += tempOutput.Trim();
+            output += "}";
+
+            return output;
+        }
     }
 }

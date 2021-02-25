@@ -27,5 +27,12 @@
             Element = element;
             Chance = chance;
         }
+
+        public override string ToString()
+        {
+            string output = $"Name:{Name} Amount:{Amount} Tier:{Tier} Element:{Element} Identifier:{Identifier}";
+            
+            return output;
+        }
     }
 }
