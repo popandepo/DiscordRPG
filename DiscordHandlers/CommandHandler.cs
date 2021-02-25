@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DiscordRPG
 {
     class CommandHandler
     {
-        public static Task Send( ulong id, string command)
+        public static Task Send(ulong id, string command)
         {
             var author = Program._client.GetUser(id);
             if (command.Contains("!join")) //Separate commands into a command handler and find an intelligent way to deal with it
@@ -55,7 +54,7 @@ namespace DiscordRPG
                     }
                 }
             }
-            else if (command.Contains("!loot")) //GIVE THE PLAYER SOME LOOT TO TEST HOW MY PROGRAM HANDLES IT
+            else if (command.Contains("!loot")) //GIVE THE PLAYER SOME LOOT TO TEST HOW THE PROGRAM HANDLES IT //REMOVE AFTER TESTING IS DONE
             {
                 foreach (var player in Program.players)
                 {

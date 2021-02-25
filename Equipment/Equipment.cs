@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DiscordRPG
+﻿namespace DiscordRPG
 {
     public class Equipment : IEquipment
     {

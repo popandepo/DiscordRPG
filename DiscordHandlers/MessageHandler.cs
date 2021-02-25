@@ -1,6 +1,5 @@
 ﻿using Discord;
 using Discord.WebSocket;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DiscordRPG
@@ -24,7 +23,7 @@ namespace DiscordRPG
                     var channel = message.Channel;
                     var command = message.Content.ToLower();
 
-                    CommandHandler.Send(author.Id,message.Content);
+                    CommandHandler.Send(author.Id, message.Content);
                 }
             }
             return Task.CompletedTask;
