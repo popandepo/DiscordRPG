@@ -23,7 +23,7 @@ namespace DiscordRPG
                     var channel = message.Channel;
                     var command = message.Content.ToLower();
 
-                    CommandHandler.Send(author.Id, message.Content);
+                    //CommandHandler.Send(author.Id, message.Content);
                 }
             }
             return Task.CompletedTask;
@@ -47,6 +47,18 @@ namespace DiscordRPG
         public static void SendMessage(Player player, string message)
         {
             player.LastMessage = player.User.SendMessageAsync(message).Result;
+        }
+
+        public static Task SendMessageAsync(Player player, string message)
+        {
+            player.LastMessage = player.User.SendMessageAsync(message).Result;
+            return Task.CompletedTask;
+        }
+
+        public static Task EditMessageAsync(Player player, string message)
+        {
+            player.LastMessage.ModifyAsync(m => { m.Content = message; });
+            return Task.CompletedTask;
         }
     }
 }

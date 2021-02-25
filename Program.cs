@@ -1,4 +1,5 @@
 ﻿using Discord;
+using Discord.Commands;
 using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
@@ -10,25 +11,24 @@ namespace DiscordRPG
     {
         public static DiscordSocketClient _client;
         public static List<Player> players = new List<Player>();
+        private CommandService _commands;
+        private CommandHandler _handler;
 
-        static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
             Console.WriteLine("Initiating...");
-            await BotInit();
-            Console.WriteLine("Initiated!");
-            while (true)
-            {
-
-            }
+            new Program().BotInit().GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Initiates the bot
         /// </summary>
         /// <returns>Nothing</returns>
-        private static async Task BotInit() //starts the bot and initiates all handlers
+        public async Task BotInit() //starts the bot and initiates all handlers
         {
             _client = new DiscordSocketClient(new DiscordSocketConfig() { AlwaysDownloadUsers = true });
+            _commands = new CommandService();
+            _handler = new CommandHandler(_client, _commands);
 
             try
             {
@@ -43,12 +43,12 @@ namespace DiscordRPG
                 Console.ReadKey();
                 await BotInit();
             }
+            Console.WriteLine("Initiated!");
 
-
-
-            _client.MessageReceived += MessageHandler.Send;//Whenever a message is heard, push it to the message handler
             _client.ReactionAdded += ReactionHandler.Send;//Whenever a reaction is added, push it to the reaction handler
             _client.ReactionRemoved += ReactionHandler.Send;//Whenever a reaction is removed, push it to the reaction handler
+
+            await Task.Delay(-1);
         }
     }
 }
