@@ -1,6 +1,6 @@
 ﻿namespace DiscordRPG_Bot_UnitTests
 {
-    public class PlayerTest
+    public class PlayerTests
     {
     }
 }
