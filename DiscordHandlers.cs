@@ -15,74 +15,78 @@ namespace DiscordRPG
         /// <returns>Task.CompletedTask</returns>
         public static Task MessageHandler(SocketMessage message)
         {
-            if (message.Content.Contains("!"))
+            if (!message.Author.IsBot)
             {
-                var author = message.Author;
-                var channel = message.Channel;
-                var command = message.Content.ToLower();
-                if (command.Contains("!join")) //Separate commands into a command handler and find an intelligent way to deal with it
+
+                if (message.Content.Contains("!"))
                 {
-                    Program.players.Add(new Player(author.Id));
-                    foreach (var player in Program.players) //IS THERE A BETTER WAY TO FIND A PLAYER WITH A SINGLE ID?
+                    var author = message.Author;
+                    var channel = message.Channel;
+                    var command = message.Content.ToLower();
+                    if (command.Contains("!join")) //Separate commands into a command handler and find an intelligent way to deal with it
                     {
-                        if (player.ID == author.Id)
+                        Program.players.Add(new Player(author.Id));
+                        foreach (var player in Program.players) //IS THERE A BETTER WAY TO FIND A PLAYER WITH A SINGLE ID?
                         {
-                            SendMessage(player, "You have been added to the list of players, please use this channel for any future messages");
-                            System.Console.WriteLine($"{player.Hashname} has been added");
+                            if (player.ID == author.Id)
+                            {
+                                SendMessage(player, "You have been added to the list of players, please use this channel for any future messages");
+                                System.Console.WriteLine($"{player.Hashname} has been added");
+                            }
                         }
                     }
-                }
-                else if (command.Contains("!leave"))
-                {
-                    foreach (var player in Program.players)
+                    else if (command.Contains("!leave"))
                     {
-                        if (player.ID == author.Id)
+                        foreach (var player in Program.players)
                         {
-                            System.Console.WriteLine($"{player.Hashname} has left");
-                            Program.players.Remove(player);
+                            if (player.ID == author.Id)
+                            {
+                                System.Console.WriteLine($"{player.Hashname} has left");
+                                Program.players.Remove(player);
+                            }
                         }
                     }
-                }
-                else if (command.Contains("!test")) //REMOVE AFTER TESTING IS DONE
-                {
-                    foreach (var player in Program.players)
+                    else if (command.Contains("!test")) //REMOVE AFTER TESTING IS DONE
                     {
-                        if (player.ID == author.Id)
+                        foreach (var player in Program.players)
                         {
-                            SendMessage(player, "I recieved a test order, responding as ordered!");
-                            System.Console.WriteLine($"{player.Hashname} sent a test message");
+                            if (player.ID == author.Id)
+                            {
+                                SendMessage(player, "I recieved a test order, responding as ordered!");
+                                System.Console.WriteLine($"{player.Hashname} sent a test message");
+                            }
                         }
                     }
-                }
-                else if (command.Contains("!edit"))
-                {
-                    foreach (var player in Program.players)
+                    else if (command.Contains("!edit"))
                     {
-                        if (player.ID == author.Id)
+                        foreach (var player in Program.players)
                         {
-                            EditMessage(player, message.Content.Remove(0, 5));
-                            System.Console.WriteLine($"{player.Hashname} edited a message");
+                            if (player.ID == author.Id)
+                            {
+                                EditMessage(player, message.Content.Remove(0, 5));
+                                System.Console.WriteLine($"{player.Hashname} edited a message");
+                            }
                         }
                     }
-                }
-                else if (command.Contains("!loot")) //GIVE THE PLAYER SOME LOOT TO TEST HOW MY PROGRAM HANDLES IT
-                {
-                    foreach (var player in Program.players)
+                    else if (command.Contains("!loot")) //GIVE THE PLAYER SOME LOOT TO TEST HOW MY PROGRAM HANDLES IT
                     {
-                        if (player.ID == author.Id)
+                        foreach (var player in Program.players)
                         {
-                            List<ILootables> loot = new List<ILootables>();
-                            loot.Add(new Item("testitem", 1, 1, "TEST", 1));
-                            loot.Add(new Material("testmaterial", 1, 1));
+                            if (player.ID == author.Id)
+                            {
+                                List<ILootables> loot = new List<ILootables>();
+                                loot.Add(new Item("testitem", 1, 1, "TEST", 1));
+                                loot.Add(new Material("testmaterial", 1, 1));
 
-                            System.Console.WriteLine($"{player.Hashname} looted some stuff");
+                                System.Console.WriteLine($"{player.Hashname} looted some stuff");
 
-                            player.RecieveLoot(loot);
+                                player.RecieveLoot(loot);
 
+                            }
                         }
+
+
                     }
-
-
                 }
             }
             return Task.CompletedTask;
@@ -117,12 +121,16 @@ namespace DiscordRPG
         /// <returns>Task.CompletedTask</returns>
         public static Task ReactionHandler(Cacheable<IUserMessage, ulong> trash1, ISocketMessageChannel channel, SocketReaction reaction)
         {
-            var emote = reaction.Emote;
-            var message = reaction.Message.Value;
-            var reacter = reaction.User.Value;
-            var author = reaction.Message.Value.Author;
-            //var channel = reaction.Channel;
+            if (!Program._client.GetUser(reaction.UserId).IsBot)
+            {
 
+                var emote = reaction.Emote;
+                var message = reaction.Message.Value;
+                var reacter = Program._client.GetUser(reaction.UserId);
+                var author = reaction.Message.Value.Author;
+                //var channel = reaction.Channel;
+
+            }
             return Task.CompletedTask;
         }
     }
