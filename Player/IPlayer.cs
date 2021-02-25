@@ -24,6 +24,7 @@ namespace DiscordRPG
         List<Item> SItems { get; set; }
         List<Material> CMaterials { get; set; }
         List<Material> SMaterials { get; set; }
+        Combat Combat { get; set; }
         int NumberOfSkills { get; }
         //list of skills
         //list of carried equipment

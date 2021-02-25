@@ -84,6 +84,16 @@ namespace DiscordRPG
                     }
                 }
             }
+            else if (command.Contains("!fight"))
+            {
+                foreach (var player in Program.players)
+                {
+                    if (player.ID == author.Id)
+                    {
+                        player.Combat = new Combat(EnemyList.Goblin);
+                    }
+                }
+            }
 
             return Task.CompletedTask;
         }

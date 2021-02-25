@@ -27,7 +27,9 @@ namespace DiscordRPG
         public List<Item> SItems { get; set; } //Stored
         public List<Material> CMaterials { get; set; } //Carried
         public List<Material> SMaterials { get; set; } //Stored
+        public Combat Combat { get; set; }
         public int NumberOfSkills => Skills.Count();
+
 
         //list of skills
         //list of carried equipment
@@ -94,14 +96,14 @@ namespace DiscordRPG
                 }
             }
         }
-        
+
         public override string ToString()
         {
             string output = $"ID:{ID}, Hashname:{Hashname}, Health:{Health}, MHealth:{MHealth}, Bp:{Bp}, Money:{Money}, State:{State}, Attack:{Attack}, Defense:{Defense},";
-            
+
             foreach (var item in CItems)
             {
-                output += "CItems:"
+                output += "CItems:";
                 output += item.ToString();
             }
             foreach (var item in SItems)
