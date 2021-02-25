@@ -16,7 +16,7 @@ namespace DiscordRPG
         int Money { get; set; }
         string State { get; set; }
         int Attack { get; set; } //TEMPORARY
-        int Defence { get; set; } //TEMPORARY
+        int Defense { get; set; } //TEMPORARY
         List<Skill> Skills { get; set; }
         List<Equipment> CEquipment { get; set; }
         List<Equipment> SEquipment { get; set; }

@@ -19,7 +19,7 @@ namespace DiscordRPG
         public int Money { get; set; }
         public string State { get; set; }
         public int Attack { get; set; } //TEMPORARY
-        public int Defence { get; set; } //TEMPORARY
+        public int Defense { get; set; } //TEMPORARY
         public List<Skill> Skills { get; set; }
         public List<Equipment> CEquipment { get; set; } //Carried
         public List<Equipment> SEquipment { get; set; } //Stored
@@ -52,7 +52,7 @@ namespace DiscordRPG
             Money = 100;
             State = "IDLE";
             Attack = 5;
-            Defence = 5;
+            Defense = 5;
 
             CItems = new List<Item>();
             CItems.Add(new Item("Potion", 3, 10, "POTION", 5));
@@ -93,6 +93,40 @@ namespace DiscordRPG
                     User.SendMessageAsync($"You looted {item.Amount} {item.Name}");
                 }
             }
+        }
+        
+        public override string ToString()
+        {
+            string output = $"ID:{ID} Hashname:{Hashname} Health:{Health} MHealth:{MHealth} Bp:{Bp} Money:{Money} State:{State} Attack:{Attack} Defense:{Defense}";
+            
+            foreach (var item in CItems)
+            {
+                output += item.ToString();
+            }
+            foreach (var item in SItems)
+            {
+                output += item.ToString();
+            }
+
+            foreach (var item in CMaterials)
+            {
+                output += item.ToString();
+            }
+            foreach (var item in SMaterials)
+            {
+                output += item.ToString();
+            }
+
+            foreach (var item in CEquipment)
+            {
+                output += item.ToString();
+            }
+            foreach (var item in SEquipment)
+            {
+                output += item.ToString();
+            }
+
+            return output;
         }
     }
 }
