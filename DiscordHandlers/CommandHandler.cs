@@ -90,7 +90,7 @@ namespace DiscordRPG
                 {
                     if (player.ID == author.Id)
                     {
-                        player.Combat = new Combat(EnemyList.Goblin,EnemyList.Slime);
+                        player.Combat = new Combat(EnemyList.Goblin, EnemyList.Slime);
                     }
                 }
             }

@@ -5,7 +5,7 @@ namespace DiscordRPG
     public class EnemyList
     {
         public static Enemy Goblin = new Enemy("Goblin",
-            new List<string> { "Forest" },
+            new List<string> { "Forest", "Plains" },
             5, //attack
             5, //defense
             5, //health
@@ -15,7 +15,7 @@ namespace DiscordRPG
             MaterialList.LootGen(MaterialList.goblinGem, 5));
 
         public static Enemy Slime = new Enemy("Slime",
-            new List<string> { "Forest" },
+            new List<string> { "Forest", "Plains" },
             4, //attack
             6, //defense
             6, //health
