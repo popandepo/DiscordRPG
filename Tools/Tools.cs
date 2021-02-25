@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace DiscordRPG.Tools
+namespace DiscordRPG
 {
-    class Tools
+    public class Tools
     {
-        public int GetRandRange(int min, int max)
+        public static int GetRandRange(int min, int max, Random rng)
         {
-            Random rnd = new Random();
+            Random rnd = rng;
             int output = rnd.Next(min, max);
             return output;
         }
