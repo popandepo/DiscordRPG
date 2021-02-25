@@ -54,5 +54,11 @@ namespace DiscordRPG
             player.LastMessage = player.User.SendMessageAsync(message).Result;
             return Task.CompletedTask;
         }
+
+        public static Task EditMessageAsync(Player player, string message)
+        {
+            player.LastMessage.ModifyAsync(m => { m.Content = message; });
+            return Task.CompletedTask;
+        }
     }
 }

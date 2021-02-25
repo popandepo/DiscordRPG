@@ -19,9 +19,8 @@ namespace DiscordRPG.Modules
             } // If the player is already registered, break out
             var player = new Player(Context.User.Id);
             Program.players.Add(player); // Add the player to players
-            MessageHandler.SendMessage(player, "You have been added to the list of players, please use this channel for any future messages");
+            await MessageHandler.SendMessageAsync(player, "You have been added to the list of players, please use this channel for any future messages");
             Console.WriteLine($"{player.Hashname} has been added");
-            await Context.Channel.SendMessageAsync("Joining");
         }
     }
 }
