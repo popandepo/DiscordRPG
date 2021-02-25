@@ -49,7 +49,7 @@ namespace DiscordRPG
                 {
                     if (player.ID == author.Id)
                     {
-                        MessageHandler.EditMessage(player, command.Remove(0, 5));
+                        MessageHandler.EditMessage(player, CommandStringParser.RemoveCommand(command));
                         Console.WriteLine($"{player.Hashname} edited a message");
                     }
                 }
