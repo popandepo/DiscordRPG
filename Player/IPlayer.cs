@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace DiscordRPG
 {
-    interface IPlayer
+    public interface IPlayer : ICreature
     {
         ulong ID { get; set; }
         IUserMessage LastMessage { get; set; }

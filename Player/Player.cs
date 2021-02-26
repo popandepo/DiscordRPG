@@ -60,23 +60,13 @@ namespace DiscordRPG
             UpdateStats();
 
             CItems = new List<Item>();
-            CItems.Add(new Item("Potion", 3, 10, "POTION", 5));
+            CItems.Add(ItemList.lowPotion);
 
             SItems = new List<Item>();
 
+            CMaterials = new List<Material>();
             SMaterials = new List<Material>();
-
-            //CEquipment = starter equipment
-            //SEquipment = nothing
-
-            //CItems = starter items
-            //SItems = nothing
-
-            //Materials = nothing
-
             //Skills = starter skills (maybe nothing, maybe a low-level heal ability or something)
-
-            //Combat = nothing
         }
 
         /// <summary>
@@ -104,6 +94,8 @@ namespace DiscordRPG
         {
             foreach (var equipment in CEquipment)
             {
+                Defense = 0;
+                Attack = 0;
                 if (equipment.EquipmentType == "Armor")
                 {
                     Defense += equipment.Defense;
@@ -114,6 +106,45 @@ namespace DiscordRPG
                 }
             }
 
+        }
+
+        public void Damage(int incDamage) //10
+        {
+            int negatePoint = incDamage * -1; //-10
+            int floorCap = incDamage / 2; //5
+
+            int totalDamage = incDamage - Defense;
+
+            if (totalDamage <= negatePoint) //if total damage is less than negate point
+            {
+                //no damage recieved
+            }
+            else if (totalDamage > negatePoint && totalDamage <= floorCap) //if total damage is between negate point and floor cap
+            {
+                Hurt(floorCap);
+            }
+            else if (totalDamage > floorCap) //if total damage is above floor cap
+            {
+                Hurt(totalDamage);
+            }
+        }
+
+        private void Hurt(int damage)
+        {
+            if (Health > damage) //if you can take the damage
+            {
+                Health -= damage;
+            }
+            else if (Health < damage) //if you would die
+            {
+                Health = 0;
+                Kill();
+            }
+        }
+
+        private void Kill()
+        {
+            State = "DEAD";
         }
 
         public override string ToString()
