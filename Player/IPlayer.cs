@@ -8,6 +8,10 @@ namespace DiscordRPG
     {
         ulong ID { get; set; }
         IUserMessage LastMessage { get; set; }
+        List<IEmote> EmoteHolder { get; set; }
+        List<IEmote> ExpectedEmotes { get; set; }
+        List<string> ExpectedString { get; set; }
+        List<int> ExpectedNumber { get; set; }
         SocketUser User { get; set; }
         string Hashname { get; set; }
         int Health { get; set; }

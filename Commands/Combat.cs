@@ -14,7 +14,9 @@ namespace DiscordRPG.Commands
             var player = UserTools.IsRegistered(Context.User.Id);
             player.Combat = new DiscordRPG.Combat(player, EnemyList.Goblin, EnemyList.Slime);
 
-            await Context.User.SendMessageAsync(Text.GetCombat(player));
+            player.LastMessage = Context.User.SendMessageAsync(Text.GetCombat(player)).Result;
+            player.AddEmote(Emote.Sword, Emote.Shield, Emote.Wand, Emote.Bag, Emote.Flag);
+
         }
     }
 }

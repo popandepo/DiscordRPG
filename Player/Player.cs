@@ -29,6 +29,10 @@ namespace DiscordRPG
         public List<Material> SMaterials { get; set; } //Stored
         public Combat Combat { get; set; }
         public int NumberOfSkills => Skills.Count();
+        public List<IEmote> ExpectedEmotes { get; set; }
+        public List<string> ExpectedString { get; set; }
+        public List<int> ExpectedNumber { get; set; }
+        public List<IEmote> EmoteHolder { get; set; }
 
 
         //list of skills
@@ -66,7 +70,15 @@ namespace DiscordRPG
 
             CMaterials = new List<Material>();
             SMaterials = new List<Material>();
+
+            ExpectedEmotes = new List<IEmote>();
             //Skills = starter skills (maybe nothing, maybe a low-level heal ability or something)
+        }
+
+        public void AddEmote(params IEmote[] emotes)
+        {
+            ExpectedEmotes.AddRange(emotes);
+            LastMessage.AddReactionsAsync(emotes);
         }
 
         /// <summary>

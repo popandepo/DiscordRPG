@@ -1,20 +1,20 @@
 ﻿using Discord;
 namespace DiscordRPG
 {
-    class Emote
+    public class Emote
     {
-        public static Emoji Shield = new Emoji("🛡️");
-        public static Emoji Sword = new Emoji("⚔️");
-        public static Emoji Bag = new Emoji("💼");
-        public static Emoji Wand = new Emoji("🪄");
-        public static Emoji QuestionMark = new Emoji("❓");
-        public static Emoji TurnBack = new Emoji("↩️");
-        public static Emoji CheckMark = new Emoji("✅");
-        public static Emoji CrossMark = new Emoji("❎");
-        public static Emoji BackButton = new Emoji("◀️");
-        public static Emoji NextButton = new Emoji("▶️");
-        public static Emoji Flag = new Emoji("🏁");
-        public static Emoji[] Numbers = { //Access using index
+        public static IEmote Shield = new Emoji("🛡️");
+        public static IEmote Sword = new Emoji("⚔️");
+        public static IEmote Bag = new Emoji("💼");
+        public static IEmote Wand = new Emoji("🪄");
+        public static IEmote QuestionMark = new Emoji("❓");
+        public static IEmote TurnBack = new Emoji("↩️");
+        public static IEmote CheckMark = new Emoji("✅");
+        public static IEmote CrossMark = new Emoji("❎");
+        public static IEmote BackButton = new Emoji("◀️");
+        public static IEmote NextButton = new Emoji("▶️");
+        public static IEmote Flag = new Emoji("🏁");
+        public static IEmote[] Numbers = { //Access using index
             new Emoji("0️⃣"),
             new Emoji("1️⃣"),
             new Emoji("2️⃣"),
@@ -27,6 +27,5 @@ namespace DiscordRPG
             new Emoji("9️⃣"),
             new Emoji("🔟")
         };
-
     }
 }

@@ -4,20 +4,36 @@ using System.Threading.Tasks;
 
 namespace DiscordRPG
 {
-    class ReactionHandler
+    public class ReactionHandler
     {
-        public static Task Send(Cacheable<IUserMessage, ulong> trash1, ISocketMessageChannel channel, SocketReaction reaction)
+        public static async Task Send(Cacheable<IUserMessage, ulong> trash1, ISocketMessageChannel channel, SocketReaction reaction)
         {
             if (!Program._client.GetUser(reaction.UserId).IsBot)
             {
-
                 var emote = reaction.Emote;
                 var reacter = Program._client.GetUser(reaction.UserId);
-                var author = reaction.Message.Value.Author;
                 //var channel = reaction.Channel;
 
+                Player player = UserTools.IsRegistered(reacter.Id);
+
+                if (emote.Name == Emote.Flag.Name)
+                {
+                    foreach (var item in player.ExpectedEmotes)
+                    {
+                        var users = player.LastMessage.GetReactionUsersAsync(item, 2).FlattenAsync().Result;
+
+                        foreach (var user in users)
+                        {
+                            if (user.Id == player.ID && item.Name != Emote.Flag.Name)
+                            {
+                                await player.User.SendMessageAsync($"You reacted with {item}");
+                            }
+                        }
+                    }
+                }
+
             }
-            return Task.CompletedTask;
+            //return Task.CompletedTask;
         }
     }
 }
