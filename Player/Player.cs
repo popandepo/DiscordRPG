@@ -99,36 +99,50 @@ namespace DiscordRPG
 
         public override string ToString()
         {
-            string output = $"ID:{ID}, Hashname:{Hashname}, Health:{Health}, MHealth:{MHealth}, Bp:{Bp}, Money:{Money}, State:{State}, Attack:{Attack}, Defense:{Defense},";
-
+            string output = $"{{\"ID\":{ID}, \"Hashname\":{Hashname}, \"Health\":{Health}, \"MHealth\":{MHealth}, \"Bp\":{Bp}, \"Money\":{Money}, \"State\":{State}, \"Attack\":{Attack}, \"Defense\":{Defense},";
+            /*
+            output += "\"CItems\":{";
             foreach (var item in CItems)
             {
-                output += "CItems:";
                 output += item.ToString();
             }
+            output += "},";
+
+            output += "\"SItems\":{";
             foreach (var item in SItems)
             {
                 output += item.ToString();
             }
+            output += "},";
 
-            foreach (var item in CMaterials)
+            output += "\"CMaterials\":{";
+            if (CMaterials.Count() != 0 && !(CMaterials is null))
             {
-                output += item.ToString();
+                CMaterials.ForEach(i => output += i);
             }
-            foreach (var item in SMaterials)
-            {
-                output += item.ToString();
-            }
+            output += "},";
 
-            foreach (var item in CEquipment)
+            output += "\"SMaterials\":{";
+            if (SMaterials.Count() != 0 && !(SMaterials is null))
             {
-                output += item.ToString();
+                SMaterials.ForEach(i => output += i);
             }
-            foreach (var item in SEquipment)
-            {
-                output += item.ToString();
-            }
+            output += "},";
 
+            output += "\"CEquipment\":{";
+            if (CEquipment.Count() != 0 && !(CEquipment is null))
+            {
+                CEquipment.ForEach(i => output += i);
+            }
+            output += "},";
+
+            output += "\"SEquipment\":{";
+            if (SEquipment.Count() != 0 && !(SEquipment is null))
+            {
+                SEquipment.ForEach(i => output += i);
+            }*/
+            output += "}";//}";
+            System.Console.WriteLine(output);
             return output;
         }
     }

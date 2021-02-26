@@ -37,16 +37,16 @@ namespace DiscordRPG
 
         public override string ToString()
         {
-            string output = $"Name:{Name}, Amount:{Amount}, MaxAmount:{MaxAmount}, Type:{Type}, Identifier:{Identifier},";
-            output += "Attributes{";
+            string output = $"{{\"Name\":{Name}, \"Amount\":{Amount}, \"MaxAmount\":{MaxAmount}, \"Type\":{Type}, \"Identifier\":{Identifier},";
+            output += "\"Attributes\":[";
             string tempOutput = "";
             foreach (var attr in Attributes)
             {
                 tempOutput += attr;
-                tempOutput += " ";
+                tempOutput += ",";
             }
             output += tempOutput.Trim();
-            output += "}";
+            output += "]}";
 
             return output;
         }

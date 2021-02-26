@@ -1,5 +1,6 @@
 ﻿using Discord.Commands;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace DiscordRPG.Commands
@@ -15,6 +16,7 @@ namespace DiscordRPG.Commands
             if (player is null) return;
             await MessageHandler.SendMessageAsync(player, "I recieved a test order, responding as ordered!");
             Console.WriteLine($"{player.Hashname} sent a test message");
+            Console.WriteLine(player);
         }
     }
 }
