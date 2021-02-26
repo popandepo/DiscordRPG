@@ -17,7 +17,11 @@ namespace DiscordRPG
                         && !typeof(string).IsAssignableFrom(property.PropertyType))
                 { // Checks if the property is an enumerable. (List<T>)
                     jsonOut += $"\"{property.Name}\":[";
-
+                    if (property.GetValue(obj) is null)
+                    {
+                        jsonOut += "],";
+                        continue;
+                    }
                     foreach (var item in (IEnumerable)property.GetValue(obj))
                     {
                         if (item is ValueType)
@@ -62,6 +66,12 @@ namespace DiscordRPG
             jsonOut = jsonOut.Remove(jsonOut.Length - 1);
             jsonOut += "}";
             return jsonOut;
+        }
+
+
+        public Object CreateObjectFromJson(string jsonString)
+        {
+            return new Object();
         }
     }
 }
