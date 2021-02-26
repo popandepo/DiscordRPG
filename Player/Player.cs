@@ -28,7 +28,7 @@ namespace DiscordRPG
         public List<Material> CMaterials { get; set; } //Carried
         public List<Material> SMaterials { get; set; } //Stored
         public Combat Combat { get; set; }
-        public int NumberOfSkills => Skills.Count();
+        public int NumberOfSkills => (Skills is null) ? 0 : Skills.Count();
 
 
         //list of skills

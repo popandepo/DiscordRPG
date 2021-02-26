@@ -14,9 +14,9 @@ namespace DiscordRPG.Commands
         {
             var player = UserTools.IsRegistered(Context.User.Id);
             if (player is null) return;
-            await MessageHandler.SendMessageAsync(player, "I recieved a test order, responding as ordered!");
             Console.WriteLine($"{player.Hashname} sent a test message");
-            Console.WriteLine(player);
+            //Console.WriteLine();
+            MessageHandler.SendMessage(player, JSONhandler.ObjectToJson(player));
         }
     }
 }
