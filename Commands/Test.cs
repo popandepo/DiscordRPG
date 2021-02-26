@@ -1,6 +1,5 @@
 ﻿using Discord.Commands;
 using System;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace DiscordRPG.Commands

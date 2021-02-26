@@ -9,6 +9,7 @@ namespace DiscordRPG
             5, //attack
             5, //defense
             5, //health
+            5, //max health
             3, //pulls
             MaterialList.LootGen(MaterialList.goblinEarOne, 20),
             MaterialList.LootGen(MaterialList.goblinEarTwo, 10),
@@ -20,6 +21,7 @@ namespace DiscordRPG
             4, //attack
             6, //defense
             6, //health
+            6, //max health
             3, //pulls
             MaterialList.LootGen(MaterialList.slimeGooOne, 20),
             MaterialList.LootGen(MaterialList.slimeGooTwo, 10),

@@ -14,7 +14,7 @@ namespace DiscordRPG
         public SocketUser User { get; set; }
         public string Hashname { get; set; }
         public int Health { get; set; }
-        public int MHealth { get; set; }
+        public int MaxHealth { get; set; }
         public int Bp { get; set; }
         public int Money { get; set; }
         public string State { get; set; }
@@ -49,7 +49,7 @@ namespace DiscordRPG
             User = Program._client.GetUser(id);
             Hashname = User.ToString();
             Health = 10;
-            MHealth = 10;
+            MaxHealth = 10;
             Bp = 0;
             Money = 100;
             State = "IDLE";
@@ -99,7 +99,7 @@ namespace DiscordRPG
 
         public override string ToString()
         {
-            string output = $"{{\"ID\":{ID}, \"Hashname\":{Hashname}, \"Health\":{Health}, \"MHealth\":{MHealth}, \"Bp\":{Bp}, \"Money\":{Money}, \"State\":{State}, \"Attack\":{Attack}, \"Defense\":{Defense},";
+            string output = $"{{\"ID\":{ID}, \"Hashname\":{Hashname}, \"Health\":{Health}, \"MHealth\":{MaxHealth}, \"Bp\":{Bp}, \"Money\":{Money}, \"State\":{State}, \"Attack\":{Attack}, \"Defense\":{Defense},";
             /*
             output += "\"CItems\":{";
             foreach (var item in CItems)

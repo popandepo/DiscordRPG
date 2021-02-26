@@ -1,8 +1,7 @@
 ﻿using Discord;
-
 namespace DiscordRPG
 {
-    class Emojis
+    class Emote
     {
         public static Emoji Shield = new Emoji("🛡️");
         public static Emoji Sword = new Emoji("⚔️");

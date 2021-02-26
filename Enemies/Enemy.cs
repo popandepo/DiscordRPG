@@ -11,6 +11,7 @@ namespace DiscordRPG
         public int Attack { get; set; }
         public int Defense { get; set; }
         public int Health { get; set; }
+        public int MaxHealth { get; set; }
         public int Bonus { get; set; } = 0;
         public int Pulls { get; set; }
         public List<ILootables> Loot { get; set; }
@@ -24,13 +25,14 @@ namespace DiscordRPG
         /// <param name="defense">The defense of the enemy</param>
         /// <param name="health">The health of the enemy</param>
         /// <param name="loot">What the enemy can drop when killed</param>
-        public Enemy(string name, List<string> environment, int attack, int defense, int health, int pulls, params ILootables[] loot)
+        public Enemy(string name, List<string> environment, int attack, int defense, int health, int maxHealth, int pulls, params ILootables[] loot)
         {
             Name = name;
             Environment = environment;
             Attack = attack;
             Defense = defense;
             Health = health;
+            MaxHealth = maxHealth;
             Pulls = pulls;
             Loot = loot.ToList();
         }

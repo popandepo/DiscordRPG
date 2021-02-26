@@ -11,9 +11,9 @@
         public static void AddHealth(Player player, int amount)
         {
             player.Health += amount;
-            if (player.Health > player.MHealth)
+            if (player.Health > player.MaxHealth)
             {
-                player.Health = player.MHealth;
+                player.Health = player.MaxHealth;
             }
         }
     }

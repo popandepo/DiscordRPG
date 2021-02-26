@@ -12,7 +12,6 @@ namespace DiscordRPG
             {
 
                 var emote = reaction.Emote;
-                var message = reaction.Message.Value;
                 var reacter = Program._client.GetUser(reaction.UserId);
                 var author = reaction.Message.Value.Author;
                 //var channel = reaction.Channel;

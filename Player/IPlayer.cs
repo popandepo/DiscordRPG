@@ -11,7 +11,7 @@ namespace DiscordRPG
         SocketUser User { get; set; }
         string Hashname { get; set; }
         int Health { get; set; }
-        int MHealth { get; set; }
+        int MaxHealth { get; set; }
         int Bp { get; set; }
         int Money { get; set; }
         string State { get; set; }

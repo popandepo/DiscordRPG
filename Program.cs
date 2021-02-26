@@ -39,14 +39,13 @@ namespace DiscordRPG
             }
             catch (Exception)
             {
-                Console.WriteLine("No Botkey found, please contact an administrator. Press any key to try again...");
+                Console.WriteLine("No Botkey found, please contact an administrator. Press any key to end");
                 Console.ReadKey();
-                await BotInit();
             }
             Console.WriteLine("Initiated!");
 
-            _client.ReactionAdded += ReactionHandler.Send;//Whenever a reaction is added, push it to the reaction handler
-            _client.ReactionRemoved += ReactionHandler.Send;//Whenever a reaction is removed, push it to the reaction handler
+            _client.ReactionAdded += ReactionHandler.Send;//Whenever a reaction is added, send it to the reaction handler
+            _client.ReactionRemoved += ReactionHandler.Send;//Whenever a reaction is removed, send it to the reaction handler
 
             await Task.Delay(-1);
         }

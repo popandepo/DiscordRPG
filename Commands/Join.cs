@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace DiscordRPG.Modules
+namespace DiscordRPG.Commands
 {
     public class Join : ModuleBase<SocketCommandContext>
     {
