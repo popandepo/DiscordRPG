@@ -53,10 +53,11 @@ namespace DiscordRPG
             Bp = 0;
             Money = 100;
             State = "IDLE";
-            Attack = 5;
-            Defense = 5;
+            Attack = 0;
+            Defense = 0;
 
             CEquipment = EquipmentList.leather;
+            UpdateStats();
 
             CItems = new List<Item>();
             CItems.Add(new Item("Potion", 3, 10, "POTION", 5));
@@ -97,6 +98,22 @@ namespace DiscordRPG
                     User.SendMessageAsync($"You looted {item.Amount} {item.Name}");
                 }
             }
+        }
+
+        public void UpdateStats()
+        {
+            foreach (var equipment in CEquipment)
+            {
+                if (equipment.EquipmentType == "Armor")
+                {
+                    Defense += equipment.Defense;
+                }
+                else if (equipment.EquipmentType == "Weapon")
+                {
+                    Attack += equipment.Attack;
+                }
+            }
+
         }
 
         public override string ToString()
