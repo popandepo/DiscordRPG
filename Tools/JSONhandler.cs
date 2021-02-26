@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DiscordRPG
 {
-    public class JSONhandler<T>
+    public class JSONhandler
     {
         public static string ObjectToJson(Object obj)
         {
@@ -13,7 +13,6 @@ namespace DiscordRPG
 
             foreach (var property in obj.GetType().GetProperties())
             {
-                //Console.WriteLine(property);
                 if (typeof(IEnumerable).IsAssignableFrom(property.PropertyType)
                         && !typeof(string).IsAssignableFrom(property.PropertyType))
                 { // Checks if the property is an enumerable. (List<T>)
@@ -21,14 +20,20 @@ namespace DiscordRPG
 
                     foreach (var item in (IEnumerable)property.GetValue(obj))
                     {
-                        //if (typeof(string).IsAssignableFrom(property.PropertyType))
-                        if (item.PropertyType.Name == "string")
+                        if (item is ValueType)
                         { // Value is a string
-                            jsonOut += $"\"{item}\",";
+                            if (item is bool)
+                            {
+                                jsonOut += $"{item.ToString().ToLower()},";
+                            }
+                            else
+                            {
+                                jsonOut += $"{item},";
+                            }
                         }
                         else
                         {
-                            jsonOut += $"{item},";
+                            jsonOut += $"\"{item}\",";
                         }
 
                     }
@@ -37,32 +42,26 @@ namespace DiscordRPG
                 }
                 else
                 {
-                    //if (typeof(string).IsAssignableFrom(property.PropertyType))
-                    if (property.PropertyType.Name == "string")
-                    { // The value is a string
-                        jsonOut += $"\"{property.Name}\":\"{property.GetValue(obj)}\",";
+                    if (typeof(ValueType).IsAssignableFrom(property.PropertyType))
+                    { // The value is a Value
+                        if (property.GetValue(obj) is bool)
+                        {
+                            jsonOut += $"\"{property.Name}\":{property.GetValue(obj).ToString().ToLower()},";
+                        }
+                        else
+                        {
+                            jsonOut += $"\"{property.Name}\":{property.GetValue(obj)},";
+                        }
                     }
                     else
                     {
-                        jsonOut += $"\"{property.Name}\":{property.GetValue(obj)},";
+                        jsonOut += $"\"{property.Name}\":\"{property.GetValue(obj)}\",";
                     }
-
                 }
             }
             jsonOut = jsonOut.Remove(jsonOut.Length - 1);
             jsonOut += "}";
             return jsonOut;
-        }
-
-        /// <summary>
-        /// If the unknown type matches the typename, return true
-        /// </summary>
-        /// <param name="unknown"></param>
-        /// <param name="typename"></param>
-        /// <returns></returns>
-        private static bool CheckType(T unknown, string typename)
-        {
-            return unknown.GetType().Name == typename;
         }
     }
 }
