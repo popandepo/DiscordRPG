@@ -56,6 +56,8 @@ namespace DiscordRPG
             Attack = 5;
             Defense = 5;
 
+            CEquipment = EquipmentList.leather;
+
             CItems = new List<Item>();
             CItems.Add(new Item("Potion", 3, 10, "POTION", 5));
 

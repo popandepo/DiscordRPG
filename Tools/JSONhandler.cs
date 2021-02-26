@@ -1,4 +1,4 @@
-﻿namespace DiscordRPG 
+﻿namespace DiscordRPG
 
 {
     class JSONhandler
