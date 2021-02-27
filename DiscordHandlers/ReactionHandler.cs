@@ -20,6 +20,7 @@ namespace DiscordRPG
                 {
                     await player.User.SendMessageAsync(Text.Tutorial(player));
                     player.HasReadTutorial = true;
+                    await player.LastMessage.DeleteAsync();
                     player.LastMessage = player.User.SendMessageAsync(Text.GetCombat(player)).Result;
                     await player.LastMessage.AddReactionsAsync(Emote.MainCombat.ToArray());
                 }
