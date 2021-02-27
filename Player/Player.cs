@@ -10,6 +10,7 @@ namespace DiscordRPG
 
 
         public ulong ID { get; set; }
+        public bool HasReadTutorial { get; set; }
         public IUserMessage LastMessage { get; set; }
         public SocketUser User { get; set; }
         public string Hashname { get; set; }
@@ -60,6 +61,8 @@ namespace DiscordRPG
             Attack = 0;
             Defense = 0;
 
+            HasReadTutorial = false;
+
             CEquipment = EquipmentList.leather;
             UpdateStats();
 
@@ -72,7 +75,20 @@ namespace DiscordRPG
             SMaterials = new List<Material>();
 
             ExpectedEmotes = new List<IEmote>();
+            EmoteHolder = new List<IEmote>();
             //Skills = starter skills (maybe nothing, maybe a low-level heal ability or something)
+        }
+
+        public void EmoteAct()
+        {
+            string output = "You reacted with:";
+
+            foreach (var emo in EmoteHolder)
+            {
+                output += emo.Name;
+            }
+
+            User.SendMessageAsync(output);
         }
 
         public void AddEmote(params IEmote[] emotes)

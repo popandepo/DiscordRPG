@@ -1,12 +1,16 @@
 ﻿using Discord;
+using System.Collections.Generic;
+
 namespace DiscordRPG
 {
     public class Emote
     {
-        public static IEmote Shield = new Emoji("🛡️");
         public static IEmote Sword = new Emoji("⚔️");
-        public static IEmote Bag = new Emoji("💼");
+        public static IEmote Shield = new Emoji("🛡️");
         public static IEmote Wand = new Emoji("🪄");
+        public static IEmote Bag = new Emoji("💼");
+        public static IEmote Shoes = new Emoji("👟");
+        public static IEmote Zap = new Emoji("⚡");
         public static IEmote QuestionMark = new Emoji("❓");
         public static IEmote TurnBack = new Emoji("↩️");
         public static IEmote CheckMark = new Emoji("✅");
@@ -27,5 +31,8 @@ namespace DiscordRPG
             new Emoji("9️⃣"),
             new Emoji("🔟")
         };
+
+        public static List<IEmote> FirstMainCombat = new List<IEmote> { QuestionMark, Sword, Shield, Wand, Bag, Shoes, Zap, Flag };
+        public static List<IEmote> MainCombat = new List<IEmote> { Sword, Shield, Wand, Bag, Shoes, Zap, Flag, QuestionMark };
     }
 }

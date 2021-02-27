@@ -7,6 +7,7 @@ namespace DiscordRPG
     public interface IPlayer : ICreature
     {
         ulong ID { get; set; }
+        bool HasReadTutorial { get; set; }
         IUserMessage LastMessage { get; set; }
         List<IEmote> EmoteHolder { get; set; }
         List<IEmote> ExpectedEmotes { get; set; }

@@ -4,6 +4,17 @@ namespace DiscordRPG
 {
     public static class Text
     {
+        public static string Tutorial(Player player)
+        {
+            string output = $"Welcome {player.User.Username}.\n" +
+                $"This is a combat focused RPG where you fight enemies and gather loot.\n" +
+                $"Then you use what you've gathered to create more powerful items and equipment.\n" +
+                $"To play the game, you select any of the icons below the most recent message.\n" +
+                $"The icons are meant to be self-explanatory\n" +
+                $"If you do have any issues or something doesn't make sense, please send a message to popandepo#2378";
+
+            return output;
+        }
         public static string GetCombat(Player player)
         {
             string output = "";
