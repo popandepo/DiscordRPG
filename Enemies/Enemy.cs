@@ -37,6 +37,24 @@ namespace DiscordRPG
             Loot = loot.ToList();
         }
 
+        public void Damage(int incomingAttack)
+        {
+            incomingAttack -= Defense;
+            Hurt(incomingAttack);
+        }
+
+        private void Hurt(int damage)
+        {
+            if (Health > damage) //if you can take the damage
+            {
+                Health -= damage;
+            }
+            else if (Health < damage || Health == damage) //if you would die
+            {
+                Health = 0;
+            }
+        }
+
         /// <summary>
         /// Grabs loot from the enemy
         /// </summary>

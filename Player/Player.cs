@@ -79,16 +79,24 @@ namespace DiscordRPG
             //Skills = starter skills (maybe nothing, maybe a low-level heal ability or something)
         }
 
-        public void EmoteAct()
+        public async void EmoteAct()
         {
-            string output = "You reacted with:";
+            string output = "";
 
-            foreach (var emo in EmoteHolder)
+            foreach (var emote in EmoteHolder)
             {
-                output += emo.Name;
+                output += emote.Name;
             }
+            if (output.Contains(Emote.Sword.Name))
+            {
+                foreach (var enemy in Combat.Enemies)
+                {
+                    enemy.Damage(Attack);
+                    LastMessage = User.SendMessageAsync(Text.GetCombat(this)).Result;
+                    await LastMessage.AddReactionsAsync(Emote.MainCombat.ToArray());
 
-            User.SendMessageAsync(output);
+                }
+            }
         }
 
         public void AddEmote(params IEmote[] emotes)
@@ -120,10 +128,10 @@ namespace DiscordRPG
 
         public void UpdateStats()
         {
+            Defense = 0;
+            Attack = 0;
             foreach (var equipment in CEquipment)
             {
-                Defense = 0;
-                Attack = 0;
                 if (equipment.EquipmentType == "Armor")
                 {
                     Defense += equipment.Defense;

@@ -12,7 +12,7 @@ namespace DiscordRPG.Commands
         public async Task CombatAsync()
         {
             var player = UserTools.IsRegistered(Context.User.Id);
-            player.Combat = new DiscordRPG.Combat(player, EnemyList.Goblin, EnemyList.Slime);
+            player.Combat = new DiscordRPG.Combat(player, EnemyList.Goblin);
 
             if (player.HasReadTutorial)
             {
