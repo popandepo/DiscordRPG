@@ -2,7 +2,7 @@
 
 namespace DiscordRPG
 {
-    public class EnemyList
+    public static class EnemyList
     {
         public static Enemy Goblin = new Enemy("Goblin",
             new List<string> { "Forest", "Plains" },

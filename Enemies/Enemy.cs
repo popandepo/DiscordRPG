@@ -43,16 +43,24 @@ namespace DiscordRPG
             Hurt(incomingAttack);
         }
 
-        private void Hurt(int damage)
+        private int Hurt(int damage)
         {
             if (Health > damage) //if you can take the damage
             {
                 Health -= damage;
+                return Health;
             }
             else if (Health < damage || Health == damage) //if you would die
             {
                 Health = 0;
+                return Health;
             }
+            return Health;
+        }
+
+        public List<ILootables> Kill()
+        {
+            return Pull();
         }
 
         /// <summary>

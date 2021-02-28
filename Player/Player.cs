@@ -34,15 +34,10 @@ namespace DiscordRPG
         public List<string> ExpectedString { get; set; }
         public List<int> ExpectedNumber { get; set; }
         public List<IEmote> EmoteHolder { get; set; }
+        public List<int> RecievedNumbers { get; set; }
 
 
         //list of skills
-        //list of carried equipment
-        //list of stored equipment
-        //list of carried items
-        //list of stored items
-        //list of materials
-        //a combat class containing everyone in the fight referenced by "player", "friend1", "enemy1", "enemy2" etc.
 
         /// <summary>
         /// Creates a player object
@@ -76,26 +71,89 @@ namespace DiscordRPG
 
             ExpectedEmotes = new List<IEmote>();
             EmoteHolder = new List<IEmote>();
+
+            RecievedNumbers = new List<int>();
             //Skills = starter skills (maybe nothing, maybe a low-level heal ability or something)
         }
 
+        public void Act()
+        {
+            LastMessage = User.SendMessageAsync(Text.GetCombat(this)).Result;
+            LastMessage.AddReactionsAsync(Emote.MainCombat.ToArray());
+            ExpectedEmotes = Emote.MainCombat;
+        }
         public async void EmoteAct()
         {
-            string output = "";
+            string emotes = "";
 
             foreach (var emote in EmoteHolder)
             {
-                output += emote.Name;
+                emotes += emote.Name;
             }
-            if (output.Contains(Emote.Sword.Name))
+            EmoteHolder.Clear();
+
+            if (emotes.Contains(Emote.Sword.Name))
             {
-                foreach (var enemy in Combat.Enemies)
+                if (emotes.Contains(Emote.Zap.Name))
                 {
-                    enemy.Damage(Attack);
-                    LastMessage = User.SendMessageAsync(Text.GetCombat(this)).Result;
-                    await LastMessage.AddReactionsAsync(Emote.MainCombat.ToArray());
 
                 }
+                else
+                {
+                    GetNum();
+                    State = "Targeting Enemy Normal Attack";
+                }
+
+            }
+
+            for (int i = 0; i < Emote.Numbers.Length; i++)
+            {
+                IEmote number = Emote.Numbers[i];
+
+                if (emotes.Contains(number.Name))
+                {
+                    RecievedNumbers.Add(i);
+                }
+            }
+            if (State == "Targeting Enemy Normal Attack" && RecievedNumbers.Count > 0)
+            {
+                Combat.Enemies[RecievedNumbers[0] - 1].Damage(Attack);
+
+                if (Combat.Enemies[RecievedNumbers[0] - 1].Health == 0)
+                {
+                    RecieveLoot(Combat.Enemies[RecievedNumbers[0] - 1].Kill());
+                }
+
+                ClearBuffer();
+                LastMessage = User.SendMessageAsync(Text.GetCombat(this)).Result;
+                await LastMessage.AddReactionsAsync(Emote.MainCombat.ToArray());
+
+            }
+        }
+
+        private void ClearBuffer()
+        {
+            RecievedNumbers.Clear();
+            ExpectedEmotes.Clear();
+            EmoteHolder.Clear();
+        }
+
+        public void GetNum()
+        {
+            LastMessage = User.SendMessageAsync(Text.GetEnemy(this)).Result;
+            ExpectedEmotes.Clear();
+
+            List<IEmote> emotes = new List<IEmote>();
+
+            for (int i = 1; i <= Combat.Enemies.Count; i++)
+            {
+                emotes.Add(Emote.Numbers[i]);
+            }
+            emotes.Add(Emote.Flag);
+            LastMessage.AddReactionsAsync(emotes.ToArray());
+            foreach (var item in emotes)
+            {
+                ExpectedEmotes.Add(item);
             }
         }
 
@@ -116,14 +174,96 @@ namespace DiscordRPG
                 if (item.Identifier == "Item")
                 {
                     CItems.Add((Item)item);
+                    CItems = MySort(CItems);
                     User.SendMessageAsync($"You looted {item.Amount} {item.Name}");
                 }
                 else if (item.Identifier == "Material")
                 {
                     CMaterials.Add((Material)item);
+                    CMaterials = MySort(CMaterials);
                     User.SendMessageAsync($"You looted {item.Amount} {item.Name}");
                 }
             }
+        }
+
+        private List<Item> MySort(List<Item> listToSort)
+        {
+            listToSort.Sort();
+            int occurences = 0;
+            Item recieving = null;
+            List<Item> output = new List<Item>();
+
+            foreach (var adding in listToSort)
+            {
+                foreach (var existing in output)
+                {
+                    if (adding.Name == existing.Name)
+                    {
+                        occurences += 1;
+                        recieving = existing;
+                    }
+                    else
+                    {
+                        occurences += 0;
+                    }
+                }
+                if (occurences == 0)
+                {
+                    output.Add(adding);
+                }
+                else
+                {
+                    foreach (var result in output)
+                    {
+                        if (result.Name == recieving.Name)
+                        {
+                            result.Amount += recieving.Amount;
+                        }
+                    }
+                }
+            }
+
+            return output;
+        }
+
+        private List<Material> MySort(List<Material> listToSort)
+        {
+            //listToSort.Sort();
+            int occurences = 0;
+            Material recieving = null;
+            List<Material> output = new List<Material>();
+
+            foreach (var adding in listToSort)
+            {
+                foreach (var existing in output)
+                {
+                    if (adding.Name == existing.Name)
+                    {
+                        occurences += 1;
+                        recieving = existing;
+                    }
+                    else
+                    {
+                        occurences += 0;
+                    }
+                }
+                if (occurences == 0)
+                {
+                    output.Add(adding);
+                }
+                else
+                {
+                    foreach (var result in output)
+                    {
+                        if (result.Name == recieving.Name)
+                        {
+                            result.Amount += recieving.Amount;
+                        }
+                    }
+                }
+            }
+
+            return output;
         }
 
         public void UpdateStats()
