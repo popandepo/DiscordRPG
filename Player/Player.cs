@@ -115,12 +115,12 @@ namespace DiscordRPG
             {
                 if (item.Identifier == "Item")
                 {
-                    SItems.Add((Item)item);
+                    CItems.Add((Item)item);
                     User.SendMessageAsync($"You looted {item.Amount} {item.Name}");
                 }
                 else if (item.Identifier == "Material")
                 {
-                    SMaterials.Add((Material)item);
+                    CMaterials.Add((Material)item);
                     User.SendMessageAsync($"You looted {item.Amount} {item.Name}");
                 }
             }
