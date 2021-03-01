@@ -35,6 +35,18 @@ namespace DiscordRPG
             Loot = loot.ToList();
         }
 
+        public Enemy(Enemy enemy)
+        {
+            Name = enemy.Name;
+            Attack = enemy.Attack;
+            Defense = enemy.Defense;
+            Health = enemy.Health;
+            MaxHealth = enemy.MaxHealth;
+            Bonus = enemy.Bonus;
+            Pulls = enemy.Pulls;
+            Loot = enemy.Loot;
+        }
+
         public void Damage(int incomingAttack)
         {
             incomingAttack -= Defense;

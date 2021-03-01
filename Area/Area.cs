@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DiscordRPG
 {
@@ -25,8 +26,20 @@ namespace DiscordRPG
         {
             List<Enemy> output = new List<Enemy>();
 
-            //write code here, get a random (between 1 and 4) amount of random enemies from the enemy list
-            //if Name is "Tutorial", pull 2 enemies
+            if (Name == "Tutorial")
+            {
+                output.Add(new Enemy(EnemyList.Goblin));
+                output.Add(new Enemy(EnemyList.Goblin));
+                return output;
+            }
+
+            var rng = new Random();
+            int enemyAmount = rng.Next(1, 5);
+            for (int i = 0; i < enemyAmount; i++)
+            {
+                int enemyIndex = rng.Next(0, Enemies.Count);
+                output.Add(Enemies[enemyIndex]);
+            }
 
             return output;
         }

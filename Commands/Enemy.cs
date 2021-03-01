@@ -1,5 +1,4 @@
 ﻿using Discord.Commands;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DiscordRPG.Commands
@@ -13,7 +12,7 @@ namespace DiscordRPG.Commands
         {
             var player = UserTools.IsRegistered(Context.User.Id);
             if (player is null) return;
-            Enemy testGoblin = new Enemy("Goblin", new List<string> { "Forest" }, 10, 10, 10, 10, 10, new Material("Goblin Club", 2, 1, "Normal", 20), new Material("Goblin Foot", 1, 1, "Normal", 50), new Material("Goblin Ear", 1, 1, "Normal", 80));
+            Enemy testGoblin = new Enemy("Goblin", 10, 10, 10, 10, 10, new Material("Goblin Club", 2, 1, "Normal", 20), new Material("Goblin Foot", 1, 1, "Normal", 50), new Material("Goblin Ear", 1, 1, "Normal", 80));
             string output = "You recieved: \n";
             testGoblin.Pull().ForEach(i => output += $"{i.Name}\n");
             await MessageHandler.SendMessageAsync(player, output);
