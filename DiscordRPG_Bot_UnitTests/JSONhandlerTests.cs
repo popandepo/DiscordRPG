@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DiscordRPG;
 using Xunit;
 
 namespace DiscordRPG_Bot_UnitTests
@@ -12,7 +13,10 @@ namespace DiscordRPG_Bot_UnitTests
         public void ObjectPropertiesAreTranslatedTest()
         {
             /*Description*/
-            
+            var tObj = new TestObject();
+            var expected = @"{""properties"":[{""name"":""Prop1"",""value"":99,""type"":""Int32""},{""name"":""Prop2"",""value"":""this is a string"",""type"":""String""}]}";
+            var result = JSONhandler.GetProperties(tObj);
+            Assert.Equal(expected, result);
         }
 
     }
@@ -20,7 +24,7 @@ namespace DiscordRPG_Bot_UnitTests
     /// <summary>
     /// 
     /// </summary>
-    public class name
+    public class TestObject
     {
         #region fields
         public int field1 = 10;
@@ -34,7 +38,7 @@ namespace DiscordRPG_Bot_UnitTests
         #endregion
 
         #region constructors
-        public name()
+        public TestObject()
         {
 
         }
