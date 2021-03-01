@@ -54,7 +54,7 @@ namespace DiscordRPG
             for (int i = 0; i < player.Combat.Enemies.Count; i++)
             {
                 Enemy enemy = player.Combat.Enemies[i];
-                output += $"{Emote.Numbers[i + 1]} = {enemy.Name}, ";
+                output += $"{i + 1} = {enemy.Name}, ";
             }
             output = output.Trim(' ');
             output = output.Trim(',');

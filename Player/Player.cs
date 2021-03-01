@@ -61,8 +61,10 @@ namespace DiscordRPG
             CEquipment = EquipmentList.leather;
             UpdateStats();
 
+            var items = new ItemList();
+
             CItems = new List<Item>();
-            CItems.Add(ItemList.lowPotion);
+            CItems.Add(items.lowPotion);
 
             SItems = new List<Item>();
 
@@ -125,8 +127,7 @@ namespace DiscordRPG
                 }
 
                 ClearBuffer();
-                LastMessage = User.SendMessageAsync(Text.GetCombat(this)).Result;
-                await LastMessage.AddReactionsAsync(Emote.MainCombat.ToArray());
+                Act();
 
             }
         }
