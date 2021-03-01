@@ -31,7 +31,7 @@ namespace DiscordRPG_Bot_UnitTests
 
 
         [Fact]
-        public void PropWithEmptyArrayTest()
+        public void PropWithArrayTest()
         {
             var tObj = new TestArrayObject();
             var expected = @"{""properties"":[{""name"":""IntArray1"",""value"":[1,2,3,4],""type"":""Int32[]""},{""name"":""Empty"",""value"":[],""type"":""Int32[]""},{""name"":""StringList"",""value"":[""one"",""two""],""type"":""List<String>""}]}";
@@ -41,12 +41,13 @@ namespace DiscordRPG_Bot_UnitTests
 
 
         [Fact]
-        public void PropWithIntArrayTest()
+        public void fieldWithArrayTest()
         {
-            
+            var tObj = new TestArrayObject();
+            var expected = @"{""fields"":[{""name"":""intArray1"",""value"":[1,2,3,4],""type"":""Int32[]""},{""name"":""empty"",""value"":[],""type"":""Int32[]""},{""name"":""stringList"",""value"":[""one"",""two""],""type"":""List<String>""}]}";
+            var result = JSONhandler.GetFields(tObj);
+            Assert.Equal(expected, result);
         }
-
-
 
     }
 

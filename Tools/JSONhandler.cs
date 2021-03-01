@@ -338,10 +338,12 @@ namespace DiscordRPG
                     }
                     else
                     {
+                        bool notEmpty = false;
                         var entries = (IEnumerable)property.GetValue(obj);
                         foreach (var entry in entries) // A stupid hack because i'm too fucking tired to think properly
                         {
-                            fieldType += $"<{entry.GetType().Name}>\"";
+                            notEmpty = true;
+                            fieldType += (entries is List<ValueType> || entries is List<string>) ? $"<{entry.GetType().Name}>\"" : "\"";
                             break;
                         }
                         foreach (var entry in (IEnumerable)property.GetValue(obj))
@@ -356,8 +358,13 @@ namespace DiscordRPG
                             }
 
                         }
-
-                        fieldContent = fieldContent.Remove(fieldContent.Length - 1, 1);
+                        if (notEmpty)
+                        {
+                            fieldContent = fieldContent.Remove(fieldContent.Length - 1, 1);
+                        } else
+                        {
+                            fieldType += "\"";
+                        }
                         fieldContent += "]";
                     }
                     jsonString += $"{{\"name\":\"{property.Name}\",\"value\":{fieldContent},\"type\":{fieldType.Replace("`1", "")}}},";
