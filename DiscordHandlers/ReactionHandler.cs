@@ -35,7 +35,7 @@ namespace DiscordRPG
                         {
                             if (user.Id == player.ID && item.Name != Emote.Flag.Name)
                             {
-                                player.EmoteHolder.Add(item);
+                                player.RecievedEmotes.Add(item);
                             }
                         }
                     }

@@ -9,7 +9,7 @@ namespace DiscordRPG
         ulong ID { get; set; }
         bool HasReadTutorial { get; set; }
         IUserMessage LastMessage { get; set; }
-        List<IEmote> EmoteHolder { get; set; }
+        List<IEmote> RecievedEmotes { get; set; }
         List<IEmote> ExpectedEmotes { get; set; }
         List<string> ExpectedString { get; set; }
         List<int> ExpectedNumber { get; set; }

@@ -32,7 +32,7 @@ namespace DiscordRPG
         public List<IEmote> ExpectedEmotes { get; set; }
         public List<string> ExpectedString { get; set; }
         public List<int> ExpectedNumber { get; set; }
-        public List<IEmote> EmoteHolder { get; set; }
+        public List<IEmote> RecievedEmotes { get; set; }
         public List<int> RecievedNumbers { get; set; }
         public Area Area { get; set; }
 
@@ -52,7 +52,7 @@ namespace DiscordRPG
             MaxHealth = 10;
             Bp = 0;
             Money = 100;
-            State = "IDLE";
+            State = "";
             Attack = 0;
             Defense = 0;
 
@@ -70,7 +70,7 @@ namespace DiscordRPG
             SMaterials = new List<Material>();
 
             ExpectedEmotes = new List<IEmote>();
-            EmoteHolder = new List<IEmote>();
+            RecievedEmotes = new List<IEmote>();
 
             RecievedNumbers = new List<int>();
 
@@ -88,11 +88,11 @@ namespace DiscordRPG
         {
             string emotes = "";
 
-            foreach (var emote in EmoteHolder)
+            foreach (var emote in RecievedEmotes)
             {
                 emotes += emote.Name;
             }
-            EmoteHolder.Clear();
+            RecievedEmotes.Clear();
 
             if (emotes.Contains(Emote.Sword.Name))
             {
@@ -103,7 +103,6 @@ namespace DiscordRPG
                 else
                 {
                     GetNum();
-                    State = "Targeting Enemy Normal Attack";
                 }
 
             }
@@ -136,7 +135,7 @@ namespace DiscordRPG
         {
             RecievedNumbers.Clear();
             ExpectedEmotes.Clear();
-            EmoteHolder.Clear();
+            RecievedEmotes.Clear();
         }
 
         public void GetNum()
@@ -189,7 +188,7 @@ namespace DiscordRPG
 
         private List<Item> MySort(List<Item> listToSort)
         {
-            listToSort.Sort();
+            //listToSort.Sort();
             int occurences = 0;
             Item recieving = null;
             List<Item> output = new List<Item>();
