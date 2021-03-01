@@ -12,6 +12,11 @@ namespace DiscordRPG
         public bool Verbose { get; set; } = false;
         // Add if Verbose for all methods
 
+        /// <summary>
+        /// Translates the object into JSON, fields, properties and methods
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns>JSON formatted String</returns>
         public static string ObjectToJson(Object obj)
         {
             string jsonOut = $"{{\"name\":\"{obj.GetType().Name}\",";
@@ -23,8 +28,15 @@ namespace DiscordRPG
             return jsonOut;
         }
 
-        public static string GetMethods(object obj)
+        /// <summary>
+        /// Internally used
+        /// Translates the objects methods into JSON
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns>JSON formatted String</returns>
+        private static string GetMethods(object obj)
         {
+            // Not needed for project
             string jsonString = "\"methods\":[";
             foreach (var method in obj.GetType().GetMethods())
             {
@@ -40,15 +52,16 @@ namespace DiscordRPG
 
                 var methodOutput = $"";
                 var methodBody = "";
-                /*
+
                 try
                 {
                     methodBody = method.GetMethodBody().ToString();
-                } catch (NullReferenceException e)
+                }
+                catch (Exception e)
                 {
-                    Console.WriteLine("nullref");
-                    //throw;
-                }*/
+                    // Threw a exeption, so do nothing. 
+                }
+            
                 var methodReturnType = method.ReturnType.Name.Replace("`1", "");
                 jsonString += $"{{\"name\":\"{method.Name}\", \"inputs\":{methodInputs}, \"body\":\"{methodBody}\",\"returnType\":\"{methodReturnType}\"}},";
             }
@@ -57,6 +70,12 @@ namespace DiscordRPG
             return jsonString;
         }
 
+        /// <summary>
+        /// Gets the Properties when run in static context
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="standalone"></param>
+        /// <returns>Json Formatted string</returns>
         public static string GetProperties(object obj, bool standalone = true)
         {
             string jsonString = "{\"properties\":[";
@@ -126,6 +145,12 @@ namespace DiscordRPG
             return jsonString;
         }
 
+        /// <summary>
+        /// Internal
+        /// Gets the properties on the object
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns>formatted string to be inserted into json</returns>
         private protected static string GetProperties(object obj)
         {
             string jsonString = "\"properties\":[";
@@ -271,6 +296,13 @@ namespace DiscordRPG
             return jsonString;
         }
 
+        /// <summary>
+        /// When run in static context
+        /// Gets the fields on the object and returs as json
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="standalone"></param>
+        /// <returns>JSON formatted string</returns>
         public static string GetFields(object obj, bool standalone = true)
         {
             string jsonString = "{\"fields\":[";
@@ -338,6 +370,11 @@ namespace DiscordRPG
             return jsonString;
         }
 
+        /// <summary>
+        /// Creates a ExpandoObject from the inputted json formatted string
+        /// </summary>
+        /// <param name="jsonString"></param>
+        /// <returns>ExpoandoObject representation of the input</returns>
         public static dynamic CreateObjectFromJson(string jsonString)
         {
             var expand = new ExpandoObject() as IDictionary<string, Object>;
