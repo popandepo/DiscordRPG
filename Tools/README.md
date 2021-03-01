@@ -33,6 +33,6 @@ string JSONhandler.GetMethods(Object obj)
 
 
 
-[Home (ProgramLogic)](https://github.com/popandepo/DiscordRPG/tree/ProgramLogic)
+[Home (ProgramLogic)](../)
 
 <!-- CHANGE TO THIS!!! (https://github.com/popandepo/DiscordRPG)-->
