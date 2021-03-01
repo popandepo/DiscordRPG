@@ -61,10 +61,8 @@ namespace DiscordRPG
             CEquipment = EquipmentList.leather;
             UpdateStats();
 
-            var items = new ItemList();
-
             CItems = new List<Item>();
-            CItems.Add(items.lowPotion);
+            CItems.Add(new Item(ItemList.lowPotion));
 
             SItems = new List<Item>();
 

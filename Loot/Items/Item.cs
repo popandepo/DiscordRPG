@@ -35,6 +35,18 @@ namespace DiscordRPG
             Attributes = attributes.ToList();
         }
 
+        public Item(Item item)
+        {
+            Name = item.Name;
+            Description = item.Description;
+            Amount = item.Amount;
+            MaxAmount = item.MaxAmount;
+            Type = item.Type;
+            Identifier = item.Identifier;
+            Attributes = item.Attributes;
+            Chance = item.Chance;
+        }
+
         public override string ToString()
         {
             string output = $"{{\"Name\":{Name}, \"Amount\":{Amount}, \"MaxAmount\":{MaxAmount}, \"Type\":{Type}, \"Identifier\":{Identifier},";

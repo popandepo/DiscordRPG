@@ -28,6 +28,16 @@
             Chance = chance;
         }
 
+        public Material(Material material)
+        {
+            Name = material.Name;
+            Amount = material.Amount;
+            Tier = material.Tier;
+            Element = material.Element;
+            Chance = material.Chance;
+        }
+
+
         public override string ToString()
         {
             string output = $"Name:{Name} Amount:{Amount} Tier:{Tier} Element:{Element} Identifier:{Identifier}";
