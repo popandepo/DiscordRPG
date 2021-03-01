@@ -16,5 +16,5 @@
 ### <b><u>Modules</u></b>
 [Commands](Commands)<br/>
 [Tools](Tools)<br/>
-[Web Interface](DiscordRPG_Webinterface)
-[Unittests](DiscordRPG_Bot_UnitTests)
+[Web Interface](DiscordRPG_WebInterface)<br/>
+[Unittests](DiscordRPG_Bot_UnitTests)<br/>
