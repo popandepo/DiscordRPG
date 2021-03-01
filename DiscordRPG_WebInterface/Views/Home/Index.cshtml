@@ -4,5 +4,34 @@
 
 <div class="text-center">
     <h1 class="display-4">Discord RPG Bot Interface</h1>
+    <div class="container">
+        @using (Html.BeginForm())
+        {
+            <div class="row">
+                <div class="col">
+                    Enter some shit
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <input type="text" name="ID" value="userID" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <input type="password" name="psswd" value="passcode" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <button action="submit">LOGIN</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
     <p>Some kind of login screen or whatever. </p>
 </div>

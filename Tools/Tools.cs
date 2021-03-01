@@ -2,7 +2,7 @@
 
 namespace DiscordRPG
 {
-    public class Tools
+    public class NumberTools
     {
         public static int GetRandRange(int min, int max, Random rng)
         {
