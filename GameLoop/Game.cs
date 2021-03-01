@@ -16,6 +16,13 @@
                             {
                                 player.Combat.Enemies.Add(enemy);
                             }
+
+                            player.Act();
+
+                            player.State = "AWAIT BATTLE";
+
+                            break;
+                        case "AWAIT BATTLE":
                             break;
                         default:
                             break;

@@ -1,7 +1,6 @@
 ﻿using Discord;
 using Discord.WebSocket;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DiscordRPG
 {
@@ -21,7 +20,7 @@ namespace DiscordRPG
         public string State { get; set; }
         public int Attack { get; set; } //TEMPORARY
         public int Defense { get; set; } //TEMPORARY
-        public List<Skill> Skills { get; set; }
+        //public List<Skill> Skills { get; set; }
         public List<Equipment> CEquipment { get; set; } //Carried
         public List<Equipment> SEquipment { get; set; } //Stored
         public List<Item> CItems { get; set; } //Carried
@@ -29,7 +28,7 @@ namespace DiscordRPG
         public List<Material> CMaterials { get; set; } //Carried
         public List<Material> SMaterials { get; set; } //Stored
         public Combat Combat { get; set; }
-        public int NumberOfSkills => Skills.Count();
+        //public int NumberOfSkills => Skills.Count();
         public List<IEmote> ExpectedEmotes { get; set; }
         public List<string> ExpectedString { get; set; }
         public List<int> ExpectedNumber { get; set; }
@@ -74,6 +73,8 @@ namespace DiscordRPG
             EmoteHolder = new List<IEmote>();
 
             RecievedNumbers = new List<int>();
+
+            Combat = new Combat();
             //Skills = starter skills (maybe nothing, maybe a low-level heal ability or something)
         }
 

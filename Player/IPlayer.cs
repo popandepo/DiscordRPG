@@ -22,7 +22,7 @@ namespace DiscordRPG
         string State { get; set; }
         int Attack { get; set; } //TEMPORARY
         int Defense { get; set; } //TEMPORARY
-        List<Skill> Skills { get; set; }
+        //List<Skill> Skills { get; set; }
         List<Equipment> CEquipment { get; set; }
         List<Equipment> SEquipment { get; set; }
         List<Item> CItems { get; set; }
@@ -31,7 +31,8 @@ namespace DiscordRPG
         List<Material> SMaterials { get; set; }
         Combat Combat { get; set; }
         List<int> RecievedNumbers { get; set; }
-        int NumberOfSkills { get; }
+        //int NumberOfSkills { get; }
+
         //list of skills
         //list of carried equipment
         //list of stored equipment

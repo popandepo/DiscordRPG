@@ -6,6 +6,6 @@ namespace DiscordRPG
     {
         List<Enemy> Enemies { get; set; }
         int Turn { get; set; }
-        List<ICreature> Combatants { get; set; }
+
     }
 }
