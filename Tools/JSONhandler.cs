@@ -228,7 +228,14 @@ namespace DiscordRPG
                     }
                     else
                     {
-                        jsonString += $"{{\"name\":\"{property.Name}\",\"value\":\"{fieldValue.ToString().Replace("`1", "")}\",\"type\":\"{property.PropertyType.Name.Replace("`1", "")}\"}},";
+                        if (fieldValue is null)
+                        {
+                            jsonString += $"{{\"name\":\"{property.Name}\",\"value\":\"\",\"type\":\"{property.PropertyType.Name.Replace("`1", "")}\"}},";
+                        }
+                        else
+                        {
+                            jsonString += $"{{\"name\":\"{property.Name}\",\"value\":\"{fieldValue.ToString().Replace("`1", "")}\",\"type\":\"{property.PropertyType.Name.Replace("`1", "")}\"}},";
+                        }
                     }
                 }
             }

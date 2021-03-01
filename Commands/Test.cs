@@ -16,7 +16,8 @@ namespace DiscordRPG.Commands
             if (player is null) return;
             Console.WriteLine($"{player.Hashname} sent a test message");
             //Console.WriteLine();
-            MessageHandler.SendMessage(player, JSONhandler.ObjectToJson(player));
+            //MessageHandler.SendMessage(player, JSONhandler.ObjectToJson(player));
+            await UserTools.SaveUsersToJSON();
         }
     }
 }
