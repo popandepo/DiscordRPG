@@ -13,6 +13,8 @@
     <li>Bot requires it's own token</li>
 </ul>
 
-### Modules
-[Commands]()<br>
-[Tools](https://github.com/popandepo/DiscordRPG/tree/ProgramLogic/Tools)
+### <b><u>Modules</u></b>
+[Commands](Commands)<br/>
+[Tools](Tools)<br/>
+[Web Interface](DiscordRPG_Webinterface)
+[Unittests](DiscordRPG_Bot_UnitTests)
