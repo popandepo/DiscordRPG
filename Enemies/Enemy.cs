@@ -7,7 +7,6 @@ namespace DiscordRPG
     public class Enemy : IEnemy
     {
         public string Name { get; set; }
-        public List<string> Environment { get; set; }
         public int Attack { get; set; }
         public int Defense { get; set; }
         public int Health { get; set; }
@@ -20,15 +19,14 @@ namespace DiscordRPG
         /// Creates an Enemy object
         /// </summary>
         /// <param name="name">The name of the enemy</param>
-        /// <param name="environment">A list of environments the enemy can be in</param>
+        /// <param name="area">A list of environments the enemy can be in</param>
         /// <param name="attack">The attack of the enemy</param>
         /// <param name="defense">The defense of the enemy</param>
         /// <param name="health">The health of the enemy</param>
         /// <param name="loot">What the enemy can drop when killed</param>
-        public Enemy(string name, List<string> environment, int attack, int defense, int health, int maxHealth, int pulls, params ILootables[] loot)
+        public Enemy(string name, int attack, int defense, int health, int maxHealth, int pulls, params ILootables[] loot)
         {
             Name = name;
-            Environment = environment;
             Attack = attack;
             Defense = defense;
             Health = health;

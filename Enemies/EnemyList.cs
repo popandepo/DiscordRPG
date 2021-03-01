@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace DiscordRPG
+﻿namespace DiscordRPG
 {
     public class EnemyList
     {
-        public Enemy Goblin = new Enemy("Goblin",
-            new List<string> { "Forest", "Plains" },
+        public static Enemy Goblin = new Enemy("Goblin",
             5, //attack
             5, //defense
             5, //health
@@ -16,8 +13,7 @@ namespace DiscordRPG
             MaterialList.LootGen(new Material(MaterialList.goblinGem), 5)
             );
 
-        public Enemy Slime = new Enemy("Slime",
-            new List<string> { "Forest", "Plains" },
+        public static Enemy Slime = new Enemy("Slime",
             4, //attack
             6, //defense
             6, //health

@@ -47,6 +47,8 @@ namespace DiscordRPG
             _client.ReactionAdded += ReactionHandler.Send;//Whenever a reaction is added, send it to the reaction handler
             _client.ReactionRemoved += ReactionHandler.Send;//Whenever a reaction is removed, send it to the reaction handler
 
+            Game.GameLoop();
+
             await Task.Delay(-1);
         }
     }

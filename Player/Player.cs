@@ -35,6 +35,7 @@ namespace DiscordRPG
         public List<int> ExpectedNumber { get; set; }
         public List<IEmote> EmoteHolder { get; set; }
         public List<int> RecievedNumbers { get; set; }
+        public Area Area { get; set; }
 
 
         //list of skills

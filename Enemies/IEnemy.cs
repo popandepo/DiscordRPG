@@ -5,7 +5,6 @@ namespace DiscordRPG
     public interface IEnemy : ICreature
     {
         string Name { get; set; }
-        List<string> Environment { get; set; }
         int Attack { get; set; }
         int Defense { get; set; }
         int Health { get; set; }
