@@ -24,5 +24,17 @@
             MaterialList.LootGen(new Material(MaterialList.slimeGem), 5),
             ItemList.LootGen(new Item(ItemList.slimePotion), 2)
             );
+
+        public static Enemy Skeleton = new Enemy("Skeleton",
+            4, //attack
+            0, //defense
+            10, //health
+            20, //max health
+            3, //pulls
+            MaterialList.LootGen(new Material(MaterialList.skeletonBoneOne), 30),
+            MaterialList.LootGen(new Material(MaterialList.skeletonBoneTwo), 20),
+            MaterialList.LootGen(new Material(MaterialList.skeletonSkull), 10),
+            MaterialList.LootGen(new Material(MaterialList.skeletonGem), 5)
+            );
     }
 }
