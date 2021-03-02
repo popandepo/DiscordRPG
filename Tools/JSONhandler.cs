@@ -96,6 +96,7 @@ namespace DiscordRPG
                     }
                     else
                     {
+                        
                         bool notEmpty = false;
                         var entries = (IEnumerable)property.GetValue(obj);
                         foreach (var entry in entries) // A stupid hack because i'm too fucking tired to think properly
@@ -107,6 +108,10 @@ namespace DiscordRPG
                         foreach (var entry in (IEnumerable)property.GetValue(obj))
                         {
                             if (entry is ValueType)
+                            {
+                                fieldContent += $"{entry},";
+                            }
+                            else if (entry is Object)
                             {
                                 fieldContent += $"{entry},";
                             }
@@ -191,6 +196,10 @@ namespace DiscordRPG
                         foreach (var entry in (IEnumerable)property.GetValue(obj))
                         {
                             if (entry is ValueType)
+                            {
+                                fieldContent += $"{entry},";
+                            }
+                            else if (entry is Object)
                             {
                                 fieldContent += $"{entry},";
                             }
@@ -285,6 +294,10 @@ namespace DiscordRPG
                             {
                                 fieldContent += $"{entry},";
                             }
+                            else if (entry is Object)
+                            {
+                                fieldContent += $"{entry},";
+                            }
                             else
                             {
                                 fieldContent += $"\"{entry}\",";
@@ -359,6 +372,10 @@ namespace DiscordRPG
                         foreach (var entry in (IEnumerable)property.GetValue(obj))
                         {
                             if (entry is ValueType)
+                            {
+                                fieldContent += $"{entry},";
+                            }
+                            else if (entry is Object)
                             {
                                 fieldContent += $"{entry},";
                             }
