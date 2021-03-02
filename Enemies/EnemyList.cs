@@ -3,7 +3,7 @@
     public class EnemyList
     {
         public static Enemy Goblin = new Enemy("Goblin",
-            5, //attack
+            10, //attack
             5, //defense
             5, //health
             5, //max health
@@ -14,10 +14,10 @@
             );
 
         public static Enemy Slime = new Enemy("Slime",
-            4, //attack
+            7, //attack
             6, //defense
             6, //health
-            6, //max health
+            10, //max health
             3, //pulls
             MaterialList.LootGen(new Material(MaterialList.slimeGooOne), 20),
             MaterialList.LootGen(new Material(MaterialList.slimeGooTwo), 10),
