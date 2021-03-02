@@ -131,6 +131,7 @@ namespace DiscordRPG
                 else
                 {
                     var fieldValue = property.GetValue(obj);
+                    if (fieldValue is null) fieldValue = "";
                     if (typeof(ValueType).IsAssignableFrom(property.PropertyType))
                     {
                         if (fieldValue is bool)
@@ -215,6 +216,7 @@ namespace DiscordRPG
                 else
                 {
                     var fieldValue = property.GetValue(obj);
+                    if (fieldValue is null) fieldValue = "";
                     if (typeof(ValueType).IsAssignableFrom(property.PropertyType))
                     {
                         if (fieldValue is bool)
@@ -298,6 +300,7 @@ namespace DiscordRPG
                 else
                 {
                     var fieldValue = property.GetValue(obj);
+                    if (fieldValue is null) fieldValue = "";
                     if (typeof(ValueType).IsAssignableFrom(property.FieldType))
                     {
                         if (fieldValue is bool)
@@ -379,6 +382,7 @@ namespace DiscordRPG
                 else
                 {
                     var fieldValue = property.GetValue(obj);
+                    if (fieldValue is null) fieldValue = "";
                     if (typeof(ValueType).IsAssignableFrom(property.FieldType))
                     {
                         if (fieldValue is bool)

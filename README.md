@@ -13,6 +13,14 @@
     <li>Bot requires it's own token</li>
 </ul>
 
+### Packages.
+<ul>
+    <li>Discord.Net</li>
+    <li>Microsoft.EntityFrameworkCore</li>
+    <li>Microsoft.EntityFrameworkCore.CoreTools</li>
+    <li>Microsoft.EntityFrameworkCore.SqlServer</li>
+</ul>
+
 ### <b><u>Modules</u></b>
 [Commands](Commands)<br/>
 [Tools](Tools)<br/>

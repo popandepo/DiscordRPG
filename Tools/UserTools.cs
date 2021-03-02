@@ -31,11 +31,16 @@ namespace DiscordRPG
             }
             outstring = outstring.Remove(outstring.Length - 1, 1);
             outstring += "}";
-            Console.WriteLine(outstring);
+            //Console.WriteLine(outstring);
             using (StreamWriter outfile = new StreamWriter("Users.json"))
             {
-                outfile.WriteLine(outfile);
+                outfile.WriteLine(outstring);
             }
+            return Task.CompletedTask;
+        }
+
+        public static Task SaveUsersToDatabase()
+        {
             return Task.CompletedTask;
         }
     }
