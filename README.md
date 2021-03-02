@@ -21,6 +21,11 @@
     <li><a href="https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/5.0.3?_src=template">Microsoft.EntityFrameworkCore.SqlServer V5.0.3</a></li>
 </ul>
 
+#### Resources...
+<ul>
+    <li><a href="https://www.tektutorialshub.com/entity-framework-core/ef-core-console-application/">Entityframework in console app</a></li>
+</ul>
+
 ### <b><u>Modules</u></b>
 [Commands](Commands)<br/>
 [Tools](Tools)<br/>
