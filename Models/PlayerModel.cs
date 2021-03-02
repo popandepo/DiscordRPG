@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DiscordRPG.Models
 {
-    public class Player
+    public class PlayerModel
     {
         public ulong Id { get; set; }
         public string Hashname { get; set; }
@@ -14,13 +14,13 @@ namespace DiscordRPG.Models
         public int Money { get; set; }
         public int Attack { get; set; } 
         public int Defense { get; set; } 
-        public List<Skill> Skills { get; set; }
-        public List<Equipment> CEquipment { get; set; } 
-        public List<Equipment> SEquipment { get; set; } 
-        public List<Item> CItems { get; set; } 
-        public List<Item> SItems { get; set; } 
-        public List<Material> CMaterials { get; set; } 
-        public List<Material> SMaterials { get; set; } 
+        public List<SkillModel> Skills { get; set; }
+        public List<EquipmentModel> CEquipment { get; set; } 
+        public List<EquipmentModel> SEquipment { get; set; } 
+        public List<ItemModel> CItems { get; set; } 
+        public List<ItemModel> SItems { get; set; } 
+        public List<MaterialModel> CMaterials { get; set; } 
+        public List<MaterialModel> SMaterials { get; set; } 
 
     }
 }

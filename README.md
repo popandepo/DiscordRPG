@@ -16,9 +16,9 @@
 ### Packages.
 <ul>
     <li>Discord.Net</li>
-    <li>Microsoft.EntityFrameworkCore</li>
-    <li>Microsoft.EntityFrameworkCore.CoreTools</li>
-    <li>Microsoft.EntityFrameworkCore.SqlServer</li>
+    <li><a href="https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/5.0.3?_src=template">Microsoft.EntityFrameworkCore V5.0.3</a></li>
+    <li><a href="https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools/5.0.3?_src=template">Microsoft.EntityFrameworkCore.CoreTools V5.0.3</a></li>
+    <li><a href="https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/5.0.3?_src=template">Microsoft.EntityFrameworkCore.SqlServer V5.0.3</a></li>
 </ul>
 
 ### <b><u>Modules</u></b>

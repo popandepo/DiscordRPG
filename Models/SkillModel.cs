@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DiscordRPG.Models
 {
-    public class Equipment
+    public class SkillModel
     {
     }
 }
