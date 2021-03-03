@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 //using Microsoft.EntityFrameworkCore.Tools;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using DiscordRPG.Tools;
 
 namespace DiscordRPG
 {
@@ -14,6 +15,7 @@ namespace DiscordRPG
     {
         public static DiscordSocketClient _client;
         public static List<Player> players = new List<Player>();
+        public static DatabaseHandler DbHandler = new DatabaseHandler();
         private CommandService _commands;
         private CommandHandler _handler;
 

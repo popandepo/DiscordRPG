@@ -1,7 +1,7 @@
 ﻿namespace DiscordRPG
 {
-    interface IMaterial : ILootables
+    public interface IMaterial : ILootables
     {
-        string Identifier { get; set; }
+        new string Identifier { get; set; }
     }
 }

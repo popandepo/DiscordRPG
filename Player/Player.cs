@@ -20,13 +20,13 @@ namespace DiscordRPG
         public string State { get; set; }
         public int Attack { get; set; } //TEMPORARY
         public int Defense { get; set; } //TEMPORARY
-        public List<Skill> Skills { get; set; }
-        public List<Equipment> CEquipment { get; set; } //Carried
-        public List<Equipment> SEquipment { get; set; } //Stored
-        public List<Item> CItems { get; set; } //Carried
-        public List<Item> SItems { get; set; } //Stored
-        public List<Material> CMaterials { get; set; } //Carried
-        public List<Material> SMaterials { get; set; } //Stored
+        public List<ISkill> Skills { get; set; }
+        public List<IEquipment> CEquipment { get; set; } //Carried
+        public List<IEquipment> SEquipment { get; set; } //Stored
+        public List<IItem> CItems { get; set; } //Carried
+        public List<IItem> SItems { get; set; } //Stored
+        public List<IMaterial> CMaterials { get; set; } //Carried
+        public List<IMaterial> SMaterials { get; set; } //Stored
         public Combat Combat { get; set; }
         public int NumberOfSkills => (Skills is null) ? 0 : Skills.Count();
 
@@ -56,12 +56,12 @@ namespace DiscordRPG
             Attack = 5;
             Defense = 5;
 
-            CItems = new List<Item>();
+            CItems = new List<IItem>();
             CItems.Add(new Item("Potion", 3, 10, "POTION", 5));
 
-            SItems = new List<Item>();
+            SItems = new List<IItem>();
 
-            SMaterials = new List<Material>();
+            SMaterials = new List<IMaterial>();
 
             //CEquipment = starter equipment
             //SEquipment = nothing
