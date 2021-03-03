@@ -16,7 +16,7 @@ namespace DiscordRPG.Tools
 
         public Task AddUserToDatabase(Player player)
         {
-            if (IsInDatabase(player)) return Task.CompletedTask;
+            //if (IsInDatabase(player)) return Task.CompletedTask;
             using (var db = new EFContext())
             {
                 PlayerModel playerModel = new PlayerModel();

@@ -142,7 +142,7 @@ namespace DiscordRPG
                 SEquipment.ForEach(i => output += i);
             }*/
             output += "}";//}";
-            System.Console.WriteLine(output);
+            //System.Console.WriteLine(output);
             return output;
         }
     }
