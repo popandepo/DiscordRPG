@@ -27,7 +27,13 @@ namespace DiscordRPG
                                     if (rand.Next(1, 101) == 1)
                                     {
                                         player.Combat.Enemies.RemoveAt(player.Combat.Enemies.Count);
-                                        player.Combat.Enemies.Add(new Enemy("Bidoof", 5, 5, 5, 5, 1, new Material("Bidoof Head", 1, 10, "Normal", 1)));
+                                        player.Combat.Enemies.Add(new Enemy("Bidoof",
+                                                                            5, //attack
+                                                                            5, //defense
+                                                                            10, //health
+                                                                            10, //maxHealth
+                                                                            1, //pulls
+                                                                            new Material("Bidoof Head", 1, 10, "Normal", 1)));
                                     }
                                 }
                             }
