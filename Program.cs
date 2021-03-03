@@ -52,8 +52,15 @@ namespace DiscordRPG
 
             _client.ReactionAdded += ReactionHandler.Send;//Whenever a reaction is added, push it to the reaction handler
             _client.ReactionRemoved += ReactionHandler.Send;//Whenever a reaction is removed, push it to the reaction handler
+            _client.UserJoined += HandleUserJoin;
 
             await Task.Delay(-1);
+        }
+
+        private async Task HandleUserJoin(SocketGuildUser arg)
+        {
+            await DbHandler.AddUserToDatabase(new Player(arg.Id));
+            
         }
     }
 }

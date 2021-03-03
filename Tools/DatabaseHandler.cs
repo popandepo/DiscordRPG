@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using DiscordRPG.Models;
 
 namespace DiscordRPG.Tools
@@ -13,9 +14,9 @@ namespace DiscordRPG.Tools
 
         }
 
-        public void AddUserToDatabase(Player player)
+        public Task AddUserToDatabase(Player player)
         {
-            if (IsInDatabase(player)) return;
+            if (IsInDatabase(player)) return Task.CompletedTask;
             using (var db = new EFContext())
             {
                 PlayerModel playerModel = new PlayerModel();
@@ -38,6 +39,7 @@ namespace DiscordRPG.Tools
                 db.Players.Add(playerModel);
                 db.SaveChanges();
             }
+            return Task.CompletedTask;
         }
 
         public bool IsInDatabase(Player player)
