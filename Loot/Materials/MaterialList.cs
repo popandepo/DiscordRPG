@@ -10,6 +10,12 @@
         public static Material slimeGooTwo = new Material("Slime Goo", 2, 1, "Normal");
         public static Material slimeGem = new Material("Slime Gem", 1, 2, "Magic");
 
+        public static Material skeletonBoneOne = new Material("Skeleton Bone", 1, 2, "Normal");
+        public static Material skeletonBoneTwo = new Material("Skeleton Bone", 2, 2, "Normal");
+        public static Material skeletonSkull = new Material("Skeleton Skull", 1, 2, "Normal");
+        public static Material skeletonGem = new Material("Skeleton Gem", 1, 3, "Magic");
+
+
         public static Material LootGen(Material material, int chance)
         {
             material.Chance = chance;
