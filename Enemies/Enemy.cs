@@ -91,7 +91,31 @@ namespace DiscordRPG
                 item.BaseChance = cumulativeChance;
                 cumulativeChance += item.Chance;
                 item.PeakChance = cumulativeChance;
-                itemsToLoot.Add(item);
+
+                int holdingBase = item.BaseChance;
+                int holdingPeak = item.PeakChance;
+
+                if (item.Identifier == "Item")
+                {
+                    itemsToLoot.Add(new Item((Item)item));
+
+                    itemsToLoot[itemsToLoot.Count - 1].BaseChance = holdingBase;
+                    holdingBase = 0;
+
+                    itemsToLoot[itemsToLoot.Count - 1].PeakChance = holdingPeak;
+                    holdingPeak = 0;
+                }
+                else if (item.Identifier == "Material")
+                {
+                    itemsToLoot.Add(new Material((Material)item));
+
+                    itemsToLoot[itemsToLoot.Count - 1].BaseChance = holdingBase;
+                    holdingBase = 0;
+
+                    itemsToLoot[itemsToLoot.Count - 1].PeakChance = holdingPeak;
+                    holdingPeak = 0;
+                }
+
             }
 
             for (int i = 0; i < (Pulls + Bonus); i++)
@@ -101,7 +125,14 @@ namespace DiscordRPG
                 {
                     if (item.BaseChance < chance && item.PeakChance > chance)
                     {
-                        loot.Add(item);
+                        if (item.Identifier == "Item")
+                        {
+                            loot.Add(new Item((Item)item));
+                        }
+                        else if (item.Identifier == "Material")
+                        {
+                            loot.Add(new Material((Material)item));
+                        }
                     }
                 }
             }

@@ -155,7 +155,7 @@ namespace DiscordRPG
 
                 if (Combat.Enemies[RecievedNumbers[0] - 1].Health == 0)
                 {
-                    User.SendMessageAsync($"You killed {Combat.Enemies[RecievedNumbers[0] - 1].Name} and recieved:");
+                    //User.SendMessageAsync($"You killed {Combat.Enemies[RecievedNumbers[0] - 1].Name} and recieved:");
                     RecieveLoot(Combat.Enemies[RecievedNumbers[0] - 1].Kill());
                 }
 
@@ -206,16 +206,15 @@ namespace DiscordRPG
                 if (item.Identifier == "Item")
                 {
                     CItems.Add((Item)item);
-                    CItems = MySort(CItems);
-                    User.SendMessageAsync($"You looted {item.Amount} {item.Name}");
                 }
                 else if (item.Identifier == "Material")
                 {
                     CMaterials.Add((Material)item);
-                    CMaterials = MySort(CMaterials);
                 }
             }
-            string output = "";
+            CItems = MySort(CItems);
+            CMaterials = MySort(CMaterials);
+            string output = "You looted:\n";
             foreach (var item in loot)
             {
                 output += $"{item.Amount} {item.Name}\n";
@@ -239,14 +238,10 @@ namespace DiscordRPG
                         occurences += 1;
                         recieving = existing;
                     }
-                    else
-                    {
-                        occurences += 0;
-                    }
                 }
                 if (occurences == 0)
                 {
-                    output.Add(adding);
+                    output.Add(new Item(adding));
                 }
                 else
                 {
@@ -279,14 +274,10 @@ namespace DiscordRPG
                         occurences += 1;
                         recieving = existing;
                     }
-                    else
-                    {
-                        occurences += 0;
-                    }
                 }
                 if (occurences == 0)
                 {
-                    output.Add(adding);
+                    output.Add(new Material(adding));
                 }
                 else
                 {
