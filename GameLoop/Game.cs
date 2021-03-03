@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace DiscordRPG
 {
     class Game
     {
-        public static void GameLoop()
+        public static async void GameLoop()
         {
             while (true)
             {
+                await Task.Delay(10);
                 foreach (var player in Program.players)
                 {
                     switch (player.State)
@@ -45,7 +47,19 @@ namespace DiscordRPG
 
                             if (player.RecievedEmotes.Contains(Emote.Sword))
                             {
-                                player.State = "ENEMY TURN";
+                                player.State = "GET SINGLE TARGET";
+                            }
+                            break;
+
+                        case "GET SINGLE TARGET":
+                            player.GetNum();
+                            player.State = "ATTACKING ONE";
+                            break;
+
+                        case "ATTACKING ONE":
+                            if (player.RecievedEmotes.Count > 0)
+                            {
+                                player.AttackEnemy();
                             }
                             break;
 

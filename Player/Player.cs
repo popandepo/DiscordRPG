@@ -84,7 +84,7 @@ namespace DiscordRPG
             LastMessage.AddReactionsAsync(Emote.MainCombat.ToArray());
             ExpectedEmotes = Emote.MainCombat;
         }
-        public async void EmoteAct()
+        public void EmoteAct()
         {
             string emotes = "";
 
@@ -116,7 +116,7 @@ namespace DiscordRPG
                     RecievedNumbers.Add(i);
                 }
             }
-            if (State == "Targeting Enemy Normal Attack" && RecievedNumbers.Count > 0)
+            if (State == "GET SINGLE TARGET" && RecievedNumbers.Count > 0)
             {
                 Combat.Enemies[RecievedNumbers[0] - 1].Damage(Attack);
 
@@ -128,6 +128,38 @@ namespace DiscordRPG
                 ClearBuffer();
                 Act();
 
+            }
+        }
+
+        public void AttackEnemy()
+        {
+            string emotes = "";
+            foreach (var emote in RecievedEmotes)
+            {
+                emotes += emote.Name;
+            }
+            RecievedEmotes.Clear();
+
+            for (int i = 0; i < Emote.Numbers.Length; i++)
+            {
+                IEmote number = Emote.Numbers[i];
+
+                if (emotes.Contains(number.Name))
+                {
+                    RecievedNumbers.Add(i);
+                }
+            }
+            if (RecievedNumbers.Count > 0)
+            {
+                Combat.Enemies[RecievedNumbers[0] - 1].Damage(Attack);
+
+                if (Combat.Enemies[RecievedNumbers[0] - 1].Health == 0)
+                {
+                    User.SendMessageAsync($"You killed {Combat.Enemies[RecievedNumbers[0] - 1].Name} and recieved:");
+                    RecieveLoot(Combat.Enemies[RecievedNumbers[0] - 1].Kill());
+                }
+
+                ClearBuffer();
             }
         }
 
@@ -181,9 +213,14 @@ namespace DiscordRPG
                 {
                     CMaterials.Add((Material)item);
                     CMaterials = MySort(CMaterials);
-                    User.SendMessageAsync($"You looted {item.Amount} {item.Name}");
                 }
             }
+            string output = "";
+            foreach (var item in loot)
+            {
+                output += $"{item.Amount} {item.Name}\n";
+            }
+            User.SendMessageAsync(output);
         }
 
         private List<Item> MySort(List<Item> listToSort)
