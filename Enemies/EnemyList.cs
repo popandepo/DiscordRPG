@@ -27,7 +27,7 @@
 
         public static Enemy Skeleton = new Enemy("Skeleton",
             4, //attack
-            0, //defense
+            1, //defense
             10, //health
             20, //max health
             3, //pulls

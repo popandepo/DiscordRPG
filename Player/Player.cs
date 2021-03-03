@@ -1,6 +1,7 @@
 ﻿using Discord;
 using Discord.WebSocket;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DiscordRPG
 {
@@ -212,8 +213,8 @@ namespace DiscordRPG
                     CMaterials.Add((Material)item);
                 }
             }
-            CItems = MySort(CItems);
-            CMaterials = MySort(CMaterials);
+            CItems = MySort(CItems).OrderBy(i => i.Name).ToList();
+            CMaterials = MySort(CMaterials).OrderBy(i => i.Name).ToList();
             string output = "You looted:\n";
             foreach (var item in loot)
             {
@@ -255,7 +256,7 @@ namespace DiscordRPG
                 }
             }
 
-            return output;
+            return output.OrderBy(i => i.Name).ToList(); ;
         }
 
         private List<Material> MySort(List<Material> listToSort)
@@ -291,7 +292,7 @@ namespace DiscordRPG
                 }
             }
 
-            return output;
+            return output.OrderBy(i => i.Name).ToList(); ;
         }
 
         public void UpdateStats()
