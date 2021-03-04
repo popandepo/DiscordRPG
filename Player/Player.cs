@@ -83,7 +83,7 @@ namespace DiscordRPG
         {
             LastMessage = User.SendMessageAsync(Text.GetCombat(this)).Result;
             LastMessage.AddReactionsAsync(Emote.MainCombat.ToArray());
-            ExpectedEmotes = Emote.MainCombat;
+            ExpectedEmotes = new List<IEmote>(Emote.MainCombat);
         }
         public void EmoteAct()
         {
@@ -93,17 +93,14 @@ namespace DiscordRPG
             {
                 emotes += emote.Name;
             }
-            RecievedEmotes.Clear();
+
+            //RecievedEmotes.Clear();
 
             if (emotes.Contains(Emote.Sword.Name))
             {
                 if (emotes.Contains(Emote.Zap.Name))
                 {
 
-                }
-                else
-                {
-                    GetNum();
                 }
 
             }
@@ -118,19 +115,18 @@ namespace DiscordRPG
                     State = "ATTACKING ONE";
                 }
             }
-            if (State == "ATTACKING ONE" && RecievedNumbers.Count > 0)
-            {
-                Combat.Enemies[RecievedNumbers[0] - 1].Damage(Attack);
+            //if (State == "ATTACKING ONE" && RecievedNumbers.Count > 0)
+            //{
+            //    Combat.Enemies[RecievedNumbers[0] - 1].Damage(Attack);
 
-                if (Combat.Enemies[RecievedNumbers[0] - 1].Health == 0)
-                {
-                    RecieveLoot(Combat.Enemies[RecievedNumbers[0] - 1].Kill());
-                }
+            //    if (Combat.Enemies[RecievedNumbers[0] - 1].Health == 0)
+            //    {
+            //        RecieveLoot(Combat.Enemies[RecievedNumbers[0] - 1].Kill());
+            //    }
 
-                ClearBuffer();
-                Act();
+            //    ClearBuffer();
 
-            }
+            //}
         }
 
         public void AttackEnemy()
@@ -140,7 +136,6 @@ namespace DiscordRPG
             {
                 emotes += emote.Name;
             }
-            RecievedEmotes.Clear();
 
             for (int i = 0; i < Emote.Numbers.Length; i++)
             {
@@ -154,12 +149,10 @@ namespace DiscordRPG
             if (RecievedNumbers.Count > 0)
             {
                 Combat.Enemies[RecievedNumbers[0] - 1].Damage(Attack);
-
-                ClearBuffer();
             }
         }
 
-        private void ClearBuffer()
+        public void ClearBuffer()
         {
             RecievedNumbers.Clear();
             ExpectedEmotes.Clear();
