@@ -63,6 +63,19 @@ namespace DiscordRPG
                                 }
                                 player.State = "GET SINGLE TARGET";
                             }
+                            else if (player.RecievedEmotes.Contains(Emote.Shield))
+                            {
+                                player.UpdateStats();
+                                if (player.RecievedEmotes.Contains(Emote.Zap))
+                                {
+                                    if (player.Bp > 0)
+                                    {
+                                        player.Bp -= 2;
+                                        player.Defense += player.Defense * 2;
+                                    }
+                                }
+                                player.Defense += player.Defense;
+                            }
                             else if (player.RecievedEmotes.Contains(Emote.Bag))
                             {
                                 //await player.User.SendMessageAsync(Text.GetInventory(player, "Carried items"));
