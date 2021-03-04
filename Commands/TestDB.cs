@@ -16,10 +16,10 @@ namespace DiscordRPG.Commands
         {
             Console.WriteLine("In testdb");
             var userid = Context.User.Id;
-            var p = new Player(userid);
-            Console.WriteLine("Going to add");
-            await Program.DbHandler.AddUserToDatabase(p);
-            Console.WriteLine("ADDING");
+            //var p = new Player(userid);
+            Console.WriteLine("Going to Get");
+            var x = await Program.DbHandler.GetUserFromDatabase(userid);
+            Console.WriteLine(x);
         }
     }
 }

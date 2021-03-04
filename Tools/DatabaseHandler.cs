@@ -1,5 +1,7 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DiscordRPG.Models;
@@ -45,6 +47,42 @@ namespace DiscordRPG
                 db.Players.Add(playerModel);
                 db.SaveChanges();
             }
+            return Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// Gets a player object from the database if found. Else return null
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Task<Player?> GetUserFromDatabase(ulong id)
+        {
+            Player? player = null;
+            using (var db = new EFContext())
+            {
+                var result = db.Players.Find(id);
+                if (result is null) return Task.FromResult(player);
+                player = new Player(result.Id) {
+                    Hashname = result.Hashname,
+                    Health = result.Health,
+                    MHealth = result.MHealth,
+                    Bp = result.Bp,
+                    Money = result.Money,
+                    Attack = result.Attack,
+                    Defense = result.Defense
+                };
+                Console.WriteLine(result.Hashname);
+            }
+            return Task.FromResult(player);
+        }
+
+        /// <summary>
+        /// Method must check if the player already exists in database, if an entry with the provided ID exists in the database, update the entry with new values. 
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
+        public Task UpdatePlayerInDatabase(Player player)
+        {
             return Task.CompletedTask;
         }
 
