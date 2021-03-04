@@ -206,11 +206,11 @@ namespace DiscordRPG
             {
                 if (item.Identifier == "Item")
                 {
-                    CItems.Add((Item)item);
+                    CItems.Add(new Item((Item)item));
                 }
                 else if (item.Identifier == "Material")
                 {
-                    CMaterials.Add((Material)item);
+                    CMaterials.Add(new Material((Material)item));
                 }
             }
             CItems = MySort(CItems).OrderBy(i => i.Name).ToList();
