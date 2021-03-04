@@ -1,5 +1,4 @@
-﻿using Discord;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace DiscordRPG
@@ -58,7 +57,7 @@ namespace DiscordRPG
                                 {
                                     if (player.Bp > 0)
                                     {
-                                        player.Bp -= 1;
+                                        player.Bp -= 2;
                                         player.Attack += player.Attack;
                                     }
                                 }
@@ -66,15 +65,26 @@ namespace DiscordRPG
                             }
                             else if (player.RecievedEmotes.Contains(Emote.Bag))
                             {
-                                await player.User.SendMessageAsync(Text.GetInventory(player, "Carried items"));
-                                await player.User.SendMessageAsync(Text.GetInventory(player, "Carried materials"));
+                                //await player.User.SendMessageAsync(Text.GetInventory(player, "Carried items"));
+                                //await player.User.SendMessageAsync(Text.GetInventory(player, "Carried materials"));
 
                                 player.RecievedEmotes.Clear();
+
+                                player.GetNum("Items");
+
+                                player.State = "USE ITEM";
+                            }
+                            break;
+
+                        case "USE ITEM":
+                            if (player.RecievedEmotes.Count > 0)
+                            {
+                                player.UseItem();
                             }
                             break;
 
                         case "GET SINGLE TARGET":
-                            player.GetNum();
+                            player.GetNum("Enemies");
                             player.State = "AWAITING NUMBER";
                             break;
 

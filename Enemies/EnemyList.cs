@@ -16,13 +16,13 @@
         public static Enemy Slime = new Enemy("Slime",
             7, //attack
             6, //defense
-            6, //health
+            5, //health
             10, //max health
             3, //pulls
             MaterialList.LootGen(new Material(MaterialList.slimeGooOne), 20),
             MaterialList.LootGen(new Material(MaterialList.slimeGooTwo), 10),
             MaterialList.LootGen(new Material(MaterialList.slimeGem), 5),
-            ItemList.LootGen(new Item(ItemList.slimePotion), 2)
+            ItemList.LootGen(new Item(ItemList.slimePotion), 5)
             );
 
         public static Enemy Skeleton = new Enemy("Skeleton",

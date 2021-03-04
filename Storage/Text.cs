@@ -16,8 +16,9 @@ namespace DiscordRPG
                 $"\n" +
                 $"Press any action you want to do\n" +
                 $"Then press the 🏁 to send the command\n" +
-                $"Only ⚔️ works right now\n" +
-                $"­";
+                $"Only ⚔️,💼  and ⚡ work right now.\n" +
+                $"⚔️ = Attack, 💼 = show inventory, ⚡ = use BP to increase attack for one turn" +
+                $"­­";
 
             return output;
         }
@@ -68,7 +69,19 @@ namespace DiscordRPG
             return output;
         }
 
-        internal static string GetInventory(Player player, string invType)
+        public static string GetItems(Player player)
+        {
+            string output = "Items:\n";
+
+            for (int i = 0; i < player.CItems.Count; i++)
+            {
+                Item item = player.CItems[i];
+                output += $"{i + 1}: {item.Name} x {item.Amount}/{item.MaxAmount}.";
+            }
+            return output;
+        }
+
+        public static string GetInventory(Player player, string invType)
         {
             player.SortList();
 

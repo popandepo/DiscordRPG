@@ -128,6 +128,50 @@ namespace DiscordRPG
             //}
         }
 
+        public void UseItem()
+        {
+            string emotes = "";
+
+            Item item = new Item(ItemList.lowPotion);
+
+            foreach (var emote in RecievedEmotes)
+            {
+                emotes += emote.Name;
+            }
+
+            for (int i = 0; i < Emote.Numbers.Length; i++)
+            {
+                IEmote number = Emote.Numbers[i];
+
+                if (emotes.Contains(number.Name))
+                {
+                    RecievedNumbers.Add(i);
+                }
+            }
+            if (RecievedNumbers.Count > 0)
+            {
+                item = CItems[RecievedNumbers[0] - 1];
+                CItems[RecievedNumbers[0] - 1].Amount -= 1;
+            }
+            UpdateStats();
+
+            switch (item.Type)
+            {
+                case "Potion":
+                    if (Health + item.Attributes[0] > MaxHealth) //if you can take the damage
+                    {
+                        Health = MaxHealth;
+                    }
+                    else if (Health + item.Attributes[0] <= MaxHealth) //if you would die
+                    {
+                        Health += item.Attributes[0];
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public void AttackEnemy()
         {
             string emotes = "";
@@ -159,22 +203,45 @@ namespace DiscordRPG
             RecievedEmotes.Clear();
         }
 
-        public void GetNum()
+        public void GetNum(string target)
         {
-            ExpectedEmotes.Clear();
-            LastMessage = User.SendMessageAsync(Text.GetEnemy(this)).Result;
-
-            List<IEmote> emotes = new List<IEmote>();
-
-            for (int i = 1; i <= Combat.Enemies.Count; i++)
+            if (target == "Enemies")
             {
-                emotes.Add(Emote.Numbers[i]);
+
+                ExpectedEmotes.Clear();
+                LastMessage = User.SendMessageAsync(Text.GetEnemy(this)).Result;
+
+                List<IEmote> emotes = new List<IEmote>();
+
+                for (int i = 1; i <= Combat.Enemies.Count; i++)
+                {
+                    emotes.Add(Emote.Numbers[i]);
+                }
+                emotes.Add(Emote.Flag);
+                LastMessage.AddReactionsAsync(emotes.ToArray());
+                foreach (var item in emotes)
+                {
+                    ExpectedEmotes.Add(item);
+                }
             }
-            emotes.Add(Emote.Flag);
-            LastMessage.AddReactionsAsync(emotes.ToArray());
-            foreach (var item in emotes)
+            else if (target == "Items")
             {
-                ExpectedEmotes.Add(item);
+
+                ExpectedEmotes.Clear();
+                LastMessage = User.SendMessageAsync(Text.GetItems(this)).Result;
+
+                List<IEmote> emotes = new List<IEmote>();
+
+                for (int i = 1; i <= CItems.Count; i++)
+                {
+                    emotes.Add(Emote.Numbers[i]);
+                }
+                emotes.Add(Emote.Flag);
+                LastMessage.AddReactionsAsync(emotes.ToArray());
+                foreach (var item in emotes)
+                {
+                    ExpectedEmotes.Add(item);
+                }
             }
         }
 
