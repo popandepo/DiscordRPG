@@ -77,6 +77,8 @@ namespace DiscordRPG
                                     }
                                 }
 
+                                player.ClearBuffer();
+
                                 player.State = "ENEMY TURN";
                             }
                             break;

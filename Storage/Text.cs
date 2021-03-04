@@ -11,7 +11,11 @@ namespace DiscordRPG
                 $"Then you use what you've gathered to create more powerful items and equipment.\n" +
                 $"To play the game, you select any of the icons below the most recent message.\n" +
                 $"The icons are meant to be self-explanatory\n" +
-                $"If you do have any issues or something doesn't make sense, please send a message to popandepo#2378";
+                $"If you do have any issues or something doesn't make sense,\n" +
+                $"please send a message to popandepo#2378\n" +
+                $"\n" +
+                $"Press any action you want to do\n" +
+                $"Then press the 🏁 to send the command.";
 
             return output;
         }
