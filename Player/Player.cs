@@ -254,6 +254,7 @@ namespace DiscordRPG
             return output.OrderBy(i => i.Name).ToList(); ;
         }
 
+
         private List<Material> MySort(List<Material> listToSort)
         {
             //listToSort.Sort();
