@@ -21,7 +21,7 @@ namespace DiscordRPG
         public int Attack { get; set; } //TEMPORARY
         public int Defense { get; set; } //TEMPORARY
         //public List<Skill> Skills { get; set; }
-        public List<Equipment> CEquipment { get; set; } //Carried
+        public List<Equipment> CEquipment { get; set; } //Carried //TURN THIS INTO AN OBJECT CALLED ARMOR WHICH CONSISTS OF EVERY EQUIPPED PIECE OF EQUIPMENT
         public List<Equipment> SEquipment { get; set; } //Stored
         public List<Item> CItems { get; set; } //Carried
         public List<Item> SItems { get; set; } //Stored
