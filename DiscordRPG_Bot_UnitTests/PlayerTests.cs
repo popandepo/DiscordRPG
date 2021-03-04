@@ -1,8 +1,7 @@
-﻿using Xunit;
-using DiscordRPG;
-using System;
+﻿using DiscordRPG;
 using System.Collections.Generic;
 using System.Linq;
+using Xunit;
 
 namespace DiscordRPG_Bot_UnitTests
 {
@@ -39,7 +38,7 @@ namespace DiscordRPG_Bot_UnitTests
         {
             /*Check that the returned list is sorted alphabetically*/
             var l = Tools.MySort(loot);
-            var letters = new List<char>() { 'C', 'I', 'M', 'S', 'T'};
+            var letters = new List<char>() { 'C', 'I', 'M', 'S', 'T' };
             var result = l.Select(i => i.Name[0]).ToList();
             Assert.Equal(letters, result);
         }

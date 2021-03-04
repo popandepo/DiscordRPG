@@ -1,5 +1,6 @@
 ﻿using Discord;
 using Discord.WebSocket;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DiscordRPG
@@ -25,6 +26,8 @@ namespace DiscordRPG
                     await player.LastMessage.AddReactionsAsync(Emote.MainCombat.ToArray());
                 }
 
+                List<IEmote> emoteHolder = new List<IEmote>();
+
                 if (emote.Name == Emote.Flag.Name)
                 {
                     foreach (var item in player.ExpectedEmotes)
@@ -35,10 +38,11 @@ namespace DiscordRPG
                         {
                             if (user.Id == player.ID && item.Name != Emote.Flag.Name)
                             {
-                                player.RecievedEmotes.Add(item);
+                                emoteHolder.Add(item);
                             }
                         }
                     }
+                    player.RecievedEmotes.AddRange(emoteHolder);
                     player.EmoteAct();
                 }
 

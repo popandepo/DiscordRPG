@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Discord;
+using System;
 using System.Threading.Tasks;
 
 namespace DiscordRPG
@@ -9,7 +10,7 @@ namespace DiscordRPG
         {
             while (true)
             {
-                await Task.Delay(10);
+                await Task.Delay(100);
                 foreach (var player in Program.players)
                 {
                     switch (player.State)
@@ -19,7 +20,7 @@ namespace DiscordRPG
                             foreach (var enemy in enemies)
                             {
                                 enemy.Bonus = 5;
-                                player.Combat.Enemies.Add(enemy);
+                                player.Combat.Enemies.Add(new Enemy(enemy));
 
                                 if (player.ID == 236267360502153217) //easter egg
                                 {
@@ -53,7 +54,22 @@ namespace DiscordRPG
 
                             if (player.RecievedEmotes.Contains(Emote.Sword))
                             {
+                                if (player.RecievedEmotes.Contains(Emote.Zap))
+                                {
+                                    if (player.Bp > 0)
+                                    {
+                                        player.Bp -= 1;
+                                        player.Attack += player.Attack;
+                                    }
+                                }
                                 player.State = "GET SINGLE TARGET";
+                            }
+                            else if (player.RecievedEmotes.Contains(Emote.Bag))
+                            {
+                                await player.User.SendMessageAsync(Text.GetInventory(player, "Carried items"));
+                                await player.User.SendMessageAsync(Text.GetInventory(player, "Carried materials"));
+
+                                player.RecievedEmotes.Clear();
                             }
                             break;
 
@@ -79,6 +95,11 @@ namespace DiscordRPG
 
                                 player.ClearBuffer();
 
+                                if (player.Bp < 3)
+                                {
+                                    player.Bp += 1;
+                                }
+
                                 player.State = "ENEMY TURN";
                             }
                             break;
@@ -99,6 +120,12 @@ namespace DiscordRPG
 
                         default:
                             break;
+                    }
+
+                    if (player.Combat.Enemies.Count == 0)
+                    {
+                        player.Area = new Area(AreaList.Forest);
+                        player.State = "BEGIN BATTLE";
                     }
                 }
             }

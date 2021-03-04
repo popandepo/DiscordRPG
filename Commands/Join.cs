@@ -17,10 +17,9 @@ namespace DiscordRPG.Commands
             } // If the player is already registered, break out
             var player = new Player(Context.User.Id);
             Program.players.Add(player); // Add the player to players
-            await MessageHandler.SendMessageAsync(player, $"You have been added to the list of players, please use this channel for any future messages\n{Text.Tutorial(player)}");
             Console.WriteLine($"{player.Hashname} has been added");
-            player.Area = new Area(AreaList.Tutorial);
             player.State = "BEGIN BATTLE";
+            await MessageHandler.SendMessageAsync(player, $"You have been added to the list of players, please use this channel for any future messages\n{Text.Tutorial(player)}");
         }
     }
 }

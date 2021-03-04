@@ -15,7 +15,9 @@ namespace DiscordRPG
                 $"please send a message to popandepo#2378\n" +
                 $"\n" +
                 $"Press any action you want to do\n" +
-                $"Then press the 🏁 to send the command.";
+                $"Then press the 🏁 to send the command\n" +
+                $"Only ⚔️ works right now\n" +
+                $"­";
 
             return output;
         }
@@ -63,6 +65,31 @@ namespace DiscordRPG
             output = output.Trim(' ');
             output = output.Trim(',');
             output += '.';
+            return output;
+        }
+
+        internal static string GetInventory(Player player, string invType)
+        {
+            player.SortList();
+
+            string output = $"{invType}:\n";
+            if (invType == "Carried items")
+            {
+                for (int i = 0; i < player.CItems.Count; i++)
+                {
+                    Item item = player.CItems[i];
+                    output += $"{i + 1}: {item.Name} x {item.Amount}/{item.MaxAmount}.";
+                }
+            }
+            if (invType == "Carried materials")
+            {
+                for (int i = 0; i < player.CMaterials.Count; i++)
+                {
+                    Material material = player.CMaterials[i];
+                    output += $"{material.Name} x {material.Amount}.\n";
+                }
+            }
+
             return output;
         }
     }

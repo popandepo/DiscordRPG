@@ -1,7 +1,6 @@
 ﻿using Discord;
 using Discord.WebSocket;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DiscordRPG
 {
@@ -54,6 +53,7 @@ namespace DiscordRPG
             Bp = 0;
             Money = 100;
             State = "";
+            Area = new Area(AreaList.Tutorial);
             Attack = 0;
             Defense = 0;
 
@@ -100,9 +100,8 @@ namespace DiscordRPG
             {
                 if (emotes.Contains(Emote.Zap.Name))
                 {
-
+                    Attack += Attack;
                 }
-
             }
 
             for (int i = 0; i < Emote.Numbers.Length; i++)
@@ -150,6 +149,7 @@ namespace DiscordRPG
             {
                 Combat.Enemies[RecievedNumbers[0] - 1].Damage(Attack);
             }
+            UpdateStats();
         }
 
         public void ClearBuffer()
@@ -201,8 +201,9 @@ namespace DiscordRPG
                     CMaterials.Add(new Material((Material)item));
                 }
             }
-            CItems = MySort(CItems).OrderBy(i => i.Name).ToList();
-            CMaterials = MySort(CMaterials).OrderBy(i => i.Name).ToList();
+
+            SortList();
+
             string output = "You looted:\n";
             foreach (var item in loot)
             {
@@ -211,77 +212,37 @@ namespace DiscordRPG
             User.SendMessageAsync(output);
         }
 
-        private List<Item> MySort(List<Item> listToSort)
+        public void SortList()
         {
-            //listToSort.Sort();
-            int occurences = 0;
-            Item recieving = null;
-            List<Item> output = new List<Item>();
+            List<ILootables> itemHolder = new List<ILootables>();
+            List<ILootables> materialHolder = new List<ILootables>();
 
-            foreach (var adding in listToSort)
+            foreach (var item in CItems)
             {
-                foreach (var existing in output)
-                {
-                    if (adding.Name == existing.Name)
-                    {
-                        occurences += 1;
-                        recieving = existing;
-                    }
-                }
-                if (occurences == 0)
-                {
-                    output.Add(new Item(adding));
-                }
-                else
-                {
-                    foreach (var result in output)
-                    {
-                        if (result.Name == recieving.Name)
-                        {
-                            result.Amount += recieving.Amount;
-                        }
-                    }
-                }
+                itemHolder.Add(item);
             }
 
-            return output.OrderBy(i => i.Name).ToList(); ;
-        }
+            itemHolder = Tools.MySort(itemHolder);
 
+            CItems.Clear();
 
-        private List<Material> MySort(List<Material> listToSort)
-        {
-            //listToSort.Sort();
-            int occurences = 0;
-            Material recieving = null;
-            List<Material> output = new List<Material>();
-
-            foreach (var adding in listToSort)
+            foreach (var item in itemHolder)
             {
-                foreach (var existing in output)
-                {
-                    if (adding.Name == existing.Name)
-                    {
-                        occurences += 1;
-                        recieving = existing;
-                    }
-                }
-                if (occurences == 0)
-                {
-                    output.Add(new Material(adding));
-                }
-                else
-                {
-                    foreach (var result in output)
-                    {
-                        if (result.Name == recieving.Name)
-                        {
-                            result.Amount += recieving.Amount;
-                        }
-                    }
-                }
+                CItems.Add((Item)item);
             }
 
-            return output.OrderBy(i => i.Name).ToList(); ;
+            foreach (var material in CMaterials)
+            {
+                materialHolder.Add(material);
+            }
+            materialHolder = Tools.MySort(materialHolder);
+
+            CMaterials.Clear();
+
+            foreach (var material in materialHolder)
+            {
+                CMaterials.Add((Material)material);
+            }
         }
 
         public void UpdateStats()
