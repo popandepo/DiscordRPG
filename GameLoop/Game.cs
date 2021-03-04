@@ -59,13 +59,25 @@ namespace DiscordRPG
 
                         case "GET SINGLE TARGET":
                             player.GetNum();
-                            player.State = "ATTACKING ONE";
+                            player.State = "AWAITING NUMBER";
                             break;
 
                         case "ATTACKING ONE":
                             if (player.RecievedEmotes.Count > 0)
                             {
                                 player.AttackEnemy();
+
+                                for (int i = 0; i < player.Combat.Enemies.Count; i++)
+                                {
+                                    Enemy enemy = player.Combat.Enemies[i];
+                                    if (enemy.Health <= 0)
+                                    {
+                                        player.RecieveLoot(player.Combat.Enemies[player.RecievedNumbers[0] - 1].Kill());
+                                        player.Combat.Enemies.RemoveAt(i);
+                                    }
+                                }
+
+                                player.State = "ENEMY TURN";
                             }
                             break;
 

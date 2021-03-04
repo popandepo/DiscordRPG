@@ -115,9 +115,10 @@ namespace DiscordRPG
                 if (emotes.Contains(number.Name))
                 {
                     RecievedNumbers.Add(i);
+                    State = "ATTACKING ONE";
                 }
             }
-            if (State == "GET SINGLE TARGET" && RecievedNumbers.Count > 0)
+            if (State == "ATTACKING ONE" && RecievedNumbers.Count > 0)
             {
                 Combat.Enemies[RecievedNumbers[0] - 1].Damage(Attack);
 
@@ -154,12 +155,6 @@ namespace DiscordRPG
             {
                 Combat.Enemies[RecievedNumbers[0] - 1].Damage(Attack);
 
-                if (Combat.Enemies[RecievedNumbers[0] - 1].Health == 0)
-                {
-                    //User.SendMessageAsync($"You killed {Combat.Enemies[RecievedNumbers[0] - 1].Name} and recieved:");
-                    RecieveLoot(Combat.Enemies[RecievedNumbers[0] - 1].Kill());
-                }
-
                 ClearBuffer();
             }
         }
@@ -173,8 +168,8 @@ namespace DiscordRPG
 
         public void GetNum()
         {
-            LastMessage = User.SendMessageAsync(Text.GetEnemy(this)).Result;
             ExpectedEmotes.Clear();
+            LastMessage = User.SendMessageAsync(Text.GetEnemy(this)).Result;
 
             List<IEmote> emotes = new List<IEmote>();
 
