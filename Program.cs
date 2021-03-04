@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 //using Microsoft.EntityFrameworkCore.Tools;
 using Microsoft.EntityFrameworkCore.SqlServer;
-using DiscordRPG.Tools;
+using DiscordRPG;
 
 namespace DiscordRPG
 {

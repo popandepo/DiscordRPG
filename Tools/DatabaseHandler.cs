@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DiscordRPG.Models;
 
-namespace DiscordRPG.Tools
+namespace DiscordRPG
 {
     public class DatabaseHandler
     {
