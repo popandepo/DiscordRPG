@@ -18,7 +18,7 @@ namespace DiscordRPG
                             var enemies = player.Area.Pull();
                             foreach (var enemy in enemies)
                             {
-                                enemy.Bonus = 5;
+                                enemy.Bonus = 3;
                                 player.Combat.Enemies.Add(new Enemy(enemy));
 
                                 if (player.ID == 236267360502153217) //easter egg
