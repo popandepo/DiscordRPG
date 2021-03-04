@@ -17,7 +17,8 @@ namespace DiscordRPG.Commands
             Console.WriteLine($"{player.Hashname} sent a test message");
             //Console.WriteLine();
             //MessageHandler.SendMessage(player, JSONhandler.ObjectToJson(player));
-            await UserTools.SaveUsersToJSON();
+            //await UserTools.SaveUsersToJSON();
+            await Program.DbHandler.AddUserToDatabase(player);
         }
     }
 }

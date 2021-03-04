@@ -19,6 +19,11 @@ namespace DiscordRPG
             //if (IsInDatabase(player)) return Task.CompletedTask;
             using (var db = new EFContext())
             {
+                var lookup = db.Players.Find((ulong)player.ID);
+                if (!(lookup is null)) // There is probably a better way to do this...
+                {
+                    if (lookup.Id == player.ID) return Task.CompletedTask;
+                }
                 PlayerModel playerModel = new PlayerModel();
                 playerModel.Id = player.ID;
                 playerModel.Hashname = player.Hashname;
@@ -28,6 +33,7 @@ namespace DiscordRPG
                 playerModel.Money = player.Money;
                 playerModel.Attack = player.Attack;
                 playerModel.Defense = player.Defense;
+                /*
                 playerModel.Skills = player.Skills;
                 playerModel.CEquipment = player.CEquipment;
                 playerModel.SEquipment = player.SEquipment;
@@ -35,7 +41,7 @@ namespace DiscordRPG
                 playerModel.SItems = player.SItems;
                 playerModel.CMaterials = player.CMaterials;
                 playerModel.SMaterials = player.SMaterials;
-
+                */
                 db.Players.Add(playerModel);
                 db.SaveChanges();
             }

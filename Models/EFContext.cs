@@ -16,10 +16,10 @@ namespace DiscordRPG.Models
         }
 
         public DbSet<PlayerModel> Players { get; set; }
-        public DbSet<ItemModel> Items { get; set; }
-        public DbSet<SkillModel> Skills { get; set; }
-        public DbSet<EquipmentModel> Equipment { get; set; }
-        public DbSet<MaterialModel> Materials { get; set; }
+        //public DbSet<ItemModel> Items { get; set; }
+        //public DbSet<SkillModel> Skills { get; set; }
+        //public DbSet<EquipmentModel> Equipment { get; set; }
+        //public DbSet<MaterialModel> Materials { get; set; }
 
     }
 }

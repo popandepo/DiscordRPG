@@ -16,13 +16,13 @@ namespace DiscordRPG.Models
         public int Money { get; set; }
         public int Attack { get; set; } 
         public int Defense { get; set; } 
-        public List<ISkill> Skills { get; set; }
-        public List<IEquipment> CEquipment { get; set; } 
-        public List<IEquipment> SEquipment { get; set; } 
-        public List<IItem> CItems { get; set; } 
-        public List<IItem> SItems { get; set; } 
-        public List<IMaterial> CMaterials { get; set; } 
-        public List<IMaterial> SMaterials { get; set; } 
+        //public List<ISkill> Skills { get; set; }
+        //public List<IEquipment> CEquipment { get; set; } 
+        //public List<IEquipment> SEquipment { get; set; } 
+        //public List<IItem> CItems { get; set; } 
+        //public List<IItem> SItems { get; set; } 
+        //public List<IMaterial> CMaterials { get; set; } 
+        //public List<IMaterial> SMaterials { get; set; } 
 
     }
 }
