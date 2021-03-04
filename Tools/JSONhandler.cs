@@ -59,6 +59,7 @@ namespace DiscordRPG
                 }
                 catch (Exception e)
                 {
+                    Console.WriteLine($"!Exception {e.Message}");
                     // Threw a exeption, so do nothing. 
                 }
             
@@ -111,7 +112,7 @@ namespace DiscordRPG
                             {
                                 fieldContent += $"{entry},";
                             }
-                            else if (entry is Object)
+                            else if (entry is Object && !(entry is string))
                             {
                                 fieldContent += $"{entry},";
                             }
@@ -199,7 +200,7 @@ namespace DiscordRPG
                             {
                                 fieldContent += $"{entry},";
                             }
-                            else if (entry is Object)
+                            else if (entry is Object && !(entry is string))
                             {
                                 fieldContent += $"{entry},";
                             }
@@ -294,7 +295,7 @@ namespace DiscordRPG
                             {
                                 fieldContent += $"{entry},";
                             }
-                            else if (entry is Object)
+                            else if (entry is Object && !(entry is string))
                             {
                                 fieldContent += $"{entry},";
                             }
@@ -375,7 +376,7 @@ namespace DiscordRPG
                             {
                                 fieldContent += $"{entry},";
                             }
-                            else if (entry is Object)
+                            else if (entry is Object && !(entry is string))
                             {
                                 fieldContent += $"{entry},";
                             }
