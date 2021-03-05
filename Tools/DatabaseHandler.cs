@@ -30,7 +30,7 @@ namespace DiscordRPG
                 playerModel.Id = player.ID;
                 playerModel.Hashname = player.Hashname;
                 playerModel.Health = player.Health;
-                playerModel.MHealth = player.MHealth;
+                playerModel.MaxHealth = player.MaxHealth;
                 playerModel.Bp = player.Bp;
                 playerModel.Money = player.Money;
                 playerModel.Attack = player.Attack;
@@ -65,7 +65,7 @@ namespace DiscordRPG
                 player = new Player(result.Id) {
                     Hashname = result.Hashname,
                     Health = result.Health,
-                    MHealth = result.MHealth,
+                    MaxHealth = result.MaxHealth,
                     Bp = result.Bp,
                     Money = result.Money,
                     Attack = result.Attack,

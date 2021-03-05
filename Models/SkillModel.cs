@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DiscordRPG.Models
 {
-    public class SkillModel : ISkill
+    public class SkillModel// : ISkill
     {
         [Key]
         public int ID { get; set; }

@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-﻿namespace DiscordRPG
-
-=======
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +6,6 @@ using System.Linq;
 using System.Text;
 
 namespace DiscordRPG
->>>>>>> ProgramLogic
 {
     public class JSONhandler
     {

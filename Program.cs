@@ -49,16 +49,14 @@ namespace DiscordRPG
             }
             Console.WriteLine("Initiated!");
 
-<<<<<<< HEAD
             _client.ReactionAdded += ReactionHandler.Send;//Whenever a reaction is added, send it to the reaction handler
             _client.ReactionRemoved += ReactionHandler.Send;//Whenever a reaction is removed, send it to the reaction handler
 
             Game.GameLoop();
-=======
             _client.ReactionAdded += ReactionHandler.Send;//Whenever a reaction is added, push it to the reaction handler
             _client.ReactionRemoved += ReactionHandler.Send;//Whenever a reaction is removed, push it to the reaction handler
             //_client.Ready += TestDatabase;
->>>>>>> ProgramLogic
+
 
             await Task.Delay(-1);
         }

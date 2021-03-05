@@ -11,7 +11,7 @@ namespace DiscordRPG.Models
         public ulong Id { get; set; }
         public string Hashname { get; set; }
         public int Health { get; set; }
-        public int MHealth { get; set; }
+        public int MaxHealth { get; set; }
         public int Bp { get; set; }
         public int Money { get; set; }
         public int Attack { get; set; } 

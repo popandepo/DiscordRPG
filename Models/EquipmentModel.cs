@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DiscordRPG.Models
 {
-    public class EquipmentModel : IEquipment
+    public class EquipmentModel// : IEquipment
     {
         [Key]
         public int Id { get; set; }
