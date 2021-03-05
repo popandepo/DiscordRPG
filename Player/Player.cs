@@ -230,7 +230,7 @@ namespace DiscordRPG
             {
 
                 ExpectedEmotes.Clear();
-                LastMessage = User.SendMessageAsync(Text.GetItems(this)).Result;
+                //LastMessage = User.SendMessageAsync(Text.GetItems(this)).Result;
 
                 List<IEmote> emotes = new List<IEmote>();
 

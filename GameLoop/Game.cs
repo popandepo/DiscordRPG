@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Discord;
+using System;
 using System.Threading.Tasks;
 
 namespace DiscordRPG
@@ -19,7 +20,7 @@ namespace DiscordRPG
 
                 await Task.Delay(100);
 
-                
+
                 foreach (var player in Program.players)
                 {
                     switch (player.State)
@@ -88,8 +89,8 @@ namespace DiscordRPG
                             }
                             else if (player.RecievedEmotes.Contains(Emote.Bag))
                             {
-                                //await player.User.SendMessageAsync(Text.GetInventory(player, "Carried items"));
-                                //await player.User.SendMessageAsync(Text.GetInventory(player, "Carried materials"));
+                                await player.User.SendMessageAsync(Text.GetInventory(player, "Carried materials"));
+                                player.LastMessage = player.User.SendMessageAsync(Text.GetInventory(player, "Carried items")).Result;
 
                                 player.RecievedEmotes.Clear();
 
