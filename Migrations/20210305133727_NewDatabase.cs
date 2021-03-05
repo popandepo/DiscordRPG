@@ -17,7 +17,9 @@ namespace DiscordRPG.Migrations
                     Bp = table.Column<int>(type: "int", nullable: false),
                     Money = table.Column<int>(type: "int", nullable: false),
                     Attack = table.Column<int>(type: "int", nullable: false),
-                    Defense = table.Column<int>(type: "int", nullable: false)
+                    Defense = table.Column<int>(type: "int", nullable: false),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HasReadTutorial = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

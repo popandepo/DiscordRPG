@@ -15,8 +15,10 @@ namespace DiscordRPG.Models
         public int Bp { get; set; }
         public int Money { get; set; }
         public int Attack { get; set; } 
-        public int Defense { get; set; } 
-        //public List<ISkill> Skills { get; set; }
+        public int Defense { get; set; }
+        public string State { get; set; }
+        public bool HasReadTutorial { get; set; }
+        //public List<SkillModel> Skills { get; set; }
         //public List<IEquipment> CEquipment { get; set; } 
         //public List<IEquipment> SEquipment { get; set; } 
         //public List<IItem> CItems { get; set; } 

@@ -35,8 +35,10 @@ namespace DiscordRPG
                 playerModel.Money = player.Money;
                 playerModel.Attack = player.Attack;
                 playerModel.Defense = player.Defense;
+                playerModel.HasReadTutorial = player.HasReadTutorial;
+                playerModel.State = player.State;
+                //playerModel.Skills = player.Skills.Select(i => (SkillModel)i).ToList();
                 /*
-                playerModel.Skills = player.Skills;
                 playerModel.CEquipment = player.CEquipment;
                 playerModel.SEquipment = player.SEquipment;
                 playerModel.CItems = player.CItems;
@@ -69,7 +71,9 @@ namespace DiscordRPG
                     Bp = result.Bp,
                     Money = result.Money,
                     Attack = result.Attack,
-                    Defense = result.Defense
+                    Defense = result.Defense,
+                    State = result.State,
+                    HasReadTutorial = result.HasReadTutorial
                 };
                 Console.WriteLine(result.Hashname);
             }

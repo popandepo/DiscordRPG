@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiscordRPG.Migrations
 {
     [DbContext(typeof(EFContext))]
-    [Migration("20210305101233_NewDatabase")]
-    partial class NewDatabase
+    [Migration("20210305134139_0")]
+    partial class _0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,6 +36,9 @@ namespace DiscordRPG.Migrations
                     b.Property<int>("Defense")
                         .HasColumnType("int");
 
+                    b.Property<bool>("HasReadTutorial")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Hashname")
                         .HasColumnType("nvarchar(max)");
 
@@ -47,6 +50,9 @@ namespace DiscordRPG.Migrations
 
                     b.Property<int>("Money")
                         .HasColumnType("int");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
