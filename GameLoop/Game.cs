@@ -9,7 +9,11 @@ namespace DiscordRPG
         {
             while (true)
             {
+                Program.looping = false;
+
                 await Task.Delay(100);
+
+                Program.looping = true;
                 foreach (var player in Program.players)
                 {
                     switch (player.State)

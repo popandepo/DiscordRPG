@@ -13,6 +13,7 @@ namespace DiscordRPG
         public static DiscordSocketClient _client;
         public static List<Player> players = new List<Player>();
         public static DatabaseHandler DbHandler = new DatabaseHandler();
+        public static bool looping = false;
         private CommandService _commands;
         private CommandHandler _handler;
 
