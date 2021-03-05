@@ -11,7 +11,7 @@ namespace DiscordRPG.Commands
         [Summary("")]
         public async Task JoinAsync()
         {
-            if (!(Program.players.Find(i => i.ID == Context.User.Id) is null))
+            if (!(Program.players.Find(p => p.ID == Context.User.Id) is null) && !(Program.holding.Find(h => h.ID == Context.User.Id) is null))
             {
                 Console.WriteLine("You are already registered");
                 return;
