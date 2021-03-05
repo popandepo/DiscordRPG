@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace DiscordRPG.Models
 {
@@ -16,7 +14,7 @@ namespace DiscordRPG.Models
         public int MaxAmount { get; set; }
         public string Type { get; set; }
         public string Identifier { get; set; } = "Item";
-        
+
         [NotMapped]
         public List<int> Attributes { get; set; }
         public int Chance { get; set; }

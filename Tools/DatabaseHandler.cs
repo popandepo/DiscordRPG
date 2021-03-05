@@ -1,10 +1,7 @@
 ﻿#nullable enable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DiscordRPG.Models;
+using System;
+using System.Threading.Tasks;
 
 namespace DiscordRPG
 {
@@ -62,7 +59,8 @@ namespace DiscordRPG
             {
                 var result = db.Players.Find(id);
                 if (result is null) return Task.FromResult(player);
-                player = new Player(result.Id) {
+                player = new Player(result.Id)
+                {
                     Hashname = result.Hashname,
                     Health = result.Health,
                     MaxHealth = result.MaxHealth,

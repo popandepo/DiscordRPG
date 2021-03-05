@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DiscordRPG.Models
 {
@@ -14,8 +11,8 @@ namespace DiscordRPG.Models
         public int MaxHealth { get; set; }
         public int Bp { get; set; }
         public int Money { get; set; }
-        public int Attack { get; set; } 
-        public int Defense { get; set; } 
+        public int Attack { get; set; }
+        public int Defense { get; set; }
         //public List<ISkill> Skills { get; set; }
         //public List<IEquipment> CEquipment { get; set; } 
         //public List<IEquipment> SEquipment { get; set; } 

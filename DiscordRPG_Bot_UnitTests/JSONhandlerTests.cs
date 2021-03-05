@@ -1,7 +1,5 @@
-﻿using System;
+﻿using DiscordRPG;
 using System.Collections.Generic;
-using System.Text;
-using DiscordRPG;
 using Xunit;
 
 namespace DiscordRPG_Bot_UnitTests
@@ -79,9 +77,9 @@ namespace DiscordRPG_Bot_UnitTests
     public class TestArrayObject
     {
         #region fields
-        public int[] intArray1 = new int[] { 1, 2, 3, 4};
+        public int[] intArray1 = new int[] { 1, 2, 3, 4 };
         public int[] empty = new int[] { };
-        public List<string> stringList = new List<string> { "one", "two"};
+        public List<string> stringList = new List<string> { "one", "two" };
         #endregion
 
         #region properties

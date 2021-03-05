@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
-using System.Text;
 
 namespace DiscordRPG
 {
@@ -62,7 +61,7 @@ namespace DiscordRPG
                     Console.WriteLine($"!Exception {e.Message}");
                     // Threw a exeption, so do nothing. 
                 }
-            
+
                 var methodReturnType = method.ReturnType.Name.Replace("`1", "");
                 jsonString += $"{{\"name\":\"{method.Name}\", \"inputs\":{methodInputs}, \"body\":\"{methodBody}\",\"returnType\":\"{methodReturnType}\"}},";
             }
@@ -97,7 +96,7 @@ namespace DiscordRPG
                     }
                     else
                     {
-                        
+
                         bool notEmpty = false;
                         var entries = (IEnumerable)property.GetValue(obj);
                         foreach (var entry in entries) // A stupid hack because i'm too fucking tired to think properly
@@ -125,7 +124,8 @@ namespace DiscordRPG
                         if (notEmpty)
                         {
                             fieldContent = fieldContent.Remove(fieldContent.Length - 1, 1);
-                        } else
+                        }
+                        else
                         {
                             fieldType += "\"";
                         }
@@ -389,7 +389,8 @@ namespace DiscordRPG
                         if (notEmpty)
                         {
                             fieldContent = fieldContent.Remove(fieldContent.Length - 1, 1);
-                        } else
+                        }
+                        else
                         {
                             fieldType += "\"";
                         }

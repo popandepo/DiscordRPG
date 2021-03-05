@@ -145,7 +145,7 @@ namespace DiscordRPG
                             break;
                     }
 
-                    if (player.Combat.Enemies.Count == 0)
+                    if (player.Combat.Enemies.Count == 0 && player.State != "")
                     {
                         player.Area = new Area(AreaList.Forest);
                         player.State = "BEGIN BATTLE";
