@@ -1,6 +1,6 @@
 ﻿namespace DiscordRPG
 {
-    interface IEquipment
+    public interface IEquipment
     {
         string Name { get; set; }
         string Slot { get; set; }

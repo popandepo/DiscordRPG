@@ -4,6 +4,10 @@ using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+//using Microsoft.EntityFrameworkCore.Tools;
+using Microsoft.EntityFrameworkCore.SqlServer;
+using DiscordRPG;
 
 namespace DiscordRPG
 {
@@ -11,6 +15,7 @@ namespace DiscordRPG
     {
         public static DiscordSocketClient _client;
         public static List<Player> players = new List<Player>();
+        public static DatabaseHandler DbHandler = new DatabaseHandler();
         private CommandService _commands;
         private CommandHandler _handler;
 
@@ -44,10 +49,16 @@ namespace DiscordRPG
             }
             Console.WriteLine("Initiated!");
 
+<<<<<<< HEAD
             _client.ReactionAdded += ReactionHandler.Send;//Whenever a reaction is added, send it to the reaction handler
             _client.ReactionRemoved += ReactionHandler.Send;//Whenever a reaction is removed, send it to the reaction handler
 
             Game.GameLoop();
+=======
+            _client.ReactionAdded += ReactionHandler.Send;//Whenever a reaction is added, push it to the reaction handler
+            _client.ReactionRemoved += ReactionHandler.Send;//Whenever a reaction is removed, push it to the reaction handler
+            //_client.Ready += TestDatabase;
+>>>>>>> ProgramLogic
 
             await Task.Delay(-1);
         }

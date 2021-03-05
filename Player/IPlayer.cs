@@ -4,7 +4,11 @@ using System.Collections.Generic;
 
 namespace DiscordRPG
 {
+<<<<<<< HEAD
     public interface IPlayer : ICreature
+=======
+    public interface IPlayer
+>>>>>>> ProgramLogic
     {
         ulong ID { get; set; }
         bool HasReadTutorial { get; set; }
@@ -22,6 +26,7 @@ namespace DiscordRPG
         string State { get; set; }
         int Attack { get; set; } //TEMPORARY
         int Defense { get; set; } //TEMPORARY
+<<<<<<< HEAD
         //List<Skill> Skills { get; set; }
         List<Equipment> CEquipment { get; set; }
         List<Equipment> SEquipment { get; set; }
@@ -29,6 +34,15 @@ namespace DiscordRPG
         List<Item> SItems { get; set; }
         List<Material> CMaterials { get; set; }
         List<Material> SMaterials { get; set; }
+=======
+        List<ISkill> Skills { get; set; }
+        List<IEquipment> CEquipment { get; set; }
+        List<IEquipment> SEquipment { get; set; }
+        List<IItem> CItems { get; set; }
+        List<IItem> SItems { get; set; }
+        List<IMaterial> CMaterials { get; set; }
+        List<IMaterial> SMaterials { get; set; }
+>>>>>>> ProgramLogic
         Combat Combat { get; set; }
         List<int> RecievedNumbers { get; set; }
         //int NumberOfSkills { get; }

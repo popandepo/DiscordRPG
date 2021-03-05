@@ -14,6 +14,7 @@ namespace DiscordRPG.Commands
             if (!(Program.players.Find(i => i.ID == Context.User.Id) is null))
             {
                 Console.WriteLine("You are already registered");
+                return;
             } // If the player is already registered, break out
             var player = new Player(Context.User.Id);
             Program.players.Add(player); // Add the player to players

@@ -20,6 +20,7 @@ namespace DiscordRPG
         public string State { get; set; }
         public int Attack { get; set; } //TEMPORARY
         public int Defense { get; set; } //TEMPORARY
+<<<<<<< HEAD
         //public List<Skill> Skills { get; set; }
         public List<Equipment> CEquipment { get; set; } //Carried //TURN THIS INTO AN OBJECT CALLED ARMOR WHICH CONSISTS OF EVERY EQUIPPED PIECE OF EQUIPMENT
         public List<Equipment> SEquipment { get; set; } //Stored
@@ -35,6 +36,17 @@ namespace DiscordRPG
         public List<IEmote> RecievedEmotes { get; set; }
         public List<int> RecievedNumbers { get; set; }
         public Area Area { get; set; }
+=======
+        public List<ISkill> Skills { get; set; }
+        public List<IEquipment> CEquipment { get; set; } //Carried
+        public List<IEquipment> SEquipment { get; set; } //Stored
+        public List<IItem> CItems { get; set; } //Carried
+        public List<IItem> SItems { get; set; } //Stored
+        public List<IMaterial> CMaterials { get; set; } //Carried
+        public List<IMaterial> SMaterials { get; set; } //Stored
+        public Combat Combat { get; set; }
+        public int NumberOfSkills => (Skills is null) ? 0 : Skills.Count();
+>>>>>>> ProgramLogic
 
 
         //list of skills
@@ -62,13 +74,22 @@ namespace DiscordRPG
             CEquipment = EquipmentList.leather;
             UpdateStats();
 
+<<<<<<< HEAD
             CItems = new List<Item>();
             CItems.Add(new Item(ItemList.lowPotion));
+=======
+            CItems = new List<IItem>();
+            CItems.Add(new Item("Potion", 3, 10, "POTION", 5));
+>>>>>>> ProgramLogic
 
-            SItems = new List<Item>();
+            SItems = new List<IItem>();
 
+<<<<<<< HEAD
             CMaterials = new List<Material>();
             SMaterials = new List<Material>();
+=======
+            SMaterials = new List<IMaterial>();
+>>>>>>> ProgramLogic
 
             ExpectedEmotes = new List<IEmote>();
             RecievedEmotes = new List<IEmote>();
@@ -414,7 +435,7 @@ namespace DiscordRPG
                 SEquipment.ForEach(i => output += i);
             }*/
             output += "}";//}";
-            System.Console.WriteLine(output);
+            //System.Console.WriteLine(output);
             return output;
         }
     }
