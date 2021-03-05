@@ -13,7 +13,7 @@ namespace DiscordRPG.Migrations
                     Id = table.Column<decimal>(type: "decimal(20,0)", nullable: false),
                     Hashname = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Health = table.Column<int>(type: "int", nullable: false),
-                    MHealth = table.Column<int>(type: "int", nullable: false),
+                    MaxHealth = table.Column<int>(type: "int", nullable: false),
                     Bp = table.Column<int>(type: "int", nullable: false),
                     Money = table.Column<int>(type: "int", nullable: false),
                     Attack = table.Column<int>(type: "int", nullable: false),

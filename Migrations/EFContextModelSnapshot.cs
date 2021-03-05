@@ -40,7 +40,7 @@ namespace DiscordRPG.Migrations
                     b.Property<int>("Health")
                         .HasColumnType("int");
 
-                    b.Property<int>("MHealth")
+                    b.Property<int>("MaxHealth")
                         .HasColumnType("int");
 
                     b.Property<int>("Money")

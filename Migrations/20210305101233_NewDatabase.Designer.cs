@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiscordRPG.Migrations
 {
     [DbContext(typeof(EFContext))]
-    [Migration("20210304110559_NewDatabase")]
+    [Migration("20210305101233_NewDatabase")]
     partial class NewDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,7 +42,7 @@ namespace DiscordRPG.Migrations
                     b.Property<int>("Health")
                         .HasColumnType("int");
 
-                    b.Property<int>("MHealth")
+                    b.Property<int>("MaxHealth")
                         .HasColumnType("int");
 
                     b.Property<int>("Money")

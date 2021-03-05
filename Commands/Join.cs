@@ -20,6 +20,7 @@ namespace DiscordRPG.Commands
             Program.players.Add(player); // Add the player to players
             Console.WriteLine($"{player.Hashname} has been added");
             player.State = "BEGIN BATTLE";
+            await Program.DbHandler.AddUserToDatabase(player);
             await MessageHandler.SendMessageAsync(player, $"You have been added to the list of players, please use this channel for any future messages\n{Text.Tutorial(player)}");
         }
     }
