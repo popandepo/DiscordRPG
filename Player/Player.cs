@@ -104,18 +104,18 @@ namespace DiscordRPG
                 {
                     Attack += Attack;
                 }
-            }
-
-            for (int i = 0; i < Emote.Numbers.Length; i++)
-            {
-                IEmote number = Emote.Numbers[i];
-
-                if (emotes.Contains(number.Name))
+                for (int i = 0; i < Emote.Numbers.Length; i++)
                 {
-                    RecievedNumbers.Add(i);
-                    State = "ATTACKING ONE";
+                    IEmote number = Emote.Numbers[i];
+
+                    if (emotes.Contains(number.Name))
+                    {
+                        RecievedNumbers.Add(i);
+                        State = "ATTACKING ONE";
+                    }
                 }
             }
+
             //if (State == "ATTACKING ONE" && RecievedNumbers.Count > 0)
             //{
             //    Combat.Enemies[RecievedNumbers[0] - 1].Damage(Attack);
@@ -154,6 +154,18 @@ namespace DiscordRPG
             {
                 item = CItems[RecievedNumbers[0] - 1];
                 CItems[RecievedNumbers[0] - 1].Amount -= 1;
+                List<Item> itemsToRemove = new List<Item>();
+                foreach (var itm in CItems)
+                {
+                    if (itm.Amount == 0)
+                    {
+                        itemsToRemove.Add(itm);
+                    }
+                }
+                foreach (var itm in itemsToRemove)
+                {
+                    CItems.Remove(itm);
+                }
             }
             UpdateStats();
 

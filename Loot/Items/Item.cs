@@ -25,13 +25,12 @@ namespace DiscordRPG
         /// <param name="type">The Type of the Item</param>
         /// <param name="chance">The chance to pull the Item when killing an enemy</param>
         /// <param name="attributes">Any Attributes the Item has</param>
-        public Item(string name, int amount, int maxAmount, string type, int chance, params int[] attributes)
+        public Item(string name, int amount, int maxAmount, string type, params int[] attributes)
         {
             Name = name;
             MaxAmount = maxAmount;
             Amount = amount;
             Type = type;
-            Chance = chance;
             Attributes = attributes.ToList();
         }
 

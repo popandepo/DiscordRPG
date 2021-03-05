@@ -104,6 +104,7 @@ namespace DiscordRPG
                             if (player.RecievedEmotes.Count > 0)
                             {
                                 player.UseItem();
+                                player.State = "ENEMY TURN";
                             }
                             break;
 
