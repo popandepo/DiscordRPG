@@ -76,7 +76,7 @@ namespace DiscordRPG
             for (int i = 0; i < player.CItems.Count; i++)
             {
                 Item item = player.CItems[i];
-                output += $"{i + 1}: {item.Name} x {item.Amount}/{item.MaxAmount}.";
+                output += $"{i + 1}: {item.Name} x {item.Amount}/{item.MaxAmount}\n{item.Description}.";
             }
             return output;
         }
@@ -91,7 +91,7 @@ namespace DiscordRPG
                 for (int i = 0; i < player.CItems.Count; i++)
                 {
                     Item item = player.CItems[i];
-                    output += $"{i + 1}: {item.Name} x {item.Amount}/{item.MaxAmount}.";
+                    output += $"{i + 1}: {item.Name} x {item.Amount}/{item.MaxAmount},\n{item.Description}.";
                 }
             }
             if (invType == "Carried materials")

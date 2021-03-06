@@ -8,10 +8,10 @@ namespace DiscordRPG_Bot_UnitTests
     public class PlayerTests
     {
         private List<ILootables> loot = new List<ILootables> {
-                new Item("TestItem1", 10, 30, "test", 20),
-                new Item("TestItem1", 10, 30, "test", 20),
-                new Item("TestItem1", 10, 30, "test", 20),
-                new Item("TestItem1", 10, 30, "test", 20),
+                new Item("TestItem1", "",10, 30, "test", 20),
+                new Item("TestItem1", "",10, 30, "test", 20),
+                new Item("TestItem1", "",10, 30, "test", 20),
+                new Item("TestItem1", "",10, 30, "test", 20),
                 new Material("Iron Ingot", 3, 50, "normal"),
                 new Material("Iron Ingot", 3, 50, "normal"),
                 new Material("Mithril Ingot", 1, 5, "epic"),

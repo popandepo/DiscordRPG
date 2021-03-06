@@ -37,7 +37,14 @@ namespace DiscordRPG
                                     var rand = new Random();
                                     if (rand.Next(1, 101) == 1)
                                     {
-                                        player.Combat.Enemies.RemoveAt(player.Combat.Enemies.Count);
+                                        try
+                                        {
+                                            player.Combat.Enemies.RemoveAt(player.Combat.Enemies.Count);
+                                        }
+                                        catch
+                                        {
+
+                                        }
                                         player.Combat.Enemies.Add(new Enemy("Bidoof",
                                                                             5, //attack
                                                                             5, //defense
