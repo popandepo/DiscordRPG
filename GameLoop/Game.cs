@@ -6,6 +6,9 @@ namespace DiscordRPG
 {
     class Game
     {
+        /// <summary>
+        /// The main game loop that runs for every player
+        /// </summary>
         public static async void GameLoop()
         {
             while (true)
@@ -60,7 +63,7 @@ namespace DiscordRPG
                             break;
 
                         case "PRE PLAYER TURN":
-                            player.Act();
+                            player.ShowMainCombat();
 
                             // setup for the player turn
 
@@ -89,10 +92,10 @@ namespace DiscordRPG
                                     if (player.Bp > 0)
                                     {
                                         player.Bp -= 2;
-                                        player.Defense += player.Defense * 2;
+                                        player.Defense += player.CEquipment.Shield.Defense * 2;
                                     }
                                 }
-                                player.Defense += player.Defense;
+                                player.Defense += player.CEquipment.Shield.Defense;
                             }
                             else if (player.RecievedEmotes.Contains(Emote.Bag))
                             {

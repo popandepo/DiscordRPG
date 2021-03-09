@@ -54,6 +54,11 @@ namespace DiscordRPG
             return output;
         }
 
+        /// <summary>
+        /// Gets all the enemies
+        /// </summary>
+        /// <param name="player">The player</param>
+        /// <returns></returns>
         public static string GetEnemy(Player player)
         {
             string output = "Select a target: ";
@@ -69,18 +74,12 @@ namespace DiscordRPG
             return output;
         }
 
-        public static string GetItems(Player player)
-        {
-            string output = "Items:\n";
-
-            for (int i = 0; i < player.CItems.Count; i++)
-            {
-                Item item = player.CItems[i];
-                output += $"{i + 1}: {item.Name} x {item.Amount}/{item.MaxAmount}\n{item.Description}.";
-            }
-            return output;
-        }
-
+        /// <summary>
+        /// Get the inventory of a player
+        /// </summary>
+        /// <param name="player">The player</param>
+        /// <param name="invType">What inventory to search</param>
+        /// <returns></returns>
         public static string GetInventory(Player player, string invType)
         {
             player.SortList();

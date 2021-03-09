@@ -18,17 +18,15 @@ namespace DiscordRPG
         public int Bp { get; set; }
         public int Money { get; set; }
         public string State { get; set; }
-        public int Attack { get; set; } //TEMPORARY
-        public int Defense { get; set; } //TEMPORARY
-        //public List<Skill> Skills { get; set; }
-        public List<Equipment> CEquipment { get; set; } //Carried //TURN THIS INTO AN OBJECT CALLED ARMOR WHICH CONSISTS OF EVERY EQUIPPED PIECE OF EQUIPMENT
+        public int Attack { get; set; }
+        public int Defense { get; set; }
+        public Armor CEquipment { get; set; } //Carried
         public List<Equipment> SEquipment { get; set; } //Stored
         public List<Item> CItems { get; set; } //Carried
         public List<Item> SItems { get; set; } //Stored
         public List<Material> CMaterials { get; set; } //Carried
         public List<Material> SMaterials { get; set; } //Stored
         public Combat Combat { get; set; }
-        //public int NumberOfSkills => Skills.Count();
         public List<IEmote> ExpectedEmotes { get; set; }
         public List<string> ExpectedString { get; set; }
         public List<int> ExpectedNumber { get; set; }
@@ -36,8 +34,6 @@ namespace DiscordRPG
         public List<int> RecievedNumbers { get; set; }
         public Area Area { get; set; }
 
-
-        //list of skills
 
         /// <summary>
         /// Creates a player object
@@ -59,7 +55,7 @@ namespace DiscordRPG
 
             HasReadTutorial = false;
 
-            CEquipment = EquipmentList.leather;
+            CEquipment = new Armor(EquipmentList.leatherCap, EquipmentList.leatherVest, EquipmentList.leatherGloves, EquipmentList.leatherBelt, EquipmentList.leatherPants, EquipmentList.leatherSword, EquipmentList.leatherShield);
             UpdateStats();
 
             CItems = new List<Item>();
@@ -81,12 +77,19 @@ namespace DiscordRPG
             //Skills = starter skills (maybe nothing, maybe a low-level heal ability or something)
         }
 
-        public void Act()
+        /// <summary>
+        /// Shows the main combat screen
+        /// </summary>
+        public void ShowMainCombat()
         {
             LastMessage = User.SendMessageAsync(Text.GetCombat(this)).Result;
             LastMessage.AddReactionsAsync(Emote.MainCombat.ToArray());
             ExpectedEmotes = new List<IEmote>(Emote.MainCombat);
         }
+
+        /// <summary>
+        /// Do things based on what the recieved emotes are
+        /// </summary>
         public void EmoteAct()
         {
             string emotes = "";
@@ -130,6 +133,9 @@ namespace DiscordRPG
             //}
         }
 
+        /// <summary>
+        /// Uses the item in the position of the previously recieved number
+        /// </summary>
         public void UseItem()
         {
             string emotes = "";
@@ -186,6 +192,9 @@ namespace DiscordRPG
             }
         }
 
+        /// <summary>
+        /// Attacks a single enemy using the first number in RecievedEmotes
+        /// </summary>
         public void AttackEnemy()
         {
             string emotes = "";
@@ -210,6 +219,9 @@ namespace DiscordRPG
             UpdateStats();
         }
 
+        /// <summary>
+        /// Clears all emote storages
+        /// </summary>
         public void ClearBuffer()
         {
             RecievedNumbers.Clear();
@@ -217,6 +229,12 @@ namespace DiscordRPG
             RecievedEmotes.Clear();
         }
 
+        /// <summary>
+        /// Sends emotes to the player based on the related amount in target
+        /// </summary>
+        /// <param name="target">What to look for.
+        /// Enemies
+        /// Items</param>
         public void GetNum(string target)
         {
             if (target == "Enemies")
@@ -259,6 +277,10 @@ namespace DiscordRPG
             }
         }
 
+        /// <summary>
+        /// Add emotes to the list of expected emotes and send it to the last message
+        /// </summary>
+        /// <param name="emotes">The emotes to add</param>
         public void AddEmote(params IEmote[] emotes)
         {
             ExpectedEmotes.AddRange(emotes);
@@ -293,6 +315,9 @@ namespace DiscordRPG
             User.SendMessageAsync(output);
         }
 
+        /// <summary>
+        /// Sorts and compresses lists (CItems and CMaterials)
+        /// </summary>
         public void SortList()
         {
             List<ILootables> itemHolder = new List<ILootables>();
@@ -326,24 +351,27 @@ namespace DiscordRPG
             }
         }
 
+        /// <summary>
+        /// Update Attack and Defense to their base stats based on worn equipment
+        /// </summary>
         public void UpdateStats()
         {
             Defense = 0;
             Attack = 0;
-            foreach (var equipment in CEquipment)
-            {
-                if (equipment.EquipmentType == "Armor")
-                {
-                    Defense += equipment.Defense;
-                }
-                else if (equipment.EquipmentType == "Weapon")
-                {
-                    Attack += equipment.Attack;
-                }
-            }
 
+            Defense += CEquipment.Head.Defense;
+            Defense += CEquipment.Chest.Defense;
+            Defense += CEquipment.Arms.Defense;
+            Defense += CEquipment.Waist.Defense;
+            Defense += CEquipment.Legs.Defense;
+
+            Attack += CEquipment.Weapon.Attack;
         }
 
+        /// <summary>
+        /// Damage the player
+        /// </summary>
+        /// <param name="incDamage">Incoming damage</param>
         public void Damage(int incDamage) //10
         {
             int negatePoint = incDamage * -1; //-10
@@ -365,6 +393,10 @@ namespace DiscordRPG
             }
         }
 
+        /// <summary>
+        /// hurt the player
+        /// </summary>
+        /// <param name="damage">Incoming damage</param>
         private void Hurt(int damage)
         {
             if (Health > damage) //if you can take the damage
@@ -378,11 +410,18 @@ namespace DiscordRPG
             }
         }
 
+        /// <summary>
+        /// Kill the player
+        /// </summary>
         private void Kill()
         {
             State = "DEAD";
         }
 
+        /// <summary>
+        /// Make a string of all information related to the player so it can be looked at or stored
+        /// </summary>
+        /// <returns>A string of all information related to the player</returns>
         public override string ToString()
         {
             string output = $"{{\"ID\":{ID}, \"Hashname\":{Hashname}, \"Health\":{Health}, \"MHealth\":{MaxHealth}, \"Bp\":{Bp}, \"Money\":{Money}, \"State\":{State}, \"Attack\":{Attack}, \"Defense\":{Defense},";
