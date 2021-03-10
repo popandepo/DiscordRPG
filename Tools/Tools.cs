@@ -13,7 +13,7 @@ namespace DiscordRPG
             return output;
         }
 
-        public static List<ILootables> MySort(List<ILootables> listToSort) // CHANGE TO PRIVATE AFTER TESTING
+        public static List<ILootables> MySort(List<ILootables> listToSort)
         {
             List<ILootables> output = new List<ILootables>();
             var distinct = listToSort.DistinctBy(i => i.Name).ToList();

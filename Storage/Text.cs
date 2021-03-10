@@ -18,7 +18,8 @@ namespace DiscordRPG
                 $"Then press the 🏁 to send the command\n" +
                 $"Only ⚔️,🛡️,💼  and ⚡ work right now.\n" +
                 $"⚔️ = Attack, 🛡️ = Defend, 💼 = show inventory\n⚡ = use BP to increase attack for one turn" +
-                $" ­­";
+                $" ­­" +
+                $"";
 
             return output;
         }

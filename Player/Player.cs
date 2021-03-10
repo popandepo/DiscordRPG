@@ -6,8 +6,6 @@ namespace DiscordRPG
 {
     public class Player : IPlayer
     {
-
-
         public ulong ID { get; set; }
         public bool HasReadTutorial { get; set; }
         public IUserMessage LastMessage { get; set; }
@@ -18,6 +16,7 @@ namespace DiscordRPG
         public int Bp { get; set; }
         public int Money { get; set; }
         public string State { get; set; }
+        public string ReturnState { get; set; }
         public int Attack { get; set; }
         public int Defense { get; set; }
         public Armor CEquipment { get; set; } //Carried
@@ -49,6 +48,7 @@ namespace DiscordRPG
             Bp = 0;
             Money = 100;
             State = "";
+            ReturnState = State;
             Area = new Area(AreaList.Tutorial);
             Attack = 0;
             Defense = 0;
@@ -59,14 +59,17 @@ namespace DiscordRPG
             UpdateStats();
 
             CItems = new List<Item>();
-            CItems.Add(new Item(ItemList.lowPotion));
 
+            CItems.Add(new Item(ItemList.lowPotion));
+            CItems.Add(new Item(ItemList.lowPotion));
+            CItems.Add(new Item(ItemList.lowPotion));
 
             SItems = new List<Item>();
 
             CMaterials = new List<Material>();
             SMaterials = new List<Material>();
 
+            SortList();
 
             ExpectedEmotes = new List<IEmote>();
             RecievedEmotes = new List<IEmote>();
@@ -97,6 +100,11 @@ namespace DiscordRPG
             foreach (var emote in RecievedEmotes)
             {
                 emotes += emote.Name;
+            }
+
+            if (ReturnCheck(emotes))
+            {
+                return;
             }
 
             //RecievedEmotes.Clear();
@@ -220,6 +228,23 @@ namespace DiscordRPG
         }
 
         /// <summary>
+        /// Checks if the player wants to return to a previous screen, if so: does it
+        /// </summary>
+        /// <param name="emotes">The string of emotes to check</param>
+        /// <returns>True if player wants to return</returns>
+        private bool ReturnCheck(string emotes)
+        {
+            if (emotes.Contains(Emote.TurnBack.Name))
+            {
+                RecievedEmotes.Clear();
+                State = ReturnState;
+                return true;
+                //Game.GameLoop();
+            }
+            return false;
+        }
+
+        /// <summary>
         /// Clears all emote storages
         /// </summary>
         public void ClearBuffer()
@@ -249,7 +274,10 @@ namespace DiscordRPG
                 {
                     emotes.Add(Emote.Numbers[i]);
                 }
+
+                emotes.Add(Emote.TurnBack);
                 emotes.Add(Emote.Flag);
+
                 LastMessage.AddReactionsAsync(emotes.ToArray());
                 foreach (var item in emotes)
                 {
@@ -268,7 +296,10 @@ namespace DiscordRPG
                 {
                     emotes.Add(Emote.Numbers[i]);
                 }
+
+                emotes.Add(Emote.TurnBack);
                 emotes.Add(Emote.Flag);
+
                 LastMessage.AddReactionsAsync(emotes.ToArray());
                 foreach (var item in emotes)
                 {

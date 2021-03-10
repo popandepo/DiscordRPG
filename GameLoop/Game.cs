@@ -63,8 +63,10 @@ namespace DiscordRPG
                             break;
 
                         case "PRE PLAYER TURN":
-                            player.ShowMainCombat();
+                            player.ReturnState = "PRE PLAYER TURN";
+                            player.ClearBuffer();
 
+                            player.ShowMainCombat();
                             // setup for the player turn
 
                             player.State = "PLAYER TURN";
