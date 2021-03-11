@@ -66,6 +66,11 @@ namespace DiscordRPG
                             player.ReturnState = "PRE PLAYER TURN";
                             player.ClearBuffer();
 
+                            if (player.Bp < 3)
+                            {
+                                player.Bp += 1;
+                            }
+
                             player.ShowMainCombat();
                             // setup for the player turn
 
@@ -74,30 +79,45 @@ namespace DiscordRPG
 
                         case "PLAYER TURN":
 
+                            if (player.ReturnCheck())
+                            {
+                                break;
+                            }
+
+                            if (player.RecievedEmotes.Contains(Emote.Zap) && player.Bp > 0)
+                            {
+                                player.State = "CHECK BP";
+                                break;
+                            }
+
                             if (player.RecievedEmotes.Contains(Emote.Sword))
                             {
-                                if (player.RecievedEmotes.Contains(Emote.Zap))
-                                {
-                                    if (player.Bp > 0)
-                                    {
-                                        player.Bp -= 2;
-                                        player.Attack += player.Attack;
-                                    }
-                                }
+                                //if (player.RecievedEmotes.Contains(Emote.Zap))
+                                //{
+                                //    if (player.Bp > 0)
+                                //    {
+                                //        player.Bp -= 2;
+                                //        player.Attack += player.Attack;
+                                //    }
+                                //}
                                 player.State = "GET SINGLE TARGET";
+                                break;
                             }
                             else if (player.RecievedEmotes.Contains(Emote.Shield))
                             {
                                 player.UpdateStats();
-                                if (player.RecievedEmotes.Contains(Emote.Zap))
-                                {
-                                    if (player.Bp > 0)
-                                    {
-                                        player.Bp -= 2;
-                                        player.Defense += player.CEquipment.Shield.Defense * 2;
-                                    }
-                                }
+                                //if (player.RecievedEmotes.Contains(Emote.Zap))
+                                //{
+                                //    if (player.Bp > 0)
+                                //    {
+                                //        player.Bp -= 2;
+                                //        player.Defense += player.CEquipment.Shield.Defense * 2;
+                                //    }
+                                //}
                                 player.Defense += player.CEquipment.Shield.Defense;
+
+                                player.State = "ENEMY TURN";
+                                break;
                             }
                             else if (player.RecievedEmotes.Contains(Emote.Bag))
                             {
@@ -109,7 +129,13 @@ namespace DiscordRPG
                                 player.GetNum("Items");
 
                                 player.State = "USE ITEM";
+                                break;
                             }
+                            break;
+
+                        case "CHECK BP":
+                            player.GetNum("Bp");
+                            player.State = "AWAITING BP";
                             break;
 
                         case "USE ITEM":
@@ -122,7 +148,7 @@ namespace DiscordRPG
 
                         case "GET SINGLE TARGET":
                             player.GetNum("Enemies");
-                            player.State = "AWAITING NUMBER";
+                            player.State = "AWAITING ENEMY";
                             break;
 
                         case "ATTACKING ONE":
@@ -142,9 +168,19 @@ namespace DiscordRPG
 
                                 player.ClearBuffer();
 
-                                if (player.Bp < 3)
+                                if (player.Combat.Enemies.Count <= 0)
                                 {
-                                    player.Bp += 1;
+                                    if (player.Area.Length > 1)
+                                    {
+                                        player.Area.Length--;
+                                        player.State = "BEGIN BATTLE";
+                                        break;
+                                    }
+                                    else if (player.Area.Length == 1)
+                                    {
+                                        player.State = "RETURNING HOME";
+                                        break;
+                                    }
                                 }
 
                                 player.State = "ENEMY TURN";
@@ -165,14 +201,51 @@ namespace DiscordRPG
                             player.State = "PRE PLAYER TURN";
                             break;
 
+                        case "RETURNING HOME":
+                            foreach (var item in player.CMaterials)
+                            {
+                                player.SMaterials.Add(item);
+                            }
+                            player.CMaterials.Clear();
+                            player.SortList();
+
+                            player.Restore();
+                            player.ShowHome();
+
+                            player.State = "HOME";
+                            break;
+
+                        case "HOME":
+                            if (player.RecievedEmotes.Contains(Emote.Bag))
+                            {
+                                player.LastMessage = player.User.SendMessageAsync(Text.GetInventory(player, "Home")).Result;
+
+                                player.RecievedEmotes.Clear();
+
+                                player.ShowHome();
+                            }
+                            else if (player.RecievedEmotes.Contains(Emote.Sword))
+                            {
+                                player.ReturnState = "RETURNING HOME";
+
+                                player.LastMessage = player.User.SendMessageAsync(Text.GetAreas(player)).Result;
+
+                                player.State = "GOING OUT";
+                            }
+                            break;
+
+                        case "GOING OUT":
+                            player.GetNum("Areas");
+                            break;
+
+                        case "DEAD":
+                            await player.User.SendMessageAsync("Your body turns to dust, you lose all carried materials and you respawn in the town.");
+                            player.CMaterials.Clear();
+                            player.State = "RETURNING HOME";
+                            break;
+
                         default:
                             break;
-                    }
-
-                    if (player.Combat.Enemies.Count == 0 && player.State != "")
-                    {
-                        player.Area = new Area(AreaList.Forest);
-                        player.State = "BEGIN BATTLE";
                     }
                 }
             }

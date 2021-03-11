@@ -17,17 +17,39 @@ namespace DiscordRPG
                 $"Press any action you want to do\n" +
                 $"Then press the 🏁 to send the command\n" +
                 $"Only ⚔️,🛡️,💼  and ⚡ work right now.\n" +
-                $"⚔️ = Attack, 🛡️ = Defend, 💼 = show inventory\n⚡ = use BP to increase attack for one turn" +
-                $" ­­" +
-                $"";
+                $"⚔️ = Attack, 🛡️ = Defend, 💼 = Show inventory\n⚡ = Use BP to enhance either attacks or defenses";
 
             return output;
         }
+        public static string GetHome(Player player)
+        {
+            string output = $"Welcome home, {player.User.Username}." +
+                $"What do you want to do?";
+
+            return output;
+        }
+
+        public static string GetAreas(Player player)
+        {
+            string output = "Areas:";
+            foreach (var area in player.UnlockedAreas)
+            {
+                output += $"\n{area.Name}: {area.Description}. Battles: {area.Length}. Enemies: ";
+                foreach (var enemy in area.Enemies)
+                {
+                    output += $"{enemy.Name}, ";
+                }
+                output = output.Trim(' ');
+                output = output.Trim(',');
+            }
+            return output;
+        }
+
         public static string GetCombat(Player player)
         {
             string output = "";
-            string lineOne = GetCombatOne(player.Combat.Enemies);
-            string lineTwo = "";
+            string lineOne = GetCombatOne(player.Area);
+            string lineTwo = GetCombatTwo(player.Combat.Enemies);
             string lineThree = "";
             string lineFour = "";
             string lineFive = GetCombatFive(player);
@@ -35,7 +57,13 @@ namespace DiscordRPG
             output = $"{lineOne}\n{lineTwo}\n{lineThree}\n{lineFour}\n{lineFive}";
             return output;
         }
-        public static string GetCombatOne(List<Enemy> enemies)
+        public static string GetCombatOne(Area area)
+        {
+            string output = $"{area.Name}, Fight {area.Length}/{area.MaxLength}";
+
+            return output;
+        }
+        public static string GetCombatTwo(List<Enemy> enemies)
         {
             string output = "";
 
@@ -76,7 +104,7 @@ namespace DiscordRPG
         }
 
         /// <summary>
-        /// Get the inventory of a player
+        /// Get an inventory of a player
         /// </summary>
         /// <param name="player">The player</param>
         /// <param name="invType">What inventory to search</param>
@@ -84,23 +112,73 @@ namespace DiscordRPG
         public static string GetInventory(Player player, string invType)
         {
             player.SortList();
+            string output;
+            if (invType == "Home")
+            {
+                output = "Total inventory:\n";
+                output += GetCItems(player);
+                output += GetSItems(player);
+                output += GetSMaterials(player);
 
-            string output = $"{invType}:\n";
-            if (invType == "Carried items")
-            {
-                for (int i = 0; i < player.CItems.Count; i++)
-                {
-                    Item item = player.CItems[i];
-                    output += $"{i + 1}: {item.Name} x {item.Amount}/{item.MaxAmount},\n{item.Description}.";
-                }
+
+                return output;
             }
-            if (invType == "Carried materials")
+
+            output = $"{invType}:\n";
+            if (invType == "Carried items:\n")
             {
-                for (int i = 0; i < player.CMaterials.Count; i++)
-                {
-                    Material material = player.CMaterials[i];
-                    output += $"{material.Name} x {material.Amount}.\n";
-                }
+                output += GetCItems(player);
+            }
+            if (invType == "Carried materials:\n")
+            {
+                output += GetCMaterials(player);
+            }
+
+            return output;
+        }
+
+        private static string GetCMaterials(Player player)
+        {
+            string output = "Carried Materials:\n";
+            for (int i = 0; i < player.CMaterials.Count; i++)
+            {
+                Material material = player.CMaterials[i];
+                output += $"{material.Name} x {material.Amount}.\n";
+            }
+
+            return output;
+        }
+
+        private static string GetSMaterials(Player player)
+        {
+            string output = "Stored Materials:\n";
+            for (int i = 0; i < player.SMaterials.Count; i++)
+            {
+                Material material = player.SMaterials[i];
+                output += $"{material.Name} x {material.Amount}.\n";
+            }
+
+            return output;
+        }
+
+        private static string GetCItems(Player player)
+        {
+            string output = "Carried Items:\n";
+            for (int i = 0; i < player.CItems.Count; i++)
+            {
+                Item item = player.CItems[i];
+                output += $"{i + 1}: {item.Name} x {item.Amount}/{item.MaxAmount},\n{item.Description}.";
+            }
+
+            return output;
+        }
+        private static string GetSItems(Player player)
+        {
+            string output = "Stored Items:\n";
+            for (int i = 0; i < player.SItems.Count; i++)
+            {
+                Item item = player.SItems[i];
+                output += $"{i + 1}: {item.Name} x {item.Amount}/{item.MaxAmount},\n{item.Description}.";
             }
 
             return output;

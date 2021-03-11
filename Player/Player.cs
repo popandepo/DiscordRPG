@@ -14,6 +14,7 @@ namespace DiscordRPG
         public int Health { get; set; }
         public int MaxHealth { get; set; }
         public int Bp { get; set; }
+        public int BpToUse { get; set; }
         public int Money { get; set; }
         public string State { get; set; }
         public string ReturnState { get; set; }
@@ -32,6 +33,7 @@ namespace DiscordRPG
         public List<IEmote> RecievedEmotes { get; set; }
         public List<int> RecievedNumbers { get; set; }
         public Area Area { get; set; }
+        public List<Area> UnlockedAreas { get; set; }
 
 
         /// <summary>
@@ -76,9 +78,15 @@ namespace DiscordRPG
 
             RecievedNumbers = new List<int>();
 
+            UnlockedAreas = new List<Area>();
+
+            UnlockedAreas.Add(new Area(AreaList.Tutorial));
+            UnlockedAreas.Add(new Area(AreaList.Forest));
+
             Combat = new Combat();
             //Skills = starter skills (maybe nothing, maybe a low-level heal ability or something)
         }
+
 
         /// <summary>
         /// Shows the main combat screen
@@ -91,8 +99,19 @@ namespace DiscordRPG
         }
 
         /// <summary>
+        ///Shows the main home screen 
+        /// </summary>
+        public void ShowHome()
+        {
+            LastMessage = User.SendMessageAsync(Text.GetHome(this)).Result;
+            LastMessage.AddReactionsAsync(Emote.Home.ToArray());
+            ExpectedEmotes = new List<IEmote>(Emote.Home);
+        }
+
+        /// <summary>
         /// Do things based on what the recieved emotes are
         /// </summary>
+
         public void EmoteAct()
         {
             string emotes = "";
@@ -102,12 +121,44 @@ namespace DiscordRPG
                 emotes += emote.Name;
             }
 
-            if (ReturnCheck(emotes))
+            if (ReturnCheck())
             {
                 return;
             }
 
+            if (State == "AWAITING BP")
+            {
+                for (int i = 0; i < Emote.Numbers.Length; i++)
+                {
+                    IEmote number = Emote.Numbers[i];
+
+                    if (emotes.Contains(number.Name))
+                    {
+                        if (Bp <= i)
+                        {
+                            BpToUse = i;
+                            State = "USE BP";
+                            return;
+                        }
+                        User.SendMessageAsync("You don't have that many BP");
+                    }
+                }
+            }
+
             //RecievedEmotes.Clear();
+            if (State == "GOING OUT")
+            {
+                for (int i = 0; i < Emote.Numbers.Length; i++)
+                {
+                    IEmote number = Emote.Numbers[i];
+
+                    if (emotes.Contains(number.Name))
+                    {
+                        Area = new Area(UnlockedAreas[i]);
+                        State = "BEGIN BATTLE";
+                    }
+                }
+            }
 
             if (emotes.Contains(Emote.Sword.Name))
             {
@@ -127,18 +178,18 @@ namespace DiscordRPG
                 }
             }
 
-            //if (State == "ATTACKING ONE" && RecievedNumbers.Count > 0)
-            //{
-            //    Combat.Enemies[RecievedNumbers[0] - 1].Damage(Attack);
+            if (State == "ATTACKING ONE" && RecievedNumbers.Count > 0)
+            {
+                Combat.Enemies[RecievedNumbers[0] - 1].Damage(Attack);
 
-            //    if (Combat.Enemies[RecievedNumbers[0] - 1].Health == 0)
-            //    {
-            //        RecieveLoot(Combat.Enemies[RecievedNumbers[0] - 1].Kill());
-            //    }
+                if (Combat.Enemies[RecievedNumbers[0] - 1].Health == 0)
+                {
+                    RecieveLoot(Combat.Enemies[RecievedNumbers[0] - 1].Kill());
+                }
 
-            //    ClearBuffer();
+                ClearBuffer();
 
-            //}
+            }
         }
 
         /// <summary>
@@ -232,14 +283,20 @@ namespace DiscordRPG
         /// </summary>
         /// <param name="emotes">The string of emotes to check</param>
         /// <returns>True if player wants to return</returns>
-        private bool ReturnCheck(string emotes)
+        public bool ReturnCheck()
         {
+            string emotes = "";
+
+            foreach (var emote in RecievedEmotes)
+            {
+                emotes += emote.Name;
+            }
+
             if (emotes.Contains(Emote.TurnBack.Name))
             {
                 RecievedEmotes.Clear();
                 State = ReturnState;
                 return true;
-                //Game.GameLoop();
             }
             return false;
         }
@@ -254,6 +311,14 @@ namespace DiscordRPG
             RecievedEmotes.Clear();
         }
 
+        public void Restore()
+        {
+            Health = MaxHealth;
+            Bp = 0;
+
+            UpdateStats();
+        }
+
         /// <summary>
         /// Sends emotes to the player based on the related amount in target
         /// </summary>
@@ -262,7 +327,28 @@ namespace DiscordRPG
         /// Items</param>
         public void GetNum(string target)
         {
-            if (target == "Enemies")
+            if (target == "Bp")
+            {
+                ExpectedEmotes.Clear();
+                LastMessage = User.SendMessageAsync("How many BP do you want to use?").Result;
+
+                List<IEmote> emotes = new List<IEmote>();
+
+                for (int i = 1; i <= Bp; i++)
+                {
+                    emotes.Add(Emote.Numbers[i]);
+                }
+
+                emotes.Add(Emote.TurnBack);
+                emotes.Add(Emote.Flag);
+
+                LastMessage.AddReactionsAsync(emotes.ToArray());
+                foreach (var item in emotes)
+                {
+                    ExpectedEmotes.Add(item);
+                }
+            }
+            else if (target == "Enemies")
             {
 
                 ExpectedEmotes.Clear();
@@ -293,6 +379,26 @@ namespace DiscordRPG
                 List<IEmote> emotes = new List<IEmote>();
 
                 for (int i = 1; i <= CItems.Count; i++)
+                {
+                    emotes.Add(Emote.Numbers[i]);
+                }
+
+                emotes.Add(Emote.TurnBack);
+                emotes.Add(Emote.Flag);
+
+                LastMessage.AddReactionsAsync(emotes.ToArray());
+                foreach (var item in emotes)
+                {
+                    ExpectedEmotes.Add(item);
+                }
+            }
+            else if (target == "Areas")
+            {
+                ExpectedEmotes.Clear();
+
+                List<IEmote> emotes = new List<IEmote>();
+
+                for (int i = 1; i <= UnlockedAreas.Count; i++)
                 {
                     emotes.Add(Emote.Numbers[i]);
                 }
@@ -347,7 +453,7 @@ namespace DiscordRPG
         }
 
         /// <summary>
-        /// Sorts and compresses lists (CItems and CMaterials)
+        /// Sorts and compresses lists (CItems, CMaterials and SItems, SMaterials)
         /// </summary>
         public void SortList()
         {
@@ -368,6 +474,9 @@ namespace DiscordRPG
                 CItems.Add((Item)item);
             }
 
+            itemHolder.Clear();
+
+
             foreach (var material in CMaterials)
             {
                 materialHolder.Add(material);
@@ -380,6 +489,41 @@ namespace DiscordRPG
             {
                 CMaterials.Add((Material)material);
             }
+
+            materialHolder.Clear();
+
+
+
+            foreach (var item in SItems)
+            {
+                itemHolder.Add(item);
+            }
+
+            itemHolder = Tools.MySort(itemHolder);
+
+            SItems.Clear();
+
+            foreach (var item in itemHolder)
+            {
+                SItems.Add((Item)item);
+            }
+
+            itemHolder.Clear();
+
+            foreach (var material in SMaterials)
+            {
+                materialHolder.Add(material);
+            }
+            materialHolder = Tools.MySort(materialHolder);
+
+            SMaterials.Clear();
+
+            foreach (var material in materialHolder)
+            {
+                SMaterials.Add((Material)material);
+            }
+
+            materialHolder.Clear();
         }
 
         /// <summary>

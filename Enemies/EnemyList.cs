@@ -2,7 +2,7 @@
 {
     public class EnemyList
     {
-        private static int globalPulls;
+        private static int globalPulls = 3;
 
         public static Enemy Goblin = new Enemy("Goblin",
             10, //attack
@@ -26,7 +26,7 @@
             MaterialList.LootGen(new Material(MaterialList.slimeGooOne), 20),
             MaterialList.LootGen(new Material(MaterialList.slimeGooTwo), 10),
             MaterialList.LootGen(new Material(MaterialList.slimeGem), 5),
-            ItemList.LootGen(new Item(ItemList.slimePotion), 5)
+            ItemList.LootGen(new Item(ItemList.slimePotion), 15)
             );
 
         public static Enemy Skeleton = new Enemy("Skeleton",
