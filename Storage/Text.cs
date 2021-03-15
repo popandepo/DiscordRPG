@@ -32,9 +32,10 @@ namespace DiscordRPG
         public static string GetAreas(Player player)
         {
             string output = "Areas:";
-            foreach (var area in player.UnlockedAreas)
+            for (int i = 0; i < player.UnlockedAreas.Count; i++)
             {
-                output += $"\n{area.Name}: {area.Description}. Battles: {area.Length}. Enemies: ";
+                Area area = player.UnlockedAreas[i];
+                output += $"\n{i + 1}: {area.Name}, {area.Description}. Battles: {area.Length}. Enemies: ";
                 foreach (var enemy in area.Enemies)
                 {
                     output += $"{enemy.Name}, ";

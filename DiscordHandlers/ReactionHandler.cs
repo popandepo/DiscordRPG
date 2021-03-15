@@ -43,7 +43,7 @@ namespace DiscordRPG
                         }
                     }
                     player.RecievedEmotes.AddRange(emoteHolder);
-                    player.EmoteAct();
+                    //player.EmoteAct();
                 }
 
             }

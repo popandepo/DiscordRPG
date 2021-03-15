@@ -17,6 +17,8 @@
         public static Material skeletonSkull = new Material("Skeleton Skull", 1, 2, "Normal");
         public static Material skeletonGem = new Material("Skeleton Gem", 1, 3, "Magic");
 
+        public static Material DesertWormChitin = new Material("Desert worm chitin", 2, 3, "Normal");
+        public static Material DesertWormGem = new Material("Desert worm gem", 1, 4, "Magic");
 
         public static Material LootGen(Material material, int chance)
         {

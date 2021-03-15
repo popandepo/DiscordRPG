@@ -14,7 +14,7 @@ namespace DiscordRPG
         {
             while (true)
             {
-                await Task.Delay(100);
+                //await Task.Delay(100);
 
                 foreach (var newPlayer in Program.holding)
                 {
@@ -24,7 +24,7 @@ namespace DiscordRPG
 
                 await Task.Delay(100);
 
-                //ConsoleLog(Program.players);
+                ConsoleLog(Program.players);
 
                 foreach (var player in Program.players)
                 {
@@ -156,6 +156,29 @@ namespace DiscordRPG
                             player.State = "AWAITING ENEMY";
                             break;
 
+                        case "AWAITING ENEMY":
+                            if (player.RecievedEmotes.Count > 0)
+                            {
+                                string emotes = "";
+
+                                foreach (var emote in player.RecievedEmotes)
+                                {
+                                    emotes += emote.Name;
+                                }
+
+                                for (int i = 0; i < Emote.Numbers.Length; i++)
+                                {
+                                    IEmote number = Emote.Numbers[i];
+
+                                    if (emotes.Contains(number.Name))
+                                    {
+                                        player.RecievedNumbers.Add(i);
+                                        player.State = "ATTACKING ONE";
+                                    }
+                                }
+                            }
+                            break;
+
                         case "ATTACKING ONE":
                             if (player.RecievedEmotes.Count > 0)
                             {
@@ -207,6 +230,12 @@ namespace DiscordRPG
                             break;
 
                         case "RETURNING HOME":
+
+                            if (player.CMaterials.Count > 0)
+                            {
+                                player.UnlockArea(player.Area);
+                            }
+
                             foreach (var item in player.CMaterials)
                             {
                                 player.SMaterials.Add(item);
@@ -235,12 +264,42 @@ namespace DiscordRPG
 
                                 player.LastMessage = player.User.SendMessageAsync(Text.GetAreas(player)).Result;
 
-                                player.State = "GOING OUT";
+                                player.State = "PREPARING FOR GOING OUT";
                             }
                             break;
 
-                        case "GOING OUT":
+                        case "PREPARING FOR GOING OUT":
                             player.GetNum("Areas");
+                            player.State = "GOING OUT";
+                            break;
+
+                        case "GOING OUT":
+                            if (player.RecievedEmotes.Count > 0)
+                            {
+
+                                string emotes = "";
+
+                                foreach (var emote in player.RecievedEmotes)
+                                {
+                                    emotes += emote.Name;
+                                }
+
+                                if (player.ReturnCheck())
+                                {
+                                    return;
+                                }
+
+                                for (int i = 0; i < Emote.Numbers.Length; i++)
+                                {
+                                    IEmote number = Emote.Numbers[i];
+
+                                    if (emotes.Contains(number.Name))
+                                    {
+                                        player.Area = new Area(player.UnlockedAreas[i]);
+                                        player.State = "BEGIN BATTLE";
+                                    }
+                                }
+                            }
                             break;
 
                         case "DEAD":
@@ -258,8 +317,7 @@ namespace DiscordRPG
 
         private static void ConsoleLog(List<Player> players)
         {
-            Console.Clear();
-            string output = "Player log\n";
+            string output = "Debug:\n";
             for (int i = 0; i < players.Count; i++)
             {
                 Player player = (Player)players[i];
@@ -273,6 +331,7 @@ namespace DiscordRPG
                 output += Text.GetSItems(player);
                 output += Text.GetSMaterials(player);
             }
+            Console.Clear();
             Console.WriteLine(output);
         }
     }

@@ -120,7 +120,7 @@ namespace DiscordRPG
 
             for (int i = 0; i < (Pulls + Bonus); i++)
             {
-                int chance = Tools.GetRandRange(0, lootSum, rng);
+                int chance = Tools.RandGen(0, lootSum);
                 foreach (var item in itemsToLoot)
                 {
                     if (item.BaseChance < chance && item.PeakChance > chance)

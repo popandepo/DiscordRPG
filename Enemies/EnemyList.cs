@@ -29,8 +29,20 @@
             ItemList.LootGen(new Item(ItemList.slimePotion), 15)
             );
 
+        public static Enemy DesertSlime = new Enemy("Desert slime",
+            7, //attack
+            7, //defense
+            10, //health
+            10, //max health
+            globalPulls, //pulls
+            MaterialList.LootGen(new Material(MaterialList.slimeGooOne), 20),
+            MaterialList.LootGen(new Material(MaterialList.slimeGooTwo), 10),
+            MaterialList.LootGen(new Material(MaterialList.slimeGem), 5),
+            ItemList.LootGen(new Item(ItemList.slimePotion), 15)
+            );
+
         public static Enemy Skeleton = new Enemy("Skeleton",
-            4, //attack
+            5, //attack
             1, //defense
             10, //health
             20, //max health
@@ -39,6 +51,16 @@
             MaterialList.LootGen(new Material(MaterialList.skeletonBoneTwo), 20),
             MaterialList.LootGen(new Material(MaterialList.skeletonSkull), 10),
             MaterialList.LootGen(new Material(MaterialList.skeletonGem), 5)
+            );
+
+        public static Enemy DesertWorm = new Enemy("Desert worm",
+            5,
+            0,
+            25,
+            25,
+            globalPulls,
+            MaterialList.LootGen(new Material(MaterialList.DesertWormChitin), 50),
+            MaterialList.LootGen(new Material(MaterialList.DesertWormGem), 10)
             );
     }
 }

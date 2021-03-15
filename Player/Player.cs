@@ -81,7 +81,6 @@ namespace DiscordRPG
             UnlockedAreas = new List<Area>();
 
             UnlockedAreas.Add(new Area(AreaList.Tutorial));
-            UnlockedAreas.Add(new Area(AreaList.Forest));
 
             Combat = new Combat();
             //Skills = starter skills (maybe nothing, maybe a low-level heal ability or something)
@@ -311,6 +310,45 @@ namespace DiscordRPG
             RecievedEmotes.Clear();
         }
 
+        public void UnlockArea(Area area)
+        {
+            bool existing = false;
+            switch (area.Name)
+            {
+                case "Tutorial":
+                    foreach (var unlocked in UnlockedAreas)
+                    {
+                        if (unlocked.Name == "Forest")
+                        {
+                            existing = true;
+                        }
+                    }
+                    if (!existing)
+                    {
+                        UnlockedAreas.Add(new Area(AreaList.Forest));
+                    }
+                    break;
+
+                case "Forest":
+                    existing = false;
+                    foreach (var unlocked in UnlockedAreas)
+                    {
+                        if (unlocked.Name == "Desert")
+                        {
+                            existing = true;
+                        }
+                    }
+                    if (!existing)
+                    {
+                        UnlockedAreas.Add(new Area(AreaList.Forest));
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
         public void Restore()
         {
             Health = MaxHealth;
@@ -347,6 +385,7 @@ namespace DiscordRPG
                 {
                     ExpectedEmotes.Add(item);
                 }
+                RecievedEmotes.Clear();
             }
             else if (target == "Enemies")
             {
@@ -369,6 +408,7 @@ namespace DiscordRPG
                 {
                     ExpectedEmotes.Add(item);
                 }
+                RecievedEmotes.Clear();
             }
             else if (target == "Items")
             {
@@ -391,6 +431,7 @@ namespace DiscordRPG
                 {
                     ExpectedEmotes.Add(item);
                 }
+                RecievedEmotes.Clear();
             }
             else if (target == "Areas")
             {
@@ -411,6 +452,7 @@ namespace DiscordRPG
                 {
                     ExpectedEmotes.Add(item);
                 }
+                RecievedEmotes.Clear();
             }
         }
 
