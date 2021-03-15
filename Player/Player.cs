@@ -16,8 +16,8 @@ namespace DiscordRPG
         public int Bp { get; set; }
         public int BpToUse { get; set; }
         public int Money { get; set; }
-        public string State { get; set; }
-        public string ReturnState { get; set; }
+        public State State { get; set; }
+        public State ReturnState { get; set; }
         public int Attack { get; set; }
         public int Defense { get; set; }
         public Armor CEquipment { get; set; } //Carried
@@ -49,7 +49,7 @@ namespace DiscordRPG
             MaxHealth = 10;
             Bp = 0;
             Money = 100;
-            State = "";
+            State = State.Idle;
             ReturnState = State;
             Area = new Area(AreaList.Tutorial);
             Attack = 0;
@@ -111,85 +111,85 @@ namespace DiscordRPG
         /// Do things based on what the recieved emotes are
         /// </summary>
 
-        public void EmoteAct()
-        {
-            string emotes = "";
+        //public void EmoteAct()
+        //{
+        //    string emotes = "";
 
-            foreach (var emote in RecievedEmotes)
-            {
-                emotes += emote.Name;
-            }
+        //    foreach (var emote in RecievedEmotes)
+        //    {
+        //        emotes += emote.Name;
+        //    }
 
-            if (ReturnCheck())
-            {
-                return;
-            }
+        //    if (ReturnCheck())
+        //    {
+        //        return;
+        //    }
 
-            if (State == "AWAITING BP")
-            {
-                for (int i = 0; i < Emote.Numbers.Length; i++)
-                {
-                    IEmote number = Emote.Numbers[i];
+        //    if (State == "AWAITING BP")
+        //    {
+        //        for (int i = 0; i < Emote.Numbers.Length; i++)
+        //        {
+        //            IEmote number = Emote.Numbers[i];
 
-                    if (emotes.Contains(number.Name))
-                    {
-                        if (Bp <= i)
-                        {
-                            BpToUse = i;
-                            State = "USE BP";
-                            return;
-                        }
-                        User.SendMessageAsync("You don't have that many BP");
-                    }
-                }
-            }
+        //            if (emotes.Contains(number.Name))
+        //            {
+        //                if (Bp <= i)
+        //                {
+        //                    BpToUse = i;
+        //                    State = "USE BP";
+        //                    return;
+        //                }
+        //                User.SendMessageAsync("You don't have that many BP");
+        //            }
+        //        }
+        //    }
 
-            //RecievedEmotes.Clear();
-            if (State == "GOING OUT")
-            {
-                for (int i = 0; i < Emote.Numbers.Length; i++)
-                {
-                    IEmote number = Emote.Numbers[i];
+        //    //RecievedEmotes.Clear();
+        //    if (State == "GOING OUT")
+        //    {
+        //        for (int i = 0; i < Emote.Numbers.Length; i++)
+        //        {
+        //            IEmote number = Emote.Numbers[i];
 
-                    if (emotes.Contains(number.Name))
-                    {
-                        Area = new Area(UnlockedAreas[i]);
-                        State = "BEGIN BATTLE";
-                    }
-                }
-            }
+        //            if (emotes.Contains(number.Name))
+        //            {
+        //                Area = new Area(UnlockedAreas[i]);
+        //                State = "BEGIN BATTLE";
+        //            }
+        //        }
+        //    }
 
-            if (emotes.Contains(Emote.Sword.Name))
-            {
-                if (emotes.Contains(Emote.Zap.Name))
-                {
-                    Attack += Attack;
-                }
-                for (int i = 0; i < Emote.Numbers.Length; i++)
-                {
-                    IEmote number = Emote.Numbers[i];
+        //    if (emotes.Contains(Emote.Sword.Name))
+        //    {
+        //        if (emotes.Contains(Emote.Zap.Name))
+        //        {
+        //            Attack += Attack;
+        //        }
+        //        for (int i = 0; i < Emote.Numbers.Length; i++)
+        //        {
+        //            IEmote number = Emote.Numbers[i];
 
-                    if (emotes.Contains(number.Name))
-                    {
-                        RecievedNumbers.Add(i);
-                        State = "ATTACKING ONE";
-                    }
-                }
-            }
+        //            if (emotes.Contains(number.Name))
+        //            {
+        //                RecievedNumbers.Add(i);
+        //                State = "ATTACKING ONE";
+        //            }
+        //        }
+        //    }
 
-            if (State == "ATTACKING ONE" && RecievedNumbers.Count > 0)
-            {
-                Combat.Enemies[RecievedNumbers[0] - 1].Damage(Attack);
+        //    if (State == "ATTACKING ONE" && RecievedNumbers.Count > 0)
+        //    {
+        //        Combat.Enemies[RecievedNumbers[0] - 1].Damage(Attack);
 
-                if (Combat.Enemies[RecievedNumbers[0] - 1].Health == 0)
-                {
-                    RecieveLoot(Combat.Enemies[RecievedNumbers[0] - 1].Kill());
-                }
+        //        if (Combat.Enemies[RecievedNumbers[0] - 1].Health == 0)
+        //        {
+        //            RecieveLoot(Combat.Enemies[RecievedNumbers[0] - 1].Kill());
+        //        }
 
-                ClearBuffer();
+        //        ClearBuffer();
 
-            }
-        }
+        //    }
+        //}
 
         /// <summary>
         /// Uses the item in the position of the previously recieved number
@@ -632,7 +632,7 @@ namespace DiscordRPG
         /// </summary>
         private void Kill()
         {
-            State = "DEAD";
+            State = State.Dead;
         }
 
         /// <summary>

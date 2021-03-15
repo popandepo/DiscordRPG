@@ -35,7 +35,7 @@ namespace DiscordRPG
         public static List<IEmote> FirstMainCombat = new List<IEmote> { QuestionMark, Sword, Shield, Wand, Bag, Shoes, Zap, Flag };
         //public static List<IEmote> MainCombat = new List<IEmote> { Sword, Shield, Wand, Bag, Shoes, Zap, Flag, QuestionMark };
         public static List<IEmote> MainCombat = new List<IEmote> { Sword, Shield, Bag, Zap, Flag, QuestionMark };
-        public static List<IEmote> Home = new List<IEmote> { Bag, Sword, Flag, QuestionMark };
+        public static List<IEmote> Home = new List<IEmote> { Bag, Sword, Flag };
 
     }
 }

@@ -20,7 +20,7 @@ namespace DiscordRPG
         int MaxHealth { get; set; }
         int Bp { get; set; }
         int Money { get; set; }
-        string State { get; set; }
+        State State { get; set; }
         int Attack { get; set; } //TEMPORARY
         int Defense { get; set; } //TEMPORARY
         //List<Skill> Skills { get; set; }

@@ -33,7 +33,7 @@ namespace DiscordRPG
 
                     switch (player.State)
                     {
-                        case "BEGIN BATTLE":
+                        case State.Begin_battle:
                             var enemies = player.Area.Pull();
                             foreach (var enemy in enemies)
                             {
@@ -64,11 +64,11 @@ namespace DiscordRPG
                                 }
                             }
 
-                            player.State = "PRE PLAYER TURN";
+                            player.State = State.Pre_player_turn;
                             break;
 
-                        case "PRE PLAYER TURN":
-                            player.ReturnState = "PRE PLAYER TURN";
+                        case State.Pre_player_turn:
+                            player.ReturnState = State.Pre_player_turn;
                             player.ClearBuffer();
 
                             if (player.Bp < 3)
@@ -79,10 +79,10 @@ namespace DiscordRPG
                             player.ShowMainCombat();
                             // setup for the player turn
 
-                            player.State = "PLAYER TURN";
+                            player.State = State.Player_turn;
                             break;
 
-                        case "PLAYER TURN":
+                        case State.Player_turn:
 
                             if (player.ReturnCheck())
                             {
@@ -91,7 +91,7 @@ namespace DiscordRPG
 
                             if (player.RecievedEmotes.Contains(Emote.Zap) && player.Bp > 0)
                             {
-                                player.State = "CHECK BP";
+                                player.State = State.Check_bp;
                                 break;
                             }
 
@@ -105,7 +105,7 @@ namespace DiscordRPG
                                 //        player.Attack += player.Attack;
                                 //    }
                                 //}
-                                player.State = "GET SINGLE TARGET";
+                                player.State = State.Get_single_target;
                                 break;
                             }
                             else if (player.RecievedEmotes.Contains(Emote.Shield))
@@ -121,7 +121,7 @@ namespace DiscordRPG
                                 //}
                                 player.Defense += player.CEquipment.Shield.Defense;
 
-                                player.State = "ENEMY TURN";
+                                player.State = State.Enemy_turn;
                                 break;
                             }
                             else if (player.RecievedEmotes.Contains(Emote.Bag))
@@ -133,30 +133,30 @@ namespace DiscordRPG
 
                                 player.GetNum("Items");
 
-                                player.State = "USE ITEM";
+                                player.State = State.Use_item;
                                 break;
                             }
                             break;
 
-                        case "CHECK BP":
+                        case State.Check_bp:
                             player.GetNum("Bp");
-                            player.State = "AWAITING BP";
+                            player.State = State.Awaiting_bp;
                             break;
 
-                        case "USE ITEM":
+                        case State.Use_item:
                             if (player.RecievedEmotes.Count > 0)
                             {
                                 player.UseItem();
-                                player.State = "ENEMY TURN";
+                                player.State = State.Enemy_turn;
                             }
                             break;
 
-                        case "GET SINGLE TARGET":
+                        case State.Get_single_target:
                             player.GetNum("Enemies");
-                            player.State = "AWAITING ENEMY";
+                            player.State = State.Awaiting_enemy;
                             break;
 
-                        case "AWAITING ENEMY":
+                        case State.Awaiting_enemy:
                             if (player.RecievedEmotes.Count > 0)
                             {
                                 string emotes = "";
@@ -173,13 +173,13 @@ namespace DiscordRPG
                                     if (emotes.Contains(number.Name))
                                     {
                                         player.RecievedNumbers.Add(i);
-                                        player.State = "ATTACKING ONE";
+                                        player.State = State.Attacking_one;
                                     }
                                 }
                             }
                             break;
 
-                        case "ATTACKING ONE":
+                        case State.Attacking_one:
                             if (player.RecievedEmotes.Count > 0)
                             {
                                 player.AttackEnemy();
@@ -201,21 +201,21 @@ namespace DiscordRPG
                                     if (player.Area.Length > 1)
                                     {
                                         player.Area.Length--;
-                                        player.State = "BEGIN BATTLE";
+                                        player.State = State.Begin_battle;
                                         break;
                                     }
                                     else if (player.Area.Length == 1)
                                     {
-                                        player.State = "RETURNING HOME";
+                                        player.State = State.Returning_home;
                                         break;
                                     }
                                 }
 
-                                player.State = "ENEMY TURN";
+                                player.State = State.Enemy_turn;
                             }
                             break;
 
-                        case "ENEMY TURN":
+                        case State.Enemy_turn:
                             foreach (var enemy in player.Combat.Enemies)
                             {
                                 if (enemy.Bonus > 0)
@@ -226,10 +226,10 @@ namespace DiscordRPG
                                 player.Damage(enemy.Attack);
                             }
 
-                            player.State = "PRE PLAYER TURN";
+                            player.State = State.Pre_player_turn;
                             break;
 
-                        case "RETURNING HOME":
+                        case State.Returning_home:
 
                             if (player.CMaterials.Count > 0)
                             {
@@ -246,10 +246,10 @@ namespace DiscordRPG
                             player.Restore();
                             player.ShowHome();
 
-                            player.State = "HOME";
+                            player.State = State.Home;
                             break;
 
-                        case "HOME":
+                        case State.Home:
                             if (player.RecievedEmotes.Contains(Emote.Bag))
                             {
                                 player.LastMessage = player.User.SendMessageAsync(Text.GetInventory(player, "Home")).Result;
@@ -260,20 +260,20 @@ namespace DiscordRPG
                             }
                             else if (player.RecievedEmotes.Contains(Emote.Sword))
                             {
-                                player.ReturnState = "RETURNING HOME";
+                                player.ReturnState = State.Returning_home;
 
                                 player.LastMessage = player.User.SendMessageAsync(Text.GetAreas(player)).Result;
 
-                                player.State = "PREPARING FOR GOING OUT";
+                                player.State = State.Prepare_to_go_out;
                             }
                             break;
 
-                        case "PREPARING FOR GOING OUT":
+                        case State.Prepare_to_go_out:
                             player.GetNum("Areas");
-                            player.State = "GOING OUT";
+                            player.State = State.Going_out;
                             break;
 
-                        case "GOING OUT":
+                        case State.Going_out:
                             if (player.RecievedEmotes.Count > 0)
                             {
 
@@ -296,16 +296,16 @@ namespace DiscordRPG
                                     if (emotes.Contains(number.Name))
                                     {
                                         player.Area = new Area(player.UnlockedAreas[i]);
-                                        player.State = "BEGIN BATTLE";
+                                        player.State = State.Begin_battle;
                                     }
                                 }
                             }
                             break;
 
-                        case "DEAD":
+                        case State.Dead:
                             await player.User.SendMessageAsync("Your body turns to dust, you lose all carried materials and you respawn in the town.");
                             player.CMaterials.Clear();
-                            player.State = "RETURNING HOME";
+                            player.State = State.Returning_home;
                             break;
 
                         default:
