@@ -90,7 +90,7 @@ namespace DiscordRPG
         /// <returns></returns>
         public static string GetEnemy(Player player)
         {
-            string output = "Select a target: ";
+            string output = "Enemies: ";
 
             for (int i = 0; i < player.Combat.Enemies.Count; i++)
             {
@@ -137,7 +137,7 @@ namespace DiscordRPG
             return output;
         }
 
-        private static string GetCMaterials(Player player)
+        public static string GetCMaterials(Player player)
         {
             string output = "Carried Materials:\n";
             for (int i = 0; i < player.CMaterials.Count; i++)
@@ -149,7 +149,7 @@ namespace DiscordRPG
             return output;
         }
 
-        private static string GetSMaterials(Player player)
+        public static string GetSMaterials(Player player)
         {
             string output = "Stored Materials:\n";
             for (int i = 0; i < player.SMaterials.Count; i++)
@@ -161,7 +161,7 @@ namespace DiscordRPG
             return output;
         }
 
-        private static string GetCItems(Player player)
+        public static string GetCItems(Player player)
         {
             string output = "Carried Items:\n";
             for (int i = 0; i < player.CItems.Count; i++)
@@ -172,7 +172,7 @@ namespace DiscordRPG
 
             return output;
         }
-        private static string GetSItems(Player player)
+        public static string GetSItems(Player player)
         {
             string output = "Stored Items:\n";
             for (int i = 0; i < player.SItems.Count; i++)

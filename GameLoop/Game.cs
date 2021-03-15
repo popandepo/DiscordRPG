@@ -1,5 +1,6 @@
 ﻿using Discord;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DiscordRPG
@@ -23,9 +24,13 @@ namespace DiscordRPG
 
                 await Task.Delay(100);
 
+                //ConsoleLog(Program.players);
 
                 foreach (var player in Program.players)
                 {
+
+
+
                     switch (player.State)
                     {
                         case "BEGIN BATTLE":
@@ -249,6 +254,26 @@ namespace DiscordRPG
                     }
                 }
             }
+        }
+
+        private static void ConsoleLog(List<Player> players)
+        {
+            Console.Clear();
+            string output = "Player log\n";
+            for (int i = 0; i < players.Count; i++)
+            {
+                Player player = (Player)players[i];
+                output += $"Player {i + 1}: {player.ID}, {player.Hashname}.\nState: {player.State}.\n";
+                output += $"Health: {player.Health}/{player.MaxHealth}, BP: {player.Bp}/{3}.\n";
+
+                output += Text.GetEnemy(player) + "\n\n";
+
+                output += Text.GetCItems(player) + "\n\n";
+                output += Text.GetCMaterials(player) + "\n";
+                output += Text.GetSItems(player);
+                output += Text.GetSMaterials(player);
+            }
+            Console.WriteLine(output);
         }
     }
 }
