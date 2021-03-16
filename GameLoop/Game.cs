@@ -26,18 +26,11 @@ namespace DiscordRPG
                     catch
                     {
                     }
-
-
                 }
-
-
                 ConsoleLog(Program.players);
 
                 foreach (var player in Program.players)
                 {
-
-
-
                     switch (player.State)
                     {
                         case State.Begin_battle:
@@ -171,7 +164,7 @@ namespace DiscordRPG
 
                                     if (emotes.Contains(number.Name))
                                     {
-                                        if (player.Bp <= i)
+                                        if (player.Bp - i >= 0)
                                         {
                                             player.BpToUse = i;
                                             player.SendMessage("What do you want to do?", true, Emote.Sword, Emote.Shield, Emote.TurnBack, Emote.Flag);
