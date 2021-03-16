@@ -9,7 +9,7 @@ namespace DiscordRPG
         public string Name { get; set; }
         public string Description { get; set; }
         public int Length { get; set; }
-        public int Fight { get; set; }
+        public int Fight { get; set; } = 1;
         public int MaxLength { get; set; }
         public List<Enemy> Enemies { get; set; }
 

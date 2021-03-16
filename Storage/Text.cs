@@ -60,7 +60,7 @@ namespace DiscordRPG
         }
         public static string GetCombatOne(Area area)
         {
-            string output = $"{area.Name}, Fight {area.Fight}/{area.MaxLength}";
+            string output = $"{area.Name}, Fight {area.Fight + 1}/{area.MaxLength}";
 
             return output;
         }
@@ -141,11 +141,11 @@ namespace DiscordRPG
             }
 
             output = $"{invType}:\n";
-            if (invType == "Carried items:\n")
+            if (invType == "Carried items")
             {
                 output += GetCItems(player);
             }
-            if (invType == "Carried materials:\n")
+            if (invType == "Carried materials")
             {
                 output += GetCMaterials(player);
             }
@@ -155,7 +155,7 @@ namespace DiscordRPG
 
         public static string GetCMaterials(Player player)
         {
-            string output = "Carried Materials:\n";
+            string output = "";
             for (int i = 0; i < player.CMaterials.Count; i++)
             {
                 Material material = player.CMaterials[i];
@@ -167,7 +167,7 @@ namespace DiscordRPG
 
         public static string GetSMaterials(Player player)
         {
-            string output = "Stored Materials:\n";
+            string output = "";
             for (int i = 0; i < player.SMaterials.Count; i++)
             {
                 Material material = player.SMaterials[i];
@@ -179,22 +179,22 @@ namespace DiscordRPG
 
         public static string GetCItems(Player player)
         {
-            string output = "Carried Items:\n";
+            string output = "";
             for (int i = 0; i < player.CItems.Count; i++)
             {
                 Item item = player.CItems[i];
-                output += $"{i + 1}: {item.Name} x {item.Amount}/{item.MaxAmount},\n{item.Description}.";
+                output += $"{i + 1}: {item.Name} x {item.Amount}/{item.MaxAmount},\n{item.Description}.\n";
             }
 
             return output;
         }
         public static string GetSItems(Player player)
         {
-            string output = "Stored Items:\n";
+            string output = "";
             for (int i = 0; i < player.SItems.Count; i++)
             {
                 Item item = player.SItems[i];
-                output += $"{i + 1}: {item.Name} x {item.Amount}/{item.MaxAmount},\n{item.Description}.";
+                output += $"{i + 1}: {item.Name} x {item.Amount}/{item.MaxAmount},\n{item.Description}.\n";
             }
 
             return output;

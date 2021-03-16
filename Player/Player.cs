@@ -286,7 +286,7 @@ namespace DiscordRPG
                     }
                     if (!existing)
                     {
-                        UnlockedAreas.Add(new Area(AreaList.Forest));
+                        UnlockedAreas.Add(new Area(AreaList.Desert));
                     }
                     break;
 

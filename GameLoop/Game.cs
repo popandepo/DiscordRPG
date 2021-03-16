@@ -347,8 +347,40 @@ namespace DiscordRPG
                             break;
 
                         case State.Battle_over:
-                            //placeholder
-                            player.State = State.Begin_battle;
+                            player.SendMessage($"You won the battle! there are {player.Area.MaxLength - player.Area.Fight} fights left. you can use items to heal up or you can keep going.\nHP: {player.Health}/{player.MaxHealth}.", true, Emote.Sword, Emote.Bag, Emote.Flag);
+                            player.State = State.At_camp;
+                            break;
+
+                        case State.At_camp:
+                            if (player.RecievedEmotes.Count > 0)
+                            {
+                                if (player.RecievedEmotes.Contains(Emote.Sword))
+                                {
+                                    player.State = State.Begin_battle;
+                                }
+                                else if (player.RecievedEmotes.Contains(Emote.Bag))
+                                {
+                                    await player.User.SendMessageAsync(Text.GetInventory(player, "Carried materials"));
+                                    player.LastMessage = player.User.SendMessageAsync(Text.GetInventory(player, "Carried items")).Result;
+
+                                    player.RecievedEmotes.Clear();
+
+                                    player.GetNum("Items");
+
+                                    player.State = State.Use_item_at_camp;
+                                }
+                            }
+                            break;
+
+                        case State.Use_item_at_camp:
+                            if (player.RecievedEmotes.Count > 0)
+                            {
+                                player.UseItem();
+
+                                player.SendMessage($"Do you want to heal some more or continue adventuring?\nHP: {player.Health}/{player.MaxHealth}.", true, Emote.Sword, Emote.Bag, Emote.Flag);
+
+                                player.State = State.At_camp;
+                            }
                             break;
 
                         case State.Enemy_turn:

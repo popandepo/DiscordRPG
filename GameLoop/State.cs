@@ -25,6 +25,8 @@
         Awaiting_enemy,
 
         Battle_over,
+        At_camp,
+        Use_item_at_camp,
 
         Dead,
 

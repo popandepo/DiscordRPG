@@ -52,13 +52,13 @@ namespace DiscordRPG
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Task<Player?> GetUserFromDatabase(ulong id)
+        public Task<Player>? GetUserFromDatabase(ulong id)
         {
             Player? player = null;
             using (var db = new EFContext())
             {
                 var result = db.Players.Find(id);
-                if (result is null) return Task.FromResult(player);
+                if (result is null) return null;
                 player = new Player(result.Id)
                 {
                     Hashname = result.Hashname,
