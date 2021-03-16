@@ -60,7 +60,7 @@ namespace DiscordRPG
         }
         public static string GetCombatOne(Area area)
         {
-            string output = $"{area.Name}, Fight {area.Length}/{area.MaxLength}";
+            string output = $"{area.Name}, Fight {area.Fight}/{area.MaxLength}";
 
             return output;
         }
@@ -92,6 +92,21 @@ namespace DiscordRPG
         public static string GetEnemy(Player player)
         {
             string output = "Enemies: ";
+
+            for (int i = 0; i < player.Combat.Enemies.Count; i++)
+            {
+                Enemy enemy = player.Combat.Enemies[i];
+                output += $"{i + 1} = {enemy.Name}, ";
+            }
+            output = output.Trim(' ');
+            output = output.Trim(',');
+            output += '.';
+            return output;
+        }
+
+        public static string GetEnemies(Player player)
+        {
+            string output = "Choose one or more to attack: ";
 
             for (int i = 0; i < player.Combat.Enemies.Count; i++)
             {

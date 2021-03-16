@@ -250,6 +250,36 @@ namespace DiscordRPG
             }
         }
 
+        public void AttackEnemies()
+        {
+            string emotes = "";
+
+            RecievedNumbers.Clear();
+
+            foreach (var emote in RecievedEmotes)
+            {
+                emotes += emote.Name;
+            }
+
+            for (int i = 0; i < Emote.Numbers.Length; i++)
+            {
+                IEmote number = Emote.Numbers[i];
+
+                if (emotes.Contains(number.Name))
+                {
+                    RecievedNumbers.Add(i);
+                }
+            }
+            if (RecievedNumbers.Count > 0)
+            {
+                for (int i = 0; i < RecievedNumbers.Count; i++)
+                {
+                    Combat.Enemies[RecievedNumbers[i] - 1].Damage(Attack += (Attack * BpToUse) / RecievedNumbers.Count);
+                }
+            }
+            UpdateStats();
+        }
+
         /// <summary>
         /// Attacks a single enemy using the first number in RecievedEmotes
         /// </summary>
@@ -410,6 +440,29 @@ namespace DiscordRPG
                 }
                 RecievedEmotes.Clear();
             }
+            else if (target == "EnemiesM")
+            {
+
+                ExpectedEmotes.Clear();
+                LastMessage = User.SendMessageAsync(Text.GetEnemies(this)).Result;
+
+                List<IEmote> emotes = new List<IEmote>();
+
+                for (int i = 1; i <= Combat.Enemies.Count; i++)
+                {
+                    emotes.Add(Emote.Numbers[i]);
+                }
+
+                emotes.Add(Emote.TurnBack);
+                emotes.Add(Emote.Flag);
+
+                LastMessage.AddReactionsAsync(emotes.ToArray());
+                foreach (var item in emotes)
+                {
+                    ExpectedEmotes.Add(item);
+                }
+                RecievedEmotes.Clear();
+            }
             else if (target == "Items")
             {
 
@@ -456,6 +509,19 @@ namespace DiscordRPG
             }
         }
 
+        public void SendMessage(string message, bool reactionary, params IEmote[] emotes)
+        {
+            if (reactionary)
+            {
+                LastMessage = User.SendMessageAsync(message).Result;
+                AddEmote(emotes);
+            }
+            else
+            {
+                User.SendMessageAsync(message);
+            }
+        }
+
         /// <summary>
         /// Add emotes to the list of expected emotes and send it to the last message
         /// </summary>
@@ -470,7 +536,7 @@ namespace DiscordRPG
         /// Gives a list of loot to the player
         /// </summary>
         /// <param name="loot">The list of loot to give to the player</param>
-        public void RecieveLoot(List<ILootables> loot)
+        public async System.Threading.Tasks.Task RecieveLootAsync(List<ILootables> loot)
         {
             foreach (var item in loot)
             {
@@ -491,7 +557,7 @@ namespace DiscordRPG
             {
                 output += $"{item.Amount} {item.Name}\n";
             }
-            User.SendMessageAsync(output);
+            await User.SendMessageAsync(output);
         }
 
         /// <summary>

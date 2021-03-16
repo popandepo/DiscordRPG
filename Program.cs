@@ -17,6 +17,8 @@ namespace DiscordRPG
 
         public static bool looping = false;
 
+        public static string debugHolder;
+
         private CommandService _commands;
         private CommandHandler _handler;
 

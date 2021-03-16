@@ -1,7 +1,6 @@
 ﻿using Discord;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace DiscordRPG
 {
@@ -16,13 +15,21 @@ namespace DiscordRPG
             {
                 //await Task.Delay(100);
 
-                foreach (var newPlayer in Program.holding)
+                for (int i = 0; i < Program.holding.Count; i++)
                 {
-                    Program.players.Add(newPlayer);
-                }
-                Program.holding.Clear();
+                    try
+                    {
+                        Player newPlayer = Program.holding[i];
+                        Program.players.Add(newPlayer);
+                        Program.holding.Remove(newPlayer);
+                    }
+                    catch
+                    {
+                    }
 
-                await Task.Delay(100);
+
+                }
+
 
                 ConsoleLog(Program.players);
 
@@ -143,6 +150,101 @@ namespace DiscordRPG
                             player.State = State.Awaiting_bp;
                             break;
 
+                        case State.Awaiting_bp:
+                            if (player.RecievedEmotes.Count > 0)
+                            {
+                                string emotes = "";
+
+                                foreach (var emote in player.RecievedEmotes)
+                                {
+                                    emotes += emote.Name;
+                                }
+
+                                if (player.ReturnCheck())
+                                {
+                                    break;
+                                }
+
+                                for (int i = 0; i < Emote.Numbers.Length; i++)
+                                {
+                                    IEmote number = Emote.Numbers[i];
+
+                                    if (emotes.Contains(number.Name))
+                                    {
+                                        if (player.Bp <= i)
+                                        {
+                                            player.BpToUse = i;
+                                            player.SendMessage("What do you want to do?", true, Emote.Sword, Emote.Shield, Emote.TurnBack, Emote.Flag);
+                                            player.State = State.Use_bp;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            await player.User.SendMessageAsync("You don't have that many BP");
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+
+                        case State.Use_bp:
+                            if (player.RecievedEmotes.Count > 0)
+                            {
+                                string emotes = "";
+
+                                foreach (var emote in player.RecievedEmotes)
+                                {
+                                    emotes += emote.Name;
+                                }
+
+                                if (player.ReturnCheck())
+                                {
+                                    break;
+                                }
+
+                                if (emotes.Contains(Emote.Sword.Name))
+                                {
+                                    player.State = State.Bp_get_multiple_targets;
+                                    break;
+                                }
+                                else if (emotes.Contains(Emote.Shield.Name))
+                                {
+                                    player.Defense += (player.CEquipment.Shield.Defense * player.BpToUse);
+                                    player.Bp -= player.BpToUse;
+                                    player.State = State.Enemy_turn;
+                                    break;
+                                }
+                            }
+                            break;
+
+                        case State.Bp_get_multiple_targets:
+                            player.GetNum("EnemiesM");
+                            player.State = State.Awaiting_bp_enemies;
+                            break;
+
+                        case State.Awaiting_bp_enemies:
+                            if (player.RecievedEmotes.Count > 0)
+                            {
+                                string emotes = "";
+
+                                foreach (var emote in player.RecievedEmotes)
+                                {
+                                    emotes += emote.Name;
+                                }
+
+                                for (int i = 0; i < Emote.Numbers.Length; i++)
+                                {
+                                    IEmote number = Emote.Numbers[i];
+
+                                    if (emotes.Contains(number.Name))
+                                    {
+                                        player.RecievedNumbers.Add(i);
+                                        player.State = State.Attacking_multiple;
+                                    }
+                                }
+                            }
+                            break;
+
                         case State.Use_item:
                             if (player.RecievedEmotes.Count > 0)
                             {
@@ -189,7 +291,7 @@ namespace DiscordRPG
                                     Enemy enemy = player.Combat.Enemies[i];
                                     if (enemy.Health <= 0)
                                     {
-                                        player.RecieveLoot(player.Combat.Enemies[player.RecievedNumbers[0] - 1].Kill());
+                                        await player.RecieveLootAsync(player.Combat.Enemies[player.RecievedNumbers[0] - 1].Kill());
                                         player.Combat.Enemies.RemoveAt(i);
                                     }
                                 }
@@ -201,7 +303,7 @@ namespace DiscordRPG
                                     if (player.Area.Length > 1)
                                     {
                                         player.Area.Length--;
-                                        player.State = State.Begin_battle;
+                                        player.State = State.Battle_over;
                                         break;
                                     }
                                     else if (player.Area.Length == 1)
@@ -213,6 +315,47 @@ namespace DiscordRPG
 
                                 player.State = State.Enemy_turn;
                             }
+                            break;
+
+                        case State.Attacking_multiple:
+                            if (player.RecievedNumbers.Count > 0)
+                            {
+                                player.AttackEnemies();
+                                for (int i = player.Combat.Enemies.Count - 1; i >= 0; i--)
+                                {
+                                    Enemy enemy = player.Combat.Enemies[i];
+                                    if (enemy.Health <= 0)
+                                    {
+                                        await player.RecieveLootAsync(enemy.Kill());
+                                        player.Combat.Enemies.RemoveAt(i);
+                                    }
+                                }
+
+                                player.ClearBuffer();
+                                player.Bp -= player.BpToUse;
+
+                                if (player.Combat.Enemies.Count <= 0)
+                                {
+                                    if (player.Area.Length > 1)
+                                    {
+                                        player.Area.Fight++;
+                                        player.Area.Length--;
+                                        player.State = State.Battle_over;
+                                        break;
+                                    }
+                                    else if (player.Area.Length == 1)
+                                    {
+                                        player.State = State.Returning_home;
+                                        break;
+                                    }
+                                }
+                                player.State = State.Enemy_turn;
+                            }
+                            break;
+
+                        case State.Battle_over:
+                            //placeholder
+                            player.State = State.Begin_battle;
                             break;
 
                         case State.Enemy_turn:
@@ -295,7 +438,7 @@ namespace DiscordRPG
 
                                     if (emotes.Contains(number.Name))
                                     {
-                                        player.Area = new Area(player.UnlockedAreas[i]);
+                                        player.Area = new Area(player.UnlockedAreas[i - 1]);
                                         player.State = State.Begin_battle;
                                     }
                                 }
@@ -331,8 +474,12 @@ namespace DiscordRPG
                 output += Text.GetSItems(player);
                 output += Text.GetSMaterials(player);
             }
-            Console.Clear();
-            Console.WriteLine(output);
+            if (Program.debugHolder != output)
+            {
+                Console.Clear();
+                Console.WriteLine(output);
+                Program.debugHolder = output;
+            }
         }
     }
 }

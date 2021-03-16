@@ -9,6 +9,7 @@ namespace DiscordRPG
         public string Name { get; set; }
         public string Description { get; set; }
         public int Length { get; set; }
+        public int Fight { get; set; }
         public int MaxLength { get; set; }
         public List<Enemy> Enemies { get; set; }
 
@@ -17,6 +18,7 @@ namespace DiscordRPG
             Name = name;
             Description = description;
             Length = length;
+            Fight = 1;
             MaxLength = Length;
             Enemies = enemies;
         }
@@ -26,6 +28,7 @@ namespace DiscordRPG
             Name = area.Name;
             Description = area.Description;
             Length = area.Length;
+            Fight = 1;
             MaxLength = area.MaxLength;
             Enemies = area.Enemies;
         }
