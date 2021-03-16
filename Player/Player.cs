@@ -190,7 +190,7 @@ namespace DiscordRPG
             {
                 for (int i = 0; i < RecievedNumbers.Count; i++)
                 {
-                    Combat.Enemies[RecievedNumbers[i] - 1].Damage(Attack += (Attack * BpToUse) / RecievedNumbers.Count);
+                    Combat.Enemies[RecievedNumbers[i] - 1].Damage((Attack += (Attack * BpToUse)) / RecievedNumbers.Count);
                 }
             }
             UpdateStats();

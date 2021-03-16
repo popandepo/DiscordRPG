@@ -62,6 +62,28 @@ namespace DiscordRPG
                                                                             new Material("Bidoof Head", 1, 10, "Normal", 1)));
                                     }
                                 }
+                                if (player.ID == 236940355730145281) //easter egg
+                                {
+                                    var rand = new Random();
+                                    if (rand.Next(1, 101) == 1)
+                                    {
+                                        try
+                                        {
+                                            player.Combat.Enemies.RemoveAt(player.Combat.Enemies.Count);
+                                        }
+                                        catch
+                                        {
+
+                                        }
+                                        player.Combat.Enemies.Add(new Enemy("Amongus drip",
+                                                                            6, //attack
+                                                                            9, //defense
+                                                                            69, //health
+                                                                            420, //maxHealth
+                                                                            1, //pulls
+                                                                            new Material("Drip", 1, 10, "Normal", 1)));
+                                    }
+                                }
                             }
 
                             player.State = State.Pre_player_turn;
