@@ -45,11 +45,11 @@ namespace DiscordRPG
             }
 
             var rng = new Random();
-            int enemyAmount = rng.Next(1, 3);
+            int enemyAmount = Tools.RandGen(1, 4, 2.2, 2);
             for (int i = 0; i < enemyAmount; i++)
             {
-                int enemyIndex = rng.Next(0, Enemies.Count);
-                output.Add(Enemies[enemyIndex]);
+                int enemy = rng.Next(0, Enemies.Count);
+                output.Add(Enemies[enemy]);
             }
 
             return output;
