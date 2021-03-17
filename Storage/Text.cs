@@ -79,7 +79,7 @@ namespace DiscordRPG
         {
             string output = "";
 
-            output += $"HP {player.Health}/{player.MaxHealth} BP {player.Bp}";
+            output += $"HP {player.Health}/{player.MaxHealth} BP {player.Bp}/3";
 
             return output;
         }

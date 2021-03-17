@@ -99,17 +99,12 @@ namespace DiscordRPG
                             }
 
                             player.ShowMainCombat();
-                            // setup for the player turn
-
                             player.State = State.Player_turn;
                             break;
 
                         case State.Player_turn:
 
-                            if (player.ReturnCheck())
-                            {
-                                break;
-                            }
+                            player.ReturnState = State.Player_turn;
 
                             if (player.RecievedEmotes.Contains(Emote.Zap) && player.Bp > 0)
                             {
@@ -119,28 +114,12 @@ namespace DiscordRPG
 
                             if (player.RecievedEmotes.Contains(Emote.Sword))
                             {
-                                //if (player.RecievedEmotes.Contains(Emote.Zap))
-                                //{
-                                //    if (player.Bp > 0)
-                                //    {
-                                //        player.Bp -= 2;
-                                //        player.Attack += player.Attack;
-                                //    }
-                                //}
                                 player.State = State.Get_single_target;
                                 break;
                             }
                             else if (player.RecievedEmotes.Contains(Emote.Shield))
                             {
                                 player.UpdateStats();
-                                //if (player.RecievedEmotes.Contains(Emote.Zap))
-                                //{
-                                //    if (player.Bp > 0)
-                                //    {
-                                //        player.Bp -= 2;
-                                //        player.Defense += player.CEquipment.Shield.Defense * 2;
-                                //    }
-                                //}
                                 player.Defense += player.CEquipment.Shield.Defense;
 
                                 player.State = State.Enemy_turn;
@@ -168,16 +147,16 @@ namespace DiscordRPG
                         case State.Awaiting_bp:
                             if (player.RecievedEmotes.Count > 0)
                             {
+                                if (player.ReturnCheck())
+                                {
+                                    break;
+                                }
+
                                 string emotes = "";
 
                                 foreach (var emote in player.RecievedEmotes)
                                 {
                                     emotes += emote.Name;
-                                }
-
-                                if (player.ReturnCheck())
-                                {
-                                    break;
                                 }
 
                                 for (int i = 0; i < Emote.Numbers.Length; i++)
@@ -205,16 +184,16 @@ namespace DiscordRPG
                         case State.Use_bp:
                             if (player.RecievedEmotes.Count > 0)
                             {
+                                if (player.ReturnCheck())
+                                {
+                                    break;
+                                }
+
                                 string emotes = "";
 
                                 foreach (var emote in player.RecievedEmotes)
                                 {
                                     emotes += emote.Name;
-                                }
-
-                                if (player.ReturnCheck())
-                                {
-                                    break;
                                 }
 
                                 if (emotes.Contains(Emote.Sword.Name))
@@ -225,7 +204,7 @@ namespace DiscordRPG
                                 else if (emotes.Contains(Emote.Shield.Name))
                                 {
                                     player.Defense += (player.CEquipment.Shield.Defense * player.BpToUse);
-                                    player.Bp -= player.BpToUse;
+                                    player.Bp -= player.BpToUse + 1;
                                     player.State = State.Enemy_turn;
                                     break;
                                 }
@@ -240,6 +219,11 @@ namespace DiscordRPG
                         case State.Awaiting_bp_enemies:
                             if (player.RecievedEmotes.Count > 0)
                             {
+                                if (player.ReturnCheck())
+                                {
+                                    break;
+                                }
+
                                 string emotes = "";
 
                                 foreach (var emote in player.RecievedEmotes)
@@ -263,6 +247,11 @@ namespace DiscordRPG
                         case State.Use_item:
                             if (player.RecievedEmotes.Count > 0)
                             {
+                                if (player.ReturnCheck())
+                                {
+                                    break;
+                                }
+
                                 player.UseItem();
                                 player.State = State.Enemy_turn;
                             }
@@ -299,6 +288,11 @@ namespace DiscordRPG
                         case State.Attacking_one:
                             if (player.RecievedEmotes.Count > 0)
                             {
+                                if (player.ReturnCheck())
+                                {
+                                    break;
+                                }
+
                                 player.AttackEnemy();
 
                                 for (int i = 0; i < player.Combat.Enemies.Count; i++)
@@ -335,6 +329,12 @@ namespace DiscordRPG
                         case State.Attacking_multiple:
                             if (player.RecievedNumbers.Count > 0)
                             {
+
+                                if (player.ReturnCheck())
+                                {
+                                    break;
+                                }
+
                                 player.AttackEnemies();
                                 for (int i = player.Combat.Enemies.Count - 1; i >= 0; i--)
                                 {
@@ -347,7 +347,7 @@ namespace DiscordRPG
                                 }
 
                                 player.ClearBuffer();
-                                player.Bp -= player.BpToUse;
+                                player.Bp -= player.BpToUse + 1;
 
                                 if (player.Combat.Enemies.Count <= 0)
                                 {
@@ -371,6 +371,7 @@ namespace DiscordRPG
                         case State.Battle_over:
                             player.SendMessage($"You won the battle! there are {player.Area.MaxLength - player.Area.Fight} fights left. you can use items to heal up or you can keep going.\nHP: {player.Health}/{player.MaxHealth}.", true, Emote.Sword, Emote.Bag, Emote.Flag);
                             player.State = State.At_camp;
+                            player.ReturnState = State.At_camp;
                             break;
 
                         case State.At_camp:
@@ -397,6 +398,11 @@ namespace DiscordRPG
                         case State.Use_item_at_camp:
                             if (player.RecievedEmotes.Count > 0)
                             {
+                                if (player.ReturnCheck())
+                                {
+                                    break;
+                                }
+
                                 player.UseItem();
 
                                 player.SendMessage($"Do you want to heal some more or continue adventuring?\nHP: {player.Health}/{player.MaxHealth}.", true, Emote.Sword, Emote.Bag, Emote.Flag);
@@ -516,10 +522,11 @@ namespace DiscordRPG
 
                 output += Text.GetEnemy(player) + "\n\n";
 
-                output += Text.GetCItems(player) + "\n\n";
+                output += Text.GetCItems(player) + "\n";
                 output += Text.GetCMaterials(player) + "\n";
                 output += Text.GetSItems(player);
                 output += Text.GetSMaterials(player);
+                output += "\n\n";
             }
             if (Program.debugHolder != output)
             {

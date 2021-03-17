@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace DiscordRPG
 {
@@ -44,12 +43,21 @@ namespace DiscordRPG
                 return output;
             }
 
-            var rng = new Random();
-            int enemyAmount = Tools.RandGen(1, 4, 2.2, 2);
-            for (int i = 0; i < enemyAmount; i++)
+            if (Fight == MaxLength)
             {
-                int enemy = rng.Next(0, Enemies.Count);
-                output.Add(Enemies[enemy]);
+                if (Name == "Forest")
+                {
+                    output.Add(new Enemy("Goblin lord", 15, 10, 20, 20, 3));
+                }
+            }
+            else
+            {
+                int enemyAmount = Tools.RandGen(1, 4, 2.2, 2);
+                for (int i = 0; i < enemyAmount; i++)
+                {
+                    int enemy = Tools.RandGen(0, Enemies.Count - 1);
+                    output.Add(Enemies[enemy]);
+                }
             }
 
             return output;
