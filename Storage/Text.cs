@@ -16,7 +16,6 @@ namespace DiscordRPG
                 $"\n" +
                 $"Press any action you want to do\n" +
                 $"Then press the 🏁 to send the command\n" +
-                $"Only ⚔️,🛡️,💼  and ⚡ work right now.\n" +
                 $"⚔️ = Attack, 🛡️ = Defend, 💼 = Show inventory\n⚡ = Use BP to enhance either attacks or defenses";
 
             return output;
@@ -60,7 +59,7 @@ namespace DiscordRPG
         }
         public static string GetCombatOne(Area area)
         {
-            string output = $"{area.Name}, Fight {area.Fight + 1}/{area.MaxLength}";
+            string output = $"{area.Name}, Fight {area.Fight}/{area.MaxLength}";
 
             return output;
         }

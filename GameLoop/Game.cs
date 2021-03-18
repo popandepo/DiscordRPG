@@ -311,6 +311,7 @@ namespace DiscordRPG
                                 {
                                     if (player.Area.Length > 1)
                                     {
+                                        player.Area.Fight++;
                                         player.Area.Length--;
                                         player.State = State.Battle_over;
                                         break;
@@ -369,7 +370,7 @@ namespace DiscordRPG
                             break;
 
                         case State.Battle_over:
-                            player.SendMessage($"You won the battle! there are {player.Area.MaxLength - player.Area.Fight} fights left. you can use items to heal up or you can keep going.\nHP: {player.Health}/{player.MaxHealth}.", true, Emote.Sword, Emote.Bag, Emote.Flag);
+                            player.SendMessage($"You won the battle! there are {player.Area.Length} fights left. you can use items to heal up or you can keep going.\nHP: {player.Health}/{player.MaxHealth}.", true, Emote.Sword, Emote.Bag, Emote.Flag);
                             player.State = State.At_camp;
                             player.ReturnState = State.At_camp;
                             break;

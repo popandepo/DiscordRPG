@@ -602,7 +602,7 @@ namespace DiscordRPG
             {
                 Health -= damage;
             }
-            else if (Health < damage) //if you would die
+            else if (Health <= damage) //if you would die
             {
                 Health = 0;
                 Kill();
